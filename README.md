@@ -47,7 +47,7 @@ This application provides you with easy-to-use abundant functions.
 		+ Settings.Designer.cs
 		+ Settings.resx  
 	+ Icon.ico  
-		This Applciation Icon. [ http://www.iconfinder.com/icondetails/103762/128/comment_edit_icon ]
+		This Applciation's Icon. [ http://www.iconfinder.com/icondetails/103762/128/comment_edit_icon ]
 	+ Program.cs  
 		Start This Program.
 	+ TweetField.csproj  
@@ -59,3 +59,7 @@ This application provides you with easy-to-use abundant functions.
 ---------
 + Bomb Function
 + HotKey Setting Change
+
+4. Need Package
+---------
+Please Install _TweetSharp_ to NuGet.
