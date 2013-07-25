@@ -53,7 +53,6 @@ This application provides you with easy-to-use abundant functions.
 	+ TweetField.csproj  
 + TweetField.sln  
 	Project File.
-+ TweetField.v11.suo
 
 3. Project Subject
 ---------
