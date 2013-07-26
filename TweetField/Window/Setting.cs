@@ -56,11 +56,11 @@ namespace TweetField
 			BackgroundColorText.Text		= ApSetting.FooterColor;
 			StringColorView.BackColor		= (Color)ClConv.ConvertFromString(ApSetting.StringColor);
 			StringColorText.Text			= ApSetting.StringColor;
-			ShowHideKey.Text				= ApSetting.ShowKey;
+			ShowHideKey.Text				= HotKey.GetKeyString(ApSetting.ShowKeyChar, ApSetting.ShowModKey);
+			ShowPosition.SelectedIndex		= ApSetting.ShowWindowPosition;
 			PostKey.SelectedIndex			= ApSetting.PostKeyType;
 			HideOffFocus.Checked			= ApSetting.HideInformation;
 			HideFormAfterTweet.Checked		= ApSetting.HideTweetWindow;
-			PostBombCheck.Checked			= PostBombSetting.Enabled = ApSetting.BombFlag;
 			// Enable Change
 			AccountDelete.Enabled			= ( ApSetting.UsingAccountVal != -1 );
 			OK.Enabled						= ( ApSetting.UsingAccountVal != -1 );
@@ -176,6 +176,25 @@ namespace TweetField
 			}
 		}
 
+		// Setting Hot Key
+		private void SettingKey_Click(object sender, EventArgs e)
+		{
+			// Create
+			HotKeyEdit hkEdit = new HotKeyEdit();
+			// -------------------------
+			// Get
+			String Result = hkEdit.SetHotKey(ref ApSetting.ShowKeyChar, ref ApSetting.ShowModKey, this);
+			// Set
+			if(Result.Length > 0){ ShowHideKey.Text = Result; }
+		}
+
+		// Position Changed
+		private void ShowPosition_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			// Setting Change
+			ApSetting.ShowWindowPosition = ShowPosition.SelectedIndex;
+		}
+
 		// Post Key Changed
 		private void PostKey_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -197,15 +216,6 @@ namespace TweetField
 			ApSetting.HideTweetWindow = HideFormAfterTweet.Checked;
 		}
 
-		// Post Bomb Setting
-		private void PostBombCheck_CheckedChanged(object sender, EventArgs e)
-		{
-			// Save
-			ApSetting.BombFlag = PostBombCheck.Checked;
-			// Reload
-			SettingReload();
-		}
-
 		// Setting Save
 		private void OK_Click(object sender, EventArgs e)
 		{
@@ -224,6 +234,7 @@ namespace TweetField
 		// Application Exit
 		private void TfExit_Click(object sender, EventArgs e)
 		{
+			Close();
 			// Program End
 			Application.Exit();
 		}

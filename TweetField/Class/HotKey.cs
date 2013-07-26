@@ -85,6 +85,20 @@ namespace TweetField
 				base.Dispose(disposing);
 			}
 		}
+
+		// Get HotKey String
+		public static String GetKeyString(Keys Key, int Mod)
+		{
+			// String
+			String Result = "";
+			// Sub Key 
+			Result += ((Mod & (int)MOD_KEY.CONTROL) != 0 ? "Ctrl + " : "");
+			Result += ((Mod & (int)MOD_KEY.SHIFT) != 0 ? "Shift + " : "");
+			Result += ((Mod & (int)MOD_KEY.ALT) != 0 ? "Alt + " : "");
+			Result += Key.ToString();
+			return Result;
+		}
+
 	}
 
 	/// <summary>

@@ -109,7 +109,7 @@
             this.投稿ウィンドウを閉じるCToolStripMenuItem,
             this.poltsの終了XToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(251, 170);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(251, 192);
 			// 
 			// 投稿PToolStripMenuItem
 			// 
@@ -168,7 +168,7 @@
 			// 
 			this.poltsの終了XToolStripMenuItem.Name = "poltsの終了XToolStripMenuItem";
 			this.poltsの終了XToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
-			this.poltsの終了XToolStripMenuItem.Text = "TweetFieldの終了(&X)";
+			this.poltsの終了XToolStripMenuItem.Text = "アプリケーションの終了(&X)";
 			this.poltsの終了XToolStripMenuItem.Click += new System.EventHandler(this.poltsの終了XToolStripMenuItem_Click);
 			// 
 			// panel1

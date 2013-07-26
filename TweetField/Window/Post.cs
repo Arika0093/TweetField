@@ -214,8 +214,10 @@ namespace TweetField
 		// Close Event
 		private void Post_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			Hide();
-			e.Cancel = true;
+			if(e.CloseReason == CloseReason.UserClosing){
+				Hide();
+				e.Cancel = true;
+			}
 		}
 
 		// Post Picture Select

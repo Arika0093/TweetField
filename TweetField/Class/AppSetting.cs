@@ -29,7 +29,8 @@ namespace TweetField
 			SysFontSize			= 9;						// Default Font Size
 			// ------------------------------
 			// Set PostWindow Setting
-			ShowKey				= "Control + Space";		// Show/Hide Key
+			ShowKeyChar			= Keys.None;				// Show/Hide Key
+			ShowModKey			= (int)MOD_KEY.CONTROL;		// Mod Key
 			ShowWindowPosition	= 0;						// Show LeftDown
 			PostKeyType			= 0;						// Enter Post
 			// Footer Color Set
@@ -38,11 +39,6 @@ namespace TweetField
 			StringColor			= ClConv.ConvertToString(Color.DimGray);
 			HideTweetWindow		= true;						// Window Hide After Tweet
 			HideInformation		= false;					// Hide Out of Focus
-			BombFlag			= false;					// Bomb Flag is false
-			// ------------------------------
-			// Bomb
-			PostValues			= new List<string>();		// Post Empty
-			Shuffle				= false;					// Not Shuffle
 		}
 		// ----------------------------------
 		//	Twitter Account Data
@@ -58,19 +54,14 @@ namespace TweetField
 		// ----------------------------------
 		//	Tweet Window Setting
 		// ----------------------------------
-		public String		ShowKey;					// Show/Hide Key
+		public Keys			ShowKeyChar;				// Show/Hide Key
+		public int			ShowModKey;					// Key Option
 		public int			ShowWindowPosition;			// First Show Position
 		public int			PostKeyType;				// PostKey Value
 		public String		FooterColor;				// Window of Footer Color
 		public String		StringColor;				// String Color
 		public bool			HideTweetWindow;			// Hide Window after Tweet
 		public bool			HideInformation;			// Hide Window out Focus
-		public bool			BombFlag;					// Bomb Flag Set
-		// ----------------------------------
-		//	Bomb Setting
-		// ----------------------------------
-		public List<String>	PostValues;					// Post Values
-		public bool			Shuffle;					// Shuffle Post
 	}
 
 	public class TwAccount

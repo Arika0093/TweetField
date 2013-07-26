@@ -14,7 +14,7 @@ namespace TweetField
 		private ApplicationSetting aps;
 		private Setting stWindow = null;
 		private Post psWindow = null;
-		private HotKey PostShow;
+		private HotKey PostShow = null;
 
 		public Background()
 		{
@@ -23,7 +23,10 @@ namespace TweetField
 		}
 
 		public void DelIcon()
-		{ notifyIcon1.Visible = false; }
+		{
+			PostShow.Dispose();
+			notifyIcon1.Visible = false;
+		}
 
 		private void 投稿PToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -46,6 +49,13 @@ namespace TweetField
 				stWindow = new Setting(aps);
 				// Setting Change
 				aps = stWindow.SettingChange(this);
+				// Dispose
+				PostShow.Dispose();
+				// Set HotKey
+				MOD_KEY ModKey = (MOD_KEY)Enum.ToObject(typeof(MOD_KEY), aps.ShowModKey);
+				PostShow = new HotKey(ModKey, aps.ShowKeyChar);
+				// Event Add
+				PostShow.HotKeyPush += new EventHandler(HotPush);
 				// null
 				stWindow = null;
 			}
@@ -82,7 +92,8 @@ namespace TweetField
 				stWindow = null;
 			}
 			// Set HotKey
-			PostShow = new HotKey(MOD_KEY.CONTROL, Keys.Space);
+			MOD_KEY ModKey = (MOD_KEY)Enum.ToObject(typeof(MOD_KEY), aps.ShowModKey);
+			PostShow = new HotKey(ModKey, aps.ShowKeyChar);
 			// Event Add
 			PostShow.HotKeyPush += new EventHandler(HotPush);
 		}
@@ -91,7 +102,7 @@ namespace TweetField
 		{
 			AppSettingAccess.SaveSetting(aps);
 			notifyIcon1.Visible = false;
-			PostShow.Dispose();
+			if(PostShow != null){ PostShow.Dispose(); }
 		}
 
 		private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
