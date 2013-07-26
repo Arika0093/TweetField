@@ -56,8 +56,7 @@ This application provides you with easy-to-use abundant functions.
 
 3. Project Subject
 ---------
-+ Bomb Function
-+ HotKey Setting Change
+None
 
 4. Need Package
 ---------
