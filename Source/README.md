@@ -18,16 +18,16 @@ This application provides you with easy-to-use abundant functions.
 		+ Consumer.cs  
 			Written Consumer Key and Consumer Secret.
 		+ HotKey.cs  
-			HotKey Manage Class. [ http://anis774.net/codevault/00140.html ]
+			HotKey Manage Class.
+		+ Remove.cs  
+			Form PositionChange Manage Class.
+		+ Remove.cs  
+			Form SizeChange Manage Class.
 	+ Window
 		+ Account.cs
 		+ Account.Designer.cs
 		+ Account.resx  
 			Add User Account for use this Application.
-		+ Background.cs
-		+ Background.Designer.cs
-		+ Background.resx  
-			For Background Run.
 		+ Captcha.cs
 		+ Captcha.Designer.cs
 		+ Captcha.resx  
@@ -54,10 +54,6 @@ This application provides you with easy-to-use abundant functions.
 + TweetField.sln  
 	Project File.
 
-3. Project Subject
----------
-None
-
-4. Need Package
+3. Need Package
 ---------
 Please Install _TweetSharp_ to NuGet.

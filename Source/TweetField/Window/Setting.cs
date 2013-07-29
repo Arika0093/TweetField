@@ -58,6 +58,8 @@ namespace TweetField
 			StringColorText.Text			= ApSetting.StringColor;
 			ShowHideKey.Text				= HotKey.GetKeyString(ApSetting.ShowKeyChar, ApSetting.ShowModKey);
 			ShowPosition.SelectedIndex		= ApSetting.ShowWindowPosition;
+			WindowWidth.Value				= ApSetting.WindowSize.Width;
+			WindowHeight.Value				= ApSetting.WindowSize.Height;
 			PostKey.SelectedIndex			= ApSetting.PostKeyType;
 			HideOffFocus.Checked			= ApSetting.HideInformation;
 			HideFormAfterTweet.Checked		= ApSetting.HideTweetWindow;
@@ -195,6 +197,18 @@ namespace TweetField
 			ApSetting.ShowWindowPosition = ShowPosition.SelectedIndex;
 		}
 
+		// Width Change
+		private void WindowWidth_ValueChanged(object sender, EventArgs e)
+		{
+			ApSetting.WindowSize.Width = (int)WindowWidth.Value;
+		}
+
+		// Height Change
+		private void WindowHeight_ValueChanged(object sender, EventArgs e)
+		{
+			ApSetting.WindowSize.Height = (int)WindowHeight.Value;
+		}
+
 		// Post Key Changed
 		private void PostKey_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -228,6 +242,10 @@ namespace TweetField
 		// Setting Cancel
 		private void Cancel_Click(object sender, EventArgs e)
 		{
+			if(ApSetting.UsingAccountVal < 0){
+				// End
+				Application.Exit();
+			}
 			Close();
 		}
 

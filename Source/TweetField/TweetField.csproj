@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,15 +47,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Hammock.ClientProfile">
+    <Reference Include="Hammock.ClientProfile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\Hammock.ClientProfile.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -69,7 +73,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TweetSharp">
+    <Reference Include="TweetSharp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\TweetSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -77,6 +82,8 @@
     <Compile Include="Class\Consumer.cs" />
     <Compile Include="Class\AppSetting.cs" />
     <Compile Include="Class\HotKey.cs" />
+    <Compile Include="Class\Remove.cs" />
+    <Compile Include="Class\Resize.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Window\Account.cs">
@@ -84,12 +91,6 @@
     </Compile>
     <Compile Include="Window\Account.Designer.cs">
       <DependentUpon>Account.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Window\Background.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Window\Background.Designer.cs">
-      <DependentUpon>Background.cs</DependentUpon>
     </Compile>
     <Compile Include="Window\Captcha.cs">
       <SubType>Form</SubType>
@@ -127,9 +128,6 @@
     </Compile>
     <EmbeddedResource Include="Window\Account.resx">
       <DependentUpon>Account.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Window\Background.resx">
-      <DependentUpon>Background.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Window\Captcha.resx">
       <DependentUpon>Captcha.cs</DependentUpon>

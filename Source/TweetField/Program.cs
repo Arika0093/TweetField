@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace TweetField
 {
@@ -25,7 +26,7 @@ namespace TweetField
 			}
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Background());
+			Application.Run(new Post());
 			// Release Mutex
 			mutex.ReleaseMutex();
 		}

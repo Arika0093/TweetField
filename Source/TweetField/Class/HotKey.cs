@@ -3,6 +3,9 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
+// ----------------------------------------------
+//	From: http://anis774.net/codevault/00140.html
+// ----------------------------------------------
 namespace TweetField
 {
 	/// <summary>

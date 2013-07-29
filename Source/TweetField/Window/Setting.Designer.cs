@@ -30,6 +30,10 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Setting));
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.WindowHeight = new System.Windows.Forms.NumericUpDown();
+			this.TfExit = new System.Windows.Forms.Button();
+			this.Cancel = new System.Windows.Forms.Button();
+			this.OK = new System.Windows.Forms.Button();
 			this.ShowPosition = new System.Windows.Forms.ComboBox();
 			this.label8 = new System.Windows.Forms.Label();
 			this.HideOffFocus = new System.Windows.Forms.CheckBox();
@@ -56,16 +60,10 @@
 			this.FontName = new System.Windows.Forms.TextBox();
 			this.BackgrouondColorView = new System.Windows.Forms.Panel();
 			this.label7 = new System.Windows.Forms.Label();
-			this.TfExit = new System.Windows.Forms.Button();
-			this.OK = new System.Windows.Forms.Button();
-			this.Cancel = new System.Windows.Forms.Button();
-			this.tabControl1 = new System.Windows.Forms.TabControl();
-			this.tabPage1 = new System.Windows.Forms.TabPage();
-			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.WindowWidth = new System.Windows.Forms.NumericUpDown();
 			this.tableLayoutPanel1.SuspendLayout();
-			this.tabControl1.SuspendLayout();
-			this.tabPage1.SuspendLayout();
-			this.tableLayoutPanel2.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.WindowHeight)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.WindowWidth)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel1
@@ -76,6 +74,10 @@
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
+			this.tableLayoutPanel1.Controls.Add(this.WindowHeight, 4, 6);
+			this.tableLayoutPanel1.Controls.Add(this.TfExit, 4, 10);
+			this.tableLayoutPanel1.Controls.Add(this.Cancel, 3, 10);
+			this.tableLayoutPanel1.Controls.Add(this.OK, 1, 10);
 			this.tableLayoutPanel1.Controls.Add(this.ShowPosition, 1, 6);
 			this.tableLayoutPanel1.Controls.Add(this.label8, 0, 6);
 			this.tableLayoutPanel1.Controls.Add(this.HideOffFocus, 3, 8);
@@ -102,10 +104,11 @@
 			this.tableLayoutPanel1.Controls.Add(this.FontName, 1, 2);
 			this.tableLayoutPanel1.Controls.Add(this.BackgrouondColorView, 1, 3);
 			this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.WindowWidth, 3, 6);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 10;
+			this.tableLayoutPanel1.RowCount = 11;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
@@ -116,12 +119,62 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(644, 318);
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(690, 342);
 			this.tableLayoutPanel1.TabIndex = 1;
+			// 
+			// WindowHeight
+			// 
+			this.WindowHeight.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.WindowHeight.Location = new System.Drawing.Point(585, 199);
+			this.WindowHeight.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+			this.WindowHeight.Name = "WindowHeight";
+			this.WindowHeight.Size = new System.Drawing.Size(102, 25);
+			this.WindowHeight.TabIndex = 32;
+			this.WindowHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.WindowHeight.ValueChanged += new System.EventHandler(this.WindowHeight_ValueChanged);
+			// 
+			// TfExit
+			// 
+			this.TfExit.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.TfExit.Location = new System.Drawing.Point(585, 305);
+			this.TfExit.Name = "TfExit";
+			this.TfExit.Size = new System.Drawing.Size(102, 34);
+			this.TfExit.TabIndex = 19;
+			this.TfExit.Text = "終了(&X)";
+			this.TfExit.UseVisualStyleBackColor = true;
+			this.TfExit.Click += new System.EventHandler(this.TfExit_Click);
+			// 
+			// Cancel
+			// 
+			this.Cancel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Cancel.Location = new System.Drawing.Point(477, 305);
+			this.Cancel.Name = "Cancel";
+			this.Cancel.Size = new System.Drawing.Size(102, 34);
+			this.Cancel.TabIndex = 9;
+			this.Cancel.Text = "キャンセル(&C)";
+			this.Cancel.UseVisualStyleBackColor = true;
+			this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
+			// 
+			// OK
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.OK, 2);
+			this.OK.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.OK.Location = new System.Drawing.Point(154, 305);
+			this.OK.Name = "OK";
+			this.OK.Size = new System.Drawing.Size(317, 34);
+			this.OK.TabIndex = 8;
+			this.OK.Text = "保存(&S)";
+			this.OK.UseVisualStyleBackColor = true;
+			this.OK.Click += new System.EventHandler(this.OK_Click);
 			// 
 			// ShowPosition
 			// 
-			this.tableLayoutPanel1.SetColumnSpan(this.ShowPosition, 4);
+			this.tableLayoutPanel1.SetColumnSpan(this.ShowPosition, 2);
 			this.ShowPosition.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ShowPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.ShowPosition.FormattingEnabled = true;
@@ -133,7 +186,7 @@
             "中央"});
 			this.ShowPosition.Location = new System.Drawing.Point(154, 199);
 			this.ShowPosition.Name = "ShowPosition";
-			this.ShowPosition.Size = new System.Drawing.Size(487, 26);
+			this.ShowPosition.Size = new System.Drawing.Size(317, 26);
 			this.ShowPosition.TabIndex = 30;
 			this.ShowPosition.SelectedIndexChanged += new System.EventHandler(this.ShowPosition_SelectedIndexChanged);
 			// 
@@ -145,7 +198,7 @@
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(145, 32);
 			this.label8.TabIndex = 29;
-			this.label8.Text = "表示位置(&O): ";
+			this.label8.Text = "表示設定(&O): ";
 			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// HideOffFocus
@@ -153,7 +206,7 @@
 			this.HideOffFocus.AutoSize = true;
 			this.tableLayoutPanel1.SetColumnSpan(this.HideOffFocus, 2);
 			this.HideOffFocus.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.HideOffFocus.Location = new System.Drawing.Point(431, 263);
+			this.HideOffFocus.Location = new System.Drawing.Point(477, 263);
 			this.HideOffFocus.Name = "HideOffFocus";
 			this.HideOffFocus.Size = new System.Drawing.Size(210, 26);
 			this.HideOffFocus.TabIndex = 27;
@@ -164,7 +217,7 @@
 			// SettingKey
 			// 
 			this.SettingKey.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.SettingKey.Location = new System.Drawing.Point(539, 167);
+			this.SettingKey.Location = new System.Drawing.Point(585, 167);
 			this.SettingKey.Name = "SettingKey";
 			this.SettingKey.Size = new System.Drawing.Size(102, 26);
 			this.SettingKey.TabIndex = 25;
@@ -175,7 +228,7 @@
 			// StringColorEdit
 			// 
 			this.StringColorEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.StringColorEdit.Location = new System.Drawing.Point(539, 135);
+			this.StringColorEdit.Location = new System.Drawing.Point(585, 135);
 			this.StringColorEdit.Name = "StringColorEdit";
 			this.StringColorEdit.Size = new System.Drawing.Size(102, 26);
 			this.StringColorEdit.TabIndex = 24;
@@ -186,7 +239,7 @@
 			// BackgroundColorEdit
 			// 
 			this.BackgroundColorEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.BackgroundColorEdit.Location = new System.Drawing.Point(539, 103);
+			this.BackgroundColorEdit.Location = new System.Drawing.Point(585, 103);
 			this.BackgroundColorEdit.Name = "BackgroundColorEdit";
 			this.BackgroundColorEdit.Size = new System.Drawing.Size(102, 26);
 			this.BackgroundColorEdit.TabIndex = 23;
@@ -197,7 +250,7 @@
 			// FontSetting
 			// 
 			this.FontSetting.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.FontSetting.Location = new System.Drawing.Point(539, 71);
+			this.FontSetting.Location = new System.Drawing.Point(585, 71);
 			this.FontSetting.Name = "FontSetting";
 			this.FontSetting.Size = new System.Drawing.Size(102, 26);
 			this.FontSetting.TabIndex = 22;
@@ -208,7 +261,7 @@
 			// AccountDelete
 			// 
 			this.AccountDelete.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.AccountDelete.Location = new System.Drawing.Point(539, 39);
+			this.AccountDelete.Location = new System.Drawing.Point(585, 39);
 			this.AccountDelete.Name = "AccountDelete";
 			this.AccountDelete.Size = new System.Drawing.Size(102, 26);
 			this.AccountDelete.TabIndex = 21;
@@ -219,7 +272,7 @@
 			// AccountAdd
 			// 
 			this.AccountAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.AccountAdd.Location = new System.Drawing.Point(431, 39);
+			this.AccountAdd.Location = new System.Drawing.Point(477, 39);
 			this.AccountAdd.Name = "AccountAdd";
 			this.AccountAdd.Size = new System.Drawing.Size(102, 26);
 			this.AccountAdd.TabIndex = 20;
@@ -240,7 +293,7 @@
             "Alt + Enter"});
 			this.PostKey.Location = new System.Drawing.Point(154, 231);
 			this.PostKey.Name = "PostKey";
-			this.PostKey.Size = new System.Drawing.Size(487, 26);
+			this.PostKey.Size = new System.Drawing.Size(533, 26);
 			this.PostKey.TabIndex = 18;
 			this.PostKey.SelectedIndexChanged += new System.EventHandler(this.PostKey_SelectedIndexChanged);
 			// 
@@ -251,7 +304,7 @@
 			this.ShowHideKey.Location = new System.Drawing.Point(154, 167);
 			this.ShowHideKey.Name = "ShowHideKey";
 			this.ShowHideKey.ReadOnly = true;
-			this.ShowHideKey.Size = new System.Drawing.Size(379, 25);
+			this.ShowHideKey.Size = new System.Drawing.Size(425, 25);
 			this.ShowHideKey.TabIndex = 17;
 			// 
 			// StringColorText
@@ -261,7 +314,7 @@
 			this.StringColorText.Location = new System.Drawing.Point(205, 135);
 			this.StringColorText.Name = "StringColorText";
 			this.StringColorText.ReadOnly = true;
-			this.StringColorText.Size = new System.Drawing.Size(328, 25);
+			this.StringColorText.Size = new System.Drawing.Size(374, 25);
 			this.StringColorText.TabIndex = 16;
 			// 
 			// BackgroundColorText
@@ -271,7 +324,7 @@
 			this.BackgroundColorText.Location = new System.Drawing.Point(205, 103);
 			this.BackgroundColorText.Name = "BackgroundColorText";
 			this.BackgroundColorText.ReadOnly = true;
-			this.BackgroundColorText.Size = new System.Drawing.Size(328, 25);
+			this.BackgroundColorText.Size = new System.Drawing.Size(374, 25);
 			this.BackgroundColorText.TabIndex = 15;
 			// 
 			// StringColorView
@@ -286,7 +339,7 @@
 			// FontSize
 			// 
 			this.FontSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.FontSize.Location = new System.Drawing.Point(431, 71);
+			this.FontSize.Location = new System.Drawing.Point(477, 71);
 			this.FontSize.Name = "FontSize";
 			this.FontSize.ReadOnly = true;
 			this.FontSize.Size = new System.Drawing.Size(102, 25);
@@ -366,7 +419,7 @@
 			this.HideFormAfterTweet.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.HideFormAfterTweet.Location = new System.Drawing.Point(154, 263);
 			this.HideFormAfterTweet.Name = "HideFormAfterTweet";
-			this.HideFormAfterTweet.Size = new System.Drawing.Size(271, 26);
+			this.HideFormAfterTweet.Size = new System.Drawing.Size(317, 26);
 			this.HideFormAfterTweet.TabIndex = 6;
 			this.HideFormAfterTweet.Text = "投稿後フォームを隠す(&H)";
 			this.HideFormAfterTweet.UseVisualStyleBackColor = true;
@@ -380,7 +433,7 @@
 			this.PostUserAccount.FormattingEnabled = true;
 			this.PostUserAccount.Location = new System.Drawing.Point(154, 39);
 			this.PostUserAccount.Name = "PostUserAccount";
-			this.PostUserAccount.Size = new System.Drawing.Size(271, 26);
+			this.PostUserAccount.Size = new System.Drawing.Size(317, 26);
 			this.PostUserAccount.TabIndex = 10;
 			this.PostUserAccount.SelectedIndexChanged += new System.EventHandler(this.PostUserAccount_SelectedIndexChanged);
 			// 
@@ -391,7 +444,7 @@
 			this.FontName.Location = new System.Drawing.Point(154, 71);
 			this.FontName.Name = "FontName";
 			this.FontName.ReadOnly = true;
-			this.FontName.Size = new System.Drawing.Size(271, 25);
+			this.FontName.Size = new System.Drawing.Size(317, 25);
 			this.FontName.TabIndex = 11;
 			// 
 			// BackgrouondColorView
@@ -415,96 +468,33 @@
 			this.label7.Location = new System.Drawing.Point(3, 3);
 			this.label7.Margin = new System.Windows.Forms.Padding(3);
 			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(638, 30);
+			this.label7.Size = new System.Drawing.Size(684, 30);
 			this.label7.TabIndex = 28;
 			this.label7.Text = "投稿関連の設定";
 			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// TfExit
+			// WindowWidth
 			// 
-			this.TfExit.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.TfExit.Location = new System.Drawing.Point(549, 361);
-			this.TfExit.Name = "TfExit";
-			this.TfExit.Size = new System.Drawing.Size(112, 33);
-			this.TfExit.TabIndex = 19;
-			this.TfExit.Text = "終了(&X)";
-			this.TfExit.UseVisualStyleBackColor = true;
-			this.TfExit.Click += new System.EventHandler(this.TfExit_Click);
-			// 
-			// OK
-			// 
-			this.tableLayoutPanel2.SetColumnSpan(this.OK, 2);
-			this.OK.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.OK.Location = new System.Drawing.Point(163, 361);
-			this.OK.Name = "OK";
-			this.OK.Size = new System.Drawing.Size(273, 33);
-			this.OK.TabIndex = 8;
-			this.OK.Text = "保存(&S)";
-			this.OK.UseVisualStyleBackColor = true;
-			this.OK.Click += new System.EventHandler(this.OK_Click);
-			// 
-			// Cancel
-			// 
-			this.Cancel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Cancel.Location = new System.Drawing.Point(442, 361);
-			this.Cancel.Name = "Cancel";
-			this.Cancel.Size = new System.Drawing.Size(101, 33);
-			this.Cancel.TabIndex = 9;
-			this.Cancel.Text = "キャンセル(&C)";
-			this.Cancel.UseVisualStyleBackColor = true;
-			this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
-			// 
-			// tabControl1
-			// 
-			this.tableLayoutPanel2.SetColumnSpan(this.tabControl1, 5);
-			this.tabControl1.Controls.Add(this.tabPage1);
-			this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tabControl1.Location = new System.Drawing.Point(3, 3);
-			this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-			this.tabControl1.Name = "tabControl1";
-			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(658, 355);
-			this.tabControl1.TabIndex = 2;
-			// 
-			// tabPage1
-			// 
-			this.tabPage1.Controls.Add(this.tableLayoutPanel1);
-			this.tabPage1.Location = new System.Drawing.Point(4, 27);
-			this.tabPage1.Name = "tabPage1";
-			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(650, 324);
-			this.tabPage1.TabIndex = 0;
-			this.tabPage1.Text = "投稿関連";
-			this.tabPage1.UseVisualStyleBackColor = true;
-			// 
-			// tableLayoutPanel2
-			// 
-			this.tableLayoutPanel2.ColumnCount = 5;
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 42F));
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
-			this.tableLayoutPanel2.Controls.Add(this.tabControl1, 0, 0);
-			this.tableLayoutPanel2.Controls.Add(this.OK, 1, 1);
-			this.tableLayoutPanel2.Controls.Add(this.Cancel, 3, 1);
-			this.tableLayoutPanel2.Controls.Add(this.TfExit, 4, 1);
-			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-			this.tableLayoutPanel2.RowCount = 2;
-			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(664, 397);
-			this.tableLayoutPanel2.TabIndex = 3;
+			this.WindowWidth.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.WindowWidth.Location = new System.Drawing.Point(477, 199);
+			this.WindowWidth.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+			this.WindowWidth.Name = "WindowWidth";
+			this.WindowWidth.Size = new System.Drawing.Size(102, 25);
+			this.WindowWidth.TabIndex = 31;
+			this.WindowWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.WindowWidth.ValueChanged += new System.EventHandler(this.WindowWidth_ValueChanged);
 			// 
 			// Setting
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Window;
-			this.ClientSize = new System.Drawing.Size(664, 397);
-			this.Controls.Add(this.tableLayoutPanel2);
+			this.ClientSize = new System.Drawing.Size(690, 342);
+			this.Controls.Add(this.tableLayoutPanel1);
 			this.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -516,9 +506,8 @@
 			this.Load += new System.EventHandler(this.Setting_Load);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
-			this.tabControl1.ResumeLayout(false);
-			this.tabPage1.ResumeLayout(false);
-			this.tableLayoutPanel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.WindowHeight)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.WindowWidth)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -553,10 +542,9 @@
 		private System.Windows.Forms.Button AccountAdd;
 		private System.Windows.Forms.CheckBox HideOffFocus;
 		private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.TabControl tabControl1;
-		private System.Windows.Forms.TabPage tabPage1;
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 		private System.Windows.Forms.ComboBox ShowPosition;
 		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.NumericUpDown WindowHeight;
+		private System.Windows.Forms.NumericUpDown WindowWidth;
 	}
 }

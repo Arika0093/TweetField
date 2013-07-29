@@ -96,5 +96,11 @@ namespace TweetField
 			e.Graphics.DrawRectangle(Pens.Black,
 				CapStart.X-1, CapStart.Y-1, CapLocal.X+1, CapLocal.Y+1);
 		}
+
+		// Exit
+		private void button1_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
 	}
 }

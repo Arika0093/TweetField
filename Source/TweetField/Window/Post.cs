@@ -15,19 +15,44 @@ namespace TweetField
 	public partial class Post : Form
 	{
 		// Constructor
-		public Post(ApplicationSetting As)
+		public Post()
 		{
-			// Copy
-			AppStg = As;
+			// Load
+			AppStg = AppSettingAccess.LoadSetting();
+			// if Account Value is 0
+			if (AppStg.UsingAccountVal < 0)
+			{
+				// Create Instance
+				var stWindow = new Setting(AppStg);
+				// Setting Change
+				AppStg = stWindow.SettingChange(this);
+			}
 			// Reset
 			InitializeComponent();
+			// Create Instance
+			FormResizer	= new FormDragResizer(this, FormDragResizer.ResizeDirection.All, 8);
+			FormMover	= new FormDragMover(this, 8);
+			// Add Event
+			FormResizer.AddMouseEvent(PostText);
+			FormResizer.AddMouseEvent(pictureBox1);
+			FormMover.AddEventHandler(PostText);
+			FormMover.AddEventHandler(pictureBox1);
+			// Set HotKey
+			MOD_KEY ModKey = (MOD_KEY)Enum.ToObject(typeof(MOD_KEY), AppStg.ShowModKey);
+			PostShow = new HotKey(ModKey, AppStg.ShowKeyChar);
+			// Event Add
+			PostShow.HotKeyPush += new EventHandler(HotPush);
 		}
 
 		// First Load
 		private void Post_Load(object sender, EventArgs e)
 		{
 			// Exchange Font
-			Font = new Font(AppStg.SysFontName, AppStg.SysFontSize); 
+			Font = new Font(AppStg.SysFontName, AppStg.SysFontSize);
+
+			
+			// Set Size
+			Size = AppStg.WindowSize;
 			// Show Position Change( X )
 			switch(AppStg.ShowWindowPosition){
 				case 2:		// ( Right Down )
@@ -144,25 +169,11 @@ namespace TweetField
 			pictureBox1.Refresh();
 		}
 
-		// Mouse Push
-		private void Post_MouseDown(object sender, MouseEventArgs e)
+		// Size Change
+		private void Post_Resize(object sender, EventArgs e)
 		{
-			if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
-			{
-				//位置を記憶する
-				MsPt = new Point(e.X, e.Y);
-			}
-		}
-
-		// Mouse Moving
-		private void Post_MouseMove(object sender, MouseEventArgs e)
-		{
-			if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
-			{
-				this.Left += e.X - MsPt.X;
-				this.Top += e.Y - MsPt.Y;
-			}
-
+			// ReDraw
+			pictureBox1.Invalidate();
 		}
 
 		// Draw
@@ -217,9 +228,20 @@ namespace TweetField
 			if(e.CloseReason == CloseReason.UserClosing){
 				Hide();
 				e.Cancel = true;
+				return;
 			}
+			AppSettingAccess.SaveSetting(AppStg);
+			notifyIcon1.Visible = false;
+			PostShow.Dispose();
 		}
 
+		// Double Click Task Icon
+		private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			Show();
+			Activate();
+		}
+	
 		// Post Picture Select
 		private void 投稿PToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -305,10 +327,19 @@ namespace TweetField
 			// Create Instance
 			Setting stWindow = new Setting(AppStg);
 			// ----------------------------------------
+			// Setting Change
+			AppStg.WindowSize = Size;
 			// Go to Account Management			
 			AppStg = stWindow.SettingChange(this);
-			// Refresh
-			Refresh();
+			// Dispose
+			PostShow.Dispose();
+			// Set HotKey
+			MOD_KEY ModKey = (MOD_KEY)Enum.ToObject(typeof(MOD_KEY), AppStg.ShowModKey);
+			PostShow = new HotKey(ModKey, AppStg.ShowKeyChar);
+			// Event Add
+			PostShow.HotKeyPush += new EventHandler(HotPush);
+			// ReLoad
+			Post_Load(sender, e);
 		}
 		
 		// Close the Post Window
@@ -320,6 +351,8 @@ namespace TweetField
 		// Application Exit
 		private void poltsの終了XToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			// Setting Change
+			AppStg.WindowSize = Size;
 			// Program End
 			Application.Exit();
 		}
@@ -384,8 +417,17 @@ namespace TweetField
 			return true;
 		}
 
-		// Mouse Point
-		private Point MsPt;
+		// HotKey Push
+		private void HotPush(object sender, EventArgs e)
+		{
+			// Visible Change
+			Visible = !Visible;
+		}
+
+		// Remover
+		private FormDragMover FormMover;
+		// Resizer
+		private FormDragResizer FormResizer;
 
 		// ApplicationSetting Copy
 		private ApplicationSetting AppStg;
@@ -417,5 +459,8 @@ namespace TweetField
 
 		// TextBox Default String
 		private String DefTextString;
+
+		// HotKey
+		private HotKey PostShow;
 	}
 }

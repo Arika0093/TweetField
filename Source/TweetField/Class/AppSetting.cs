@@ -32,6 +32,7 @@ namespace TweetField
 			ShowKeyChar			= Keys.None;				// Show/Hide Key
 			ShowModKey			= (int)MOD_KEY.CONTROL;		// Mod Key
 			ShowWindowPosition	= 0;						// Show LeftDown
+			WindowSize			= new Size(433, 63);		// Default Size
 			PostKeyType			= 0;						// Enter Post
 			// Footer Color Set
 			FooterColor			= ClConv.ConvertToString(Color.DeepSkyBlue);
@@ -54,6 +55,7 @@ namespace TweetField
 		// ----------------------------------
 		//	Tweet Window Setting
 		// ----------------------------------
+		public Size			WindowSize;					// PostForm Window Size
 		public Keys			ShowKeyChar;				// Show/Hide Key
 		public int			ShowModKey;					// Key Option
 		public int			ShowWindowPosition;			// First Show Position

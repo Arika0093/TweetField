@@ -4,6 +4,10 @@
   <TwitterAccs />
   <SysFontName>メイリオ</SysFontName>
   <SysFontSize>9</SysFontSize>
+  <WindowSize>
+    <Width>433</Width>
+    <Height>63</Height>
+  </WindowSize>
   <ShowKeyChar>Space</ShowKeyChar>
   <ShowModKey>2</ShowModKey>
   <ShowWindowPosition>0</ShowWindowPosition>
