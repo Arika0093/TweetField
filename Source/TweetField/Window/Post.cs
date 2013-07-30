@@ -47,10 +47,11 @@ namespace TweetField
 		// First Load
 		private void Post_Load(object sender, EventArgs e)
 		{
+			// Color Convertor
+			ColorConverter ClConv = new ColorConverter();
+			// ---------------------------------------------------
 			// Exchange Font
-			Font = new Font(AppStg.SysFontName, AppStg.SysFontSize);
-
-			
+			this.Font = new Font(AppStg.SysFontName, AppStg.SysFontSize);
 			// Set Size
 			Size = AppStg.WindowSize;
 			// Show Position Change( X )
@@ -103,6 +104,9 @@ namespace TweetField
 			// Set Default String
 			DefTextString = "この欄に呟く内容を入力します。右クリックでメニューを表示します。\r\n"
 				+ PostKey + "キーを押すことで呟きを投稿します。";
+			// Image Set
+			PostText.ForeColor = (Color)ClConv.ConvertFromString(AppStg.FontColor);
+			// Active
 			Activate();
 			ActiveControl = PostText;
 		}

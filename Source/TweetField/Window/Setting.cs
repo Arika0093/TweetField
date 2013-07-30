@@ -50,6 +50,7 @@ namespace TweetField
 			// Account Setting
 			PostUserAccount.SelectedIndex	= ApSetting.UsingAccountVal;
 			// Setting Item
+			FontColor.BackColor				= (Color)ClConv.ConvertFromString(ApSetting.FontColor);
 			FontName.Text					= ApSetting.SysFontName;
 			FontSize.Text					= ApSetting.SysFontSize.ToString();
 			BackgrouondColorView.BackColor	= (Color)ClConv.ConvertFromString(ApSetting.FooterColor);
@@ -121,17 +122,21 @@ namespace TweetField
 		{
 			// Create instance
 			FontDialog fd	= new FontDialog();
+			// Color Convertor
+			ColorConverter ClConv = new ColorConverter();
 			// ---------------------------------------------------
 			// Member Reset
 			fd.Font			= new Font(FontName.Text, float.Parse(FontSize.Text));
+			fd.Color		= (Color)ClConv.ConvertFromString(ApSetting.FontColor);		
+			fd.ShowColor	= true;
 			fd.ScriptsOnly	= false;
-			fd.ShowEffects	= false;
 			fd.AllowVerticalFonts	= false;
 			// Show
 			if(fd.ShowDialog() == DialogResult.OK){
 				// Exchange
-				ApSetting.SysFontName = fd.Font.Name;
-				ApSetting.SysFontSize = fd.Font.Size;
+				ApSetting.SysFontName	= fd.Font.Name;
+				ApSetting.SysFontSize	= fd.Font.Size;
+				ApSetting.FontColor		= ClConv.ConvertToString(fd.Color);
 				// Reload
 				SettingReload();
 			}

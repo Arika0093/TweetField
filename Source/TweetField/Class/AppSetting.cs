@@ -34,6 +34,8 @@ namespace TweetField
 			ShowWindowPosition	= 0;						// Show LeftDown
 			WindowSize			= new Size(433, 63);		// Default Size
 			PostKeyType			= 0;						// Enter Post
+			// Font Color Set
+			FontColor			= ClConv.ConvertToString(Color.Black);
 			// Footer Color Set
 			FooterColor			= ClConv.ConvertToString(Color.DeepSkyBlue);
 			// String Color Set
@@ -60,6 +62,7 @@ namespace TweetField
 		public int			ShowModKey;					// Key Option
 		public int			ShowWindowPosition;			// First Show Position
 		public int			PostKeyType;				// PostKey Value
+		public String		FontColor;					// PostForm's Text Font Color
 		public String		FooterColor;				// Window of Footer Color
 		public String		StringColor;				// String Color
 		public bool			HideTweetWindow;			// Hide Window after Tweet

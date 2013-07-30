@@ -61,6 +61,7 @@
 			this.BackgrouondColorView = new System.Windows.Forms.Panel();
 			this.label7 = new System.Windows.Forms.Label();
 			this.WindowWidth = new System.Windows.Forms.NumericUpDown();
+			this.FontColor = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.WindowHeight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.WindowWidth)).BeginInit();
@@ -74,6 +75,7 @@
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
+			this.tableLayoutPanel1.Controls.Add(this.FontColor, 1, 2);
 			this.tableLayoutPanel1.Controls.Add(this.WindowHeight, 4, 6);
 			this.tableLayoutPanel1.Controls.Add(this.TfExit, 4, 10);
 			this.tableLayoutPanel1.Controls.Add(this.Cancel, 3, 10);
@@ -101,7 +103,7 @@
 			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
 			this.tableLayoutPanel1.Controls.Add(this.HideFormAfterTweet, 1, 8);
 			this.tableLayoutPanel1.Controls.Add(this.PostUserAccount, 1, 1);
-			this.tableLayoutPanel1.Controls.Add(this.FontName, 1, 2);
+			this.tableLayoutPanel1.Controls.Add(this.FontName, 2, 2);
 			this.tableLayoutPanel1.Controls.Add(this.BackgrouondColorView, 1, 3);
 			this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.WindowWidth, 3, 6);
@@ -120,7 +122,8 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(690, 342);
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(690, 355);
 			this.tableLayoutPanel1.TabIndex = 1;
 			// 
 			// WindowHeight
@@ -141,7 +144,7 @@
 			// TfExit
 			// 
 			this.TfExit.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.TfExit.Location = new System.Drawing.Point(585, 305);
+			this.TfExit.Location = new System.Drawing.Point(585, 318);
 			this.TfExit.Name = "TfExit";
 			this.TfExit.Size = new System.Drawing.Size(102, 34);
 			this.TfExit.TabIndex = 19;
@@ -152,7 +155,7 @@
 			// Cancel
 			// 
 			this.Cancel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Cancel.Location = new System.Drawing.Point(477, 305);
+			this.Cancel.Location = new System.Drawing.Point(477, 318);
 			this.Cancel.Name = "Cancel";
 			this.Cancel.Size = new System.Drawing.Size(102, 34);
 			this.Cancel.TabIndex = 9;
@@ -164,7 +167,7 @@
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.OK, 2);
 			this.OK.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.OK.Location = new System.Drawing.Point(154, 305);
+			this.OK.Location = new System.Drawing.Point(154, 318);
 			this.OK.Name = "OK";
 			this.OK.Size = new System.Drawing.Size(317, 34);
 			this.OK.TabIndex = 8;
@@ -440,11 +443,10 @@
 			// FontName
 			// 
 			this.FontName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.tableLayoutPanel1.SetColumnSpan(this.FontName, 2);
-			this.FontName.Location = new System.Drawing.Point(154, 71);
+			this.FontName.Location = new System.Drawing.Point(205, 71);
 			this.FontName.Name = "FontName";
 			this.FontName.ReadOnly = true;
-			this.FontName.Size = new System.Drawing.Size(317, 25);
+			this.FontName.Size = new System.Drawing.Size(266, 25);
 			this.FontName.TabIndex = 11;
 			// 
 			// BackgrouondColorView
@@ -488,12 +490,21 @@
 			this.WindowWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.WindowWidth.ValueChanged += new System.EventHandler(this.WindowWidth_ValueChanged);
 			// 
+			// FontColor
+			// 
+			this.FontColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.FontColor.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.FontColor.Location = new System.Drawing.Point(154, 71);
+			this.FontColor.Name = "FontColor";
+			this.FontColor.Size = new System.Drawing.Size(45, 26);
+			this.FontColor.TabIndex = 33;
+			// 
 			// Setting
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Window;
-			this.ClientSize = new System.Drawing.Size(690, 342);
+			this.ClientSize = new System.Drawing.Size(690, 355);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -546,5 +557,6 @@
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.NumericUpDown WindowHeight;
 		private System.Windows.Forms.NumericUpDown WindowWidth;
+		private System.Windows.Forms.Panel FontColor;
 	}
 }
