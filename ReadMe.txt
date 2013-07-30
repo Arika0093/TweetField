@@ -8,7 +8,7 @@
 yŠJ”­Œ¾ŒêzC#
 y@í@—ŞzFree Soft / Open Source
 y LicensezGPL v2
-y VersionzVer. 0.9.2.0
+y VersionzVer. 0.9.3.0
 y Projectzhttps://github.com/Arika0093/TweetField
 ----------------------------------------------------------------------------
 yŠeí‹@”\z
