@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <ApplicationSetting xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <UsingAccountVal>-1</UsingAccountVal>
   <TwitterAccs />
@@ -14,6 +14,8 @@
   <PostKeyType>0</PostKeyType>
   <FooterColor>DeepSkyBlue</FooterColor>
   <StringColor>DimGray</StringColor>
+  <DualPost>false</DualPost>
+  <NoResetString>false</NoResetString>
   <HideTweetWindow>true</HideTweetWindow>
   <HideInformation>false</HideInformation>
 </ApplicationSetting>

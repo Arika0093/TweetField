@@ -41,6 +41,8 @@ namespace TweetField
 			// String Color Set
 			StringColor			= ClConv.ConvertToString(Color.DimGray);
 			HideTweetWindow		= true;						// Window Hide After Tweet
+			DualPost			= false;
+			NoResetString		= false;
 			HideInformation		= false;					// Hide Out of Focus
 		}
 		// ----------------------------------
@@ -65,6 +67,8 @@ namespace TweetField
 		public String		FontColor;					// PostForm's Text Font Color
 		public String		FooterColor;				// Window of Footer Color
 		public String		StringColor;				// String Color
+		public bool			DualPost;					// Add Some String
+		public bool			NoResetString;				// 
 		public bool			HideTweetWindow;			// Hide Window after Tweet
 		public bool			HideInformation;			// Hide Window out Focus
 	}

@@ -62,6 +62,8 @@ namespace TweetField
 			WindowWidth.Value				= ApSetting.WindowSize.Width;
 			WindowHeight.Value				= ApSetting.WindowSize.Height;
 			PostKey.SelectedIndex			= ApSetting.PostKeyType;
+			RentouKaihi.Checked				= ApSetting.DualPost;
+			TextSave.Checked				= ApSetting.NoResetString;
 			HideOffFocus.Checked			= ApSetting.HideInformation;
 			HideFormAfterTweet.Checked		= ApSetting.HideTweetWindow;
 			// Enable Change
@@ -219,6 +221,20 @@ namespace TweetField
 		{
 			// Setting Change
 			ApSetting.PostKeyType = PostKey.SelectedIndex;
+		}
+
+		// Rentou Kaihi
+		private void RentouKaihi_CheckedChanged(object sender, EventArgs e)
+		{
+			// Setting Change
+			ApSetting.DualPost = RentouKaihi.Checked;
+		}
+
+		// Text Save
+		private void TextSave_CheckedChanged(object sender, EventArgs e)
+		{
+			// Setting Change
+			ApSetting.NoResetString = TextSave.Checked;
 		}
 
 		// Hide Off focus

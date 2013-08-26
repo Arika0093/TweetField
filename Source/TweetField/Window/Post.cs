@@ -374,9 +374,12 @@ namespace TweetField
 		// Post Tweet
 		private bool TweetPost(String s)
 		{
+			bool CheckOK = true;
 			// Empty Textbox and Refresh
-			PostText.Text = "";
-			PostText.Refresh();
+			if(AppStg.NoResetString == false){
+				PostText.Text = "";
+				PostText.Refresh();
+			}
 			// Check
 			if(String.IsNullOrWhiteSpace(s) || StringLengthBuf(s) > 140 || s == DefTextString )
 			{
@@ -396,6 +399,22 @@ namespace TweetField
 				AppStg.TwitterAccs[AppStg.UsingAccountVal].AccessToken,
 				AppStg.TwitterAccs[AppStg.UsingAccountVal].AccessSecret
 			);
+			// Check String
+			while(CheckOK && AppStg.DualPost){
+				// End
+				CheckOK = false;
+				// Loop
+				foreach(String Tweet in BeforeTweets){
+					// if Cmp
+					if(Tweet == s){
+						// Add 
+						s += "　";
+						// Restart
+						CheckOK = true;
+						break;
+					}
+				}
+			};
 			// IF not Picture Tweet
 			if(PicturePath == ""){
 				// Send Tweet
@@ -409,14 +428,20 @@ namespace TweetField
 				opt.Images = new Dictionary<string, Stream> { { "image", stream } };
 				// Send Tweet
 				TwitServ.SendTweetWithMedia(opt);
-				// If Temp File
-				if(PictureType >= 1){
-					// File Delete
-					File.Delete(_PictPath);
+				// If Reset Flag
+				if(AppStg.NoResetString == false){
+					// If Temp File
+					if(PictureType >= 1){
+						// File Delete
+						File.Delete(_PictPath);
+					}
+					// Picture reset
+					PicturePath = "";
 				}
-				// Picture reset
-				PicturePath = "";
 			}
+			// Add List
+			BeforeTweets[LastAddPlace] = s;
+			LastAddPlace = (LastAddPlace + 1)%15;
 			// end
 			return true;
 		}
@@ -463,6 +488,10 @@ namespace TweetField
 
 		// TextBox Default String
 		private String DefTextString;
+
+		// Before Post(x10)
+		private String[] BeforeTweets = new String[15];
+		private int LastAddPlace = 0;
 
 		// HotKey
 		private HotKey PostShow;
