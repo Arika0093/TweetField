@@ -69,6 +69,8 @@ namespace TweetField
 		public String		StringColor;				// String Color
 		public bool			DualPost;					// Add Some String
 		public bool			NoResetString;				// 
+		public bool			KiseiInfoShow;				// 
+		public bool			ChangeAccOnKisei;			// 
 		public bool			HideTweetWindow;			// Hide Window after Tweet
 		public bool			HideInformation;			// Hide Window out Focus
 	}
@@ -79,6 +81,7 @@ namespace TweetField
 		//	User Status
 		// ----------------------------------
 		public String		UserName;					// Account User Name
+		public String		ShowName;					// Show Name
 		public String		ConsKey;					// Consumer Key
 		public String		ConsSecret;					// Consumer Secret Key
 		public String		AccessToken;				// Token

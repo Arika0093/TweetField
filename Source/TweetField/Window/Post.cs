@@ -17,6 +17,8 @@ namespace TweetField
 		// Constructor
 		public Post()
 		{
+			// Hide
+			this.Hide();
 			// Load
 			AppStg = AppSettingAccess.LoadSetting();
 			// if Account Value is 0
@@ -50,6 +52,8 @@ namespace TweetField
 			// Color Convertor
 			ColorConverter ClConv = new ColorConverter();
 			// ---------------------------------------------------
+			// Get Kisei
+			if (AppStg.KiseiInfoShow) { GetKiseiNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]); }
 			// Exchange Font
 			this.Font = new Font(AppStg.SysFontName, AppStg.SysFontSize);
 			// Set Size
@@ -130,11 +134,8 @@ namespace TweetField
 					// end
 					return;
 				}
-				// If Hide Setting
-				if(AppStg.HideTweetWindow == true){
-					// Destroy
-					Hide();
-				}
+				// Kisei Check
+				GetKiseiNum(AppStg.TwitterAccs[AppStg.UsingAccountVal], true);
 				// Not Do Default Key Function
 				e.SuppressKeyPress = true;
 			}
@@ -216,8 +217,12 @@ namespace TweetField
 					pictureBox1.Height - stringSize.Height, sf);
 				// -----------------------------------------------------------
 				// 描画する文字を指定
-				String DrawAc = "投稿: " + AppStg.TwitterAccs[AppStg.UsingAccountVal].UserName +
-					( PicturePath.Length != 0 ? "（画像: " + Path.GetFileName(PicturePath) + " ）" : "");
+				String DrawAc = "投稿: " + AppStg.TwitterAccs[AppStg.UsingAccountVal].ShowName +
+					"[@" + AppStg.TwitterAccs[AppStg.UsingAccountVal].UserName + "] " +
+					( AppStg.KiseiInfoShow ?
+						"[残: " + GetKiseiNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]).ToString() + "] " :
+						"") +
+					( PicturePath.Length != 0 ? "(画像: " + Path.GetFileName(PicturePath) + " )" : "");
 				// 描画幅を取得
 				stringSize = e.Graphics.MeasureString(DrawAc, Font, pictureBox1.Width, sf);
 				// 描画
@@ -374,21 +379,35 @@ namespace TweetField
 		// Post Tweet
 		private bool TweetPost(String s)
 		{
-			bool CheckOK = true;
 			// Empty Textbox and Refresh
 			if(AppStg.NoResetString == false){
 				PostText.Text = "";
 				PostText.Refresh();
 			}
-			// Check
-			if(String.IsNullOrWhiteSpace(s) || StringLengthBuf(s) > 140 || s == DefTextString )
-			{
-				PostText.Text = s;
-				// false
-				return false;
-			}
 			// if After Close
 			if (AppStg.HideTweetWindow) { Hide(); }
+			bool CheckOK = false;
+			// if Check Kisei
+			if (AppStg.ChangeAccOnKisei)
+			{
+				int Val = AppStg.UsingAccountVal;
+				// Check
+				do{
+					int Lenght = GetKiseiNum(AppStg.TwitterAccs[Val]);
+					if(Lenght >= 5){
+						CheckOK = true;
+						AppStg.UsingAccountVal = Val;
+						break;
+					}
+					Val = (Val+1)%AppStg.TwitterAccs.Count;
+				}while(Val != AppStg.UsingAccountVal);
+				// if Post unable
+				if(CheckOK == false){
+					// MessageBox
+					MessageBox.Show("現在登録されている全アカウントで規制されているようです。");
+					return false;
+				}
+			}
 			// Create Twitter Service Instance
 			TwitterService TwitServ = new TwitterService(
 				AppStg.TwitterAccs[AppStg.UsingAccountVal].ConsKey,
@@ -399,6 +418,7 @@ namespace TweetField
 				AppStg.TwitterAccs[AppStg.UsingAccountVal].AccessToken,
 				AppStg.TwitterAccs[AppStg.UsingAccountVal].AccessSecret
 			);
+			CheckOK = true;
 			// Check String
 			while(CheckOK && AppStg.DualPost){
 				// End
@@ -415,6 +435,13 @@ namespace TweetField
 					}
 				}
 			};
+			// Check
+			if (String.IsNullOrWhiteSpace(s) || StringLengthBuf(s) > 140 || s == DefTextString)
+			{
+				PostText.Text = s;
+				// false
+				return false;
+			}
 			// IF not Picture Tweet
 			if(PicturePath == ""){
 				// Send Tweet
@@ -442,8 +469,59 @@ namespace TweetField
 			// Add List
 			BeforeTweets[LastAddPlace] = s;
 			LastAddPlace = (LastAddPlace + 1)%15;
+			// RePaint
+			pictureBox1.Refresh();
 			// end
 			return true;
+		}
+
+		// Get Kisei Num
+		private int GetKiseiNum(TwAccount Acc, bool Reload = false)
+		{
+			// if different
+			if(Account != null && Account.UserName == Acc.UserName && !Reload){
+				// return
+				return Buf;
+			}
+			// copy
+			Account = Acc;
+			// Reset
+			Buf = 128;
+			// for get my TL
+			ListTweetsOnUserTimelineOptions opt = new ListTweetsOnUserTimelineOptions();
+			// set my account
+			opt.ScreenName = Acc.UserName;
+			// over 128
+			opt.Count = 128;
+			// Create Twitter Service Instance
+			TwitterService TwitServ = new TwitterService(
+				Account.ConsKey, Account.ConsSecret
+			);
+			// OAuth
+			TwitServ.AuthenticateWith(
+				Account.AccessToken, Account.AccessSecret
+			);
+			// Get now time
+			DateTime Dt = DateTime.UtcNow;
+			// Get
+			var Tweets = TwitServ.ListTweetsOnUserTimeline(opt);
+			// foreach
+			foreach(var Tweet in Tweets)
+			{
+				// Get Tweet's Create Time
+				DateTime Twdt = Tweet.CreatedDate;
+				// Span Get
+				TimeSpan Ts = Dt - Twdt;
+				// if 3 Hours over
+				if(Ts.Hours >= 3){
+					// End
+					break;
+				}
+				// Value Minus
+				Buf--;
+			}
+			// Result
+			return Buf;
 		}
 
 		// HotKey Push
@@ -495,5 +573,10 @@ namespace TweetField
 
 		// HotKey
 		private HotKey PostShow;
+
+		// Instance
+		TwAccount Account = null;
+		// Buf
+		int Buf = 0;
 	}
 }

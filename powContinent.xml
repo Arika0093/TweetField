@@ -1,21 +1,24 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <ApplicationSetting xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <UsingAccountVal>-1</UsingAccountVal>
   <TwitterAccs />
   <SysFontName>メイリオ</SysFontName>
-  <SysFontSize>9</SysFontSize>
+  <SysFontSize>9.75</SysFontSize>
   <WindowSize>
-    <Width>433</Width>
-    <Height>63</Height>
+    <Width>497</Width>
+    <Height>65</Height>
   </WindowSize>
   <ShowKeyChar>Space</ShowKeyChar>
   <ShowModKey>2</ShowModKey>
   <ShowWindowPosition>0</ShowWindowPosition>
   <PostKeyType>0</PostKeyType>
+  <FontColor>Black</FontColor>
   <FooterColor>DeepSkyBlue</FooterColor>
   <StringColor>DimGray</StringColor>
-  <DualPost>false</DualPost>
+  <DualPost>true</DualPost>
   <NoResetString>false</NoResetString>
+  <KiseiInfoShow>true</KiseiInfoShow>
+  <ChangeAccOnKisei>false</ChangeAccOnKisei>
   <HideTweetWindow>true</HideTweetWindow>
   <HideInformation>false</HideInformation>
 </ApplicationSetting>

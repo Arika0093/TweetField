@@ -1,30 +1,30 @@
 ----------------------------------------------------------------------------
-【　名　称】Powerful Continent
-【　登録名】TweetField
-【　著作権】Copyright (C) 2013 Arika.
-【　連絡先】Delete0093@Gmail.com
-【動作確認】Windows8 64Bit
-【開発環境】Microsoft Visual Studio Professional
-【開発言語】C#
-【　種　類】Free Soft / Open Source
-【 License】GPL v2
-【 Version】Ver. 0.9.3.0
-【 Project】https://github.com/Arika0093/TweetField
+�y�@���@�́zPowerful Continent
+�y�@�o�^���zTweetField
+�y�@���쌠�zCopyright (C) 2013 Arika.
+�y�@�A����zDelete0093@Gmail.com
+�y����m�F�zWindows8 64Bit
+�y�J�����zMicrosoft Visual Studio Professional
+�y�J������zC#
+�y�@��@�ށzFree Soft / Open Source
+�y License�zGPL v2
+�y Version�zVer. 0.10.0.0
+�y Project�zhttps://github.com/Arika0093/TweetField
 ----------------------------------------------------------------------------
-【各種機能】
-　・指定したホットキーで瞬時に呼び出し可能。
-　・画像を添付可能。
-　・連投規制の回避機能を搭載。
-　・さらに文字温存機能搭載で同文を大量POSTすることも可能に。
-　・クリップボードの画像を直接アップロード可能。
-　・スクリーンショットを撮影してそのままアップロード可能。
+�y�e��@�\�z
+�@�E�w�肵���z�b�g�L�[�ŏu���ɌĂяo���\
+�@�E�摜��Y�t�\
+�@�E�N���b�v�{�[�h�̉摜�𒼐ڃA�b�v���[�h�\
+�@�E�X�N���[���V���b�g���B�e���Ă��̂܂܃A�b�v���[�h�\
+�@�E�K���܂ł̂����悻�̖ڈ���\��
+�@�E�K�����ɃA�J�E���g�������Ő؂�ւ���@�\������
 
-【使用方法】
-　1. powContinent.exeを実行します。
-　2. ダイアログ右上の「アカウント追加」ボタンを選択します。
-　3. アカウント認証をします。
-　4. その他設定を変更して「保存」ボタンを選択します。
-　5. ホットキー(初期値: Ctrl + Space)の同時押し または
-　   タスクバーのアイコンをクリックします。
-　6. 呟く内容を入力します。
-　7. Enterキー（初期設定）で投稿します。
+�y�g�p���@�z
+�@1. powContinent.exe�����s���܂��B
+�@2. �_�C�A���O�E��́u�A�J�E���g�ǉ��v�{�^����I�����܂��B
+�@3. �A�J�E���g�F�؂����܂��B
+�@4. ���̑��ݒ��ύX���āu�ۑ��v�{�^����I�����܂��B
+�@5. �z�b�g�L�[(�����l: Ctrl + Space)�̓������� �܂���
+�@   �^�X�N�o�[�̃A�C�R�����N���b�N���܂��B
+�@6. �ꂭ���e����͂��܂��B
+�@7. Enter�L�[�i�����ݒ�j�œ��e���܂��B

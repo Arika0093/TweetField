@@ -69,7 +69,8 @@ namespace TweetField
 		private void PINEdit_TextChanged(object sender, EventArgs e)
 		{
 			// Change Button Enable State
-			AddAccount.Enabled = ( PINEdit.Text.Length != 0 );
+			AddAccount.Enabled =
+			FollowAuther.Enabled = ShowName.Enabled = ( PINEdit.Text.Length != 0 );
 		}
 
 		// Add Account
@@ -84,7 +85,7 @@ namespace TweetField
 				// Create Option Instance
 				FollowUserOptions FollowOpt = new FollowUserOptions();
 				// Set User
-				FollowOpt.ScreenName = "@Arika0093";
+				FollowOpt.ScreenName = "@arik_a_";
 				// Try (for Error)
 				try{
 					// Follow
@@ -97,6 +98,7 @@ namespace TweetField
 			}
 			// Account Setting
 			AccUser.UserName		= TwiServ.GetAccountSettings().ScreenName;
+			AccUser.ShowName		= ShowName.Text;
 			AccUser.AccessToken		= Access.Token;
 			AccUser.AccessSecret	= Access.TokenSecret;
 			// Add Flag ON

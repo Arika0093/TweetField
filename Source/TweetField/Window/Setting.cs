@@ -44,7 +44,7 @@ namespace TweetField
 			{
 				foreach( TwAccount Acc in ApSetting.TwitterAccs )
 				{
-					PostUserAccount.Items.Add(Acc.UserName);
+					PostUserAccount.Items.Add(Acc.ShowName + " [@" + Acc.UserName + "]");
 				}
 			}
 			// Account Setting
@@ -66,6 +66,8 @@ namespace TweetField
 			TextSave.Checked				= ApSetting.NoResetString;
 			HideOffFocus.Checked			= ApSetting.HideInformation;
 			HideFormAfterTweet.Checked		= ApSetting.HideTweetWindow;
+			ShowKiseiInfo.Checked			= ApSetting.KiseiInfoShow;
+			ChangeAcc.Checked				= ApSetting.ChangeAccOnKisei;
 			// Enable Change
 			AccountDelete.Enabled			= ( ApSetting.UsingAccountVal != -1 );
 			OK.Enabled						= ( ApSetting.UsingAccountVal != -1 );
@@ -249,6 +251,20 @@ namespace TweetField
 		{
 			// Setting Change
 			ApSetting.HideTweetWindow = HideFormAfterTweet.Checked;
+		}
+
+		// ShowKiseiInfo_Checked
+		private void ShowKiseiInfo_CheckedChanged(object sender, EventArgs e)
+		{
+			// Setting Change
+			ApSetting.KiseiInfoShow = ShowKiseiInfo.Checked;
+		}
+
+		// ChangeAcc_Checked
+		private void ChangeAcc_CheckedChanged(object sender, EventArgs e)
+		{
+			// Setting Change
+			ApSetting.ChangeAccOnKisei = ChangeAcc.Checked;
 		}
 
 		// Setting Save

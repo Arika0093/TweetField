@@ -66,6 +66,8 @@
 			this.WindowWidth = new System.Windows.Forms.NumericUpDown();
 			this.TextSave = new System.Windows.Forms.CheckBox();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.ShowKiseiInfo = new System.Windows.Forms.CheckBox();
+			this.ChangeAcc = new System.Windows.Forms.CheckBox();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.WindowHeight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.WindowWidth)).BeginInit();
@@ -79,15 +81,17 @@
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
-			this.tableLayoutPanel1.Controls.Add(this.RentouKaihi, 1, 8);
+			this.tableLayoutPanel1.Controls.Add(this.ChangeAcc, 1, 9);
+			this.tableLayoutPanel1.Controls.Add(this.ShowKiseiInfo, 1, 8);
+			this.tableLayoutPanel1.Controls.Add(this.RentouKaihi, 3, 8);
 			this.tableLayoutPanel1.Controls.Add(this.FontColor, 1, 2);
 			this.tableLayoutPanel1.Controls.Add(this.WindowHeight, 4, 6);
-			this.tableLayoutPanel1.Controls.Add(this.TfExit, 4, 11);
-			this.tableLayoutPanel1.Controls.Add(this.Cancel, 3, 11);
-			this.tableLayoutPanel1.Controls.Add(this.OK, 1, 11);
+			this.tableLayoutPanel1.Controls.Add(this.TfExit, 4, 12);
+			this.tableLayoutPanel1.Controls.Add(this.Cancel, 3, 12);
+			this.tableLayoutPanel1.Controls.Add(this.OK, 1, 12);
 			this.tableLayoutPanel1.Controls.Add(this.ShowPosition, 1, 6);
 			this.tableLayoutPanel1.Controls.Add(this.label8, 0, 6);
-			this.tableLayoutPanel1.Controls.Add(this.HideOffFocus, 3, 9);
+			this.tableLayoutPanel1.Controls.Add(this.HideOffFocus, 3, 10);
 			this.tableLayoutPanel1.Controls.Add(this.SettingKey, 4, 5);
 			this.tableLayoutPanel1.Controls.Add(this.StringColorEdit, 4, 4);
 			this.tableLayoutPanel1.Controls.Add(this.BackgroundColorEdit, 4, 3);
@@ -106,17 +110,17 @@
 			this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
 			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 4);
 			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
-			this.tableLayoutPanel1.Controls.Add(this.HideFormAfterTweet, 1, 9);
+			this.tableLayoutPanel1.Controls.Add(this.HideFormAfterTweet, 3, 9);
 			this.tableLayoutPanel1.Controls.Add(this.PostUserAccount, 1, 1);
 			this.tableLayoutPanel1.Controls.Add(this.FontName, 2, 2);
 			this.tableLayoutPanel1.Controls.Add(this.BackgrouondColorView, 1, 3);
 			this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.WindowWidth, 3, 6);
-			this.tableLayoutPanel1.Controls.Add(this.TextSave, 2, 8);
+			this.tableLayoutPanel1.Controls.Add(this.TextSave, 1, 10);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 12;
+			this.tableLayoutPanel1.RowCount = 13;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
@@ -127,9 +131,11 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(680, 356);
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(680, 384);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// RentouKaihi
@@ -137,9 +143,9 @@
 			this.RentouKaihi.AutoSize = true;
 			this.tableLayoutPanel1.SetColumnSpan(this.RentouKaihi, 2);
 			this.RentouKaihi.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.RentouKaihi.Location = new System.Drawing.Point(133, 263);
+			this.RentouKaihi.Location = new System.Drawing.Point(467, 263);
 			this.RentouKaihi.Name = "RentouKaihi";
-			this.RentouKaihi.Size = new System.Drawing.Size(328, 22);
+			this.RentouKaihi.Size = new System.Drawing.Size(210, 22);
 			this.RentouKaihi.TabIndex = 28;
 			this.RentouKaihi.Text = "自動で連投回避する";
 			this.toolTip1.SetToolTip(this.RentouKaihi, "同じ内容をつぶやこうとした場合に自動で全角スペースを付加して\r\n連投を可能にします。");
@@ -174,7 +180,7 @@
 			// TfExit
 			// 
 			this.TfExit.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.TfExit.Location = new System.Drawing.Point(575, 319);
+			this.TfExit.Location = new System.Drawing.Point(575, 347);
 			this.TfExit.Name = "TfExit";
 			this.TfExit.Size = new System.Drawing.Size(102, 34);
 			this.TfExit.TabIndex = 33;
@@ -185,7 +191,7 @@
 			// Cancel
 			// 
 			this.Cancel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.Cancel.Location = new System.Drawing.Point(467, 319);
+			this.Cancel.Location = new System.Drawing.Point(467, 347);
 			this.Cancel.Name = "Cancel";
 			this.Cancel.Size = new System.Drawing.Size(102, 34);
 			this.Cancel.TabIndex = 32;
@@ -197,7 +203,7 @@
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.OK, 2);
 			this.OK.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.OK.Location = new System.Drawing.Point(133, 319);
+			this.OK.Location = new System.Drawing.Point(133, 347);
 			this.OK.Name = "OK";
 			this.OK.Size = new System.Drawing.Size(328, 34);
 			this.OK.TabIndex = 31;
@@ -240,8 +246,9 @@
 			this.HideOffFocus.AutoSize = true;
 			this.tableLayoutPanel1.SetColumnSpan(this.HideOffFocus, 2);
 			this.HideOffFocus.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.HideOffFocus.Location = new System.Drawing.Point(467, 291);
+			this.HideOffFocus.Location = new System.Drawing.Point(467, 319);
 			this.HideOffFocus.Name = "HideOffFocus";
+			this.tableLayoutPanel1.SetRowSpan(this.HideOffFocus, 2);
 			this.HideOffFocus.Size = new System.Drawing.Size(210, 22);
 			this.HideOffFocus.TabIndex = 30;
 			this.HideOffFocus.Text = "文字情報を隠す";
@@ -459,9 +466,9 @@
 			this.HideFormAfterTweet.AutoSize = true;
 			this.tableLayoutPanel1.SetColumnSpan(this.HideFormAfterTweet, 2);
 			this.HideFormAfterTweet.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.HideFormAfterTweet.Location = new System.Drawing.Point(133, 291);
+			this.HideFormAfterTweet.Location = new System.Drawing.Point(467, 291);
 			this.HideFormAfterTweet.Name = "HideFormAfterTweet";
-			this.HideFormAfterTweet.Size = new System.Drawing.Size(328, 22);
+			this.HideFormAfterTweet.Size = new System.Drawing.Size(210, 22);
 			this.HideFormAfterTweet.TabIndex = 29;
 			this.HideFormAfterTweet.Text = "投稿後フォームを隠す";
 			this.toolTip1.SetToolTip(this.HideFormAfterTweet, "ツイート後にウインドウを隠します。");
@@ -537,21 +544,50 @@
 			this.TextSave.AutoSize = true;
 			this.tableLayoutPanel1.SetColumnSpan(this.TextSave, 2);
 			this.TextSave.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.TextSave.Location = new System.Drawing.Point(467, 263);
+			this.TextSave.Location = new System.Drawing.Point(133, 319);
 			this.TextSave.Name = "TextSave";
-			this.TextSave.Size = new System.Drawing.Size(210, 22);
+			this.TextSave.Size = new System.Drawing.Size(328, 22);
 			this.TextSave.TabIndex = 27;
 			this.TextSave.Text = "投稿後に文章を保持する";
 			this.toolTip1.SetToolTip(this.TextSave, "呟いた内容を呟き後に削除しないで、そのままにします。");
 			this.TextSave.UseVisualStyleBackColor = true;
 			this.TextSave.CheckedChanged += new System.EventHandler(this.TextSave_CheckedChanged);
 			// 
+			// ShowKiseiInfo
+			// 
+			this.ShowKiseiInfo.AutoSize = true;
+			this.tableLayoutPanel1.SetColumnSpan(this.ShowKiseiInfo, 2);
+			this.ShowKiseiInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ShowKiseiInfo.Location = new System.Drawing.Point(133, 263);
+			this.ShowKiseiInfo.Name = "ShowKiseiInfo";
+			this.ShowKiseiInfo.Size = new System.Drawing.Size(328, 22);
+			this.ShowKiseiInfo.TabIndex = 34;
+			this.ShowKiseiInfo.Text = "規制情報を表示する";
+			this.toolTip1.SetToolTip(this.ShowKiseiInfo, "あと何回投稿したら規制されるかを表示します。\r\nやや重い動作ですので、気になる方はチェックを外してください。");
+			this.ShowKiseiInfo.UseVisualStyleBackColor = true;
+			this.ShowKiseiInfo.CheckedChanged += new System.EventHandler(this.ShowKiseiInfo_CheckedChanged);
+			// 
+			// ChangeAcc
+			// 
+			this.ChangeAcc.AutoSize = true;
+			this.tableLayoutPanel1.SetColumnSpan(this.ChangeAcc, 2);
+			this.ChangeAcc.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ChangeAcc.Location = new System.Drawing.Point(133, 291);
+			this.ChangeAcc.Name = "ChangeAcc";
+			this.ChangeAcc.Size = new System.Drawing.Size(328, 22);
+			this.ChangeAcc.TabIndex = 35;
+			this.ChangeAcc.Text = "規制されたら自動でアカウント切り替え";
+			this.toolTip1.SetToolTip(this.ChangeAcc, "もし投稿規制になった時に、登録してあるアカウントの順を一つずらして投稿します。\r\nリストの終端まで達した場合、最初のアカウントの状態を見て、規制されていればそこで" +
+        "連鎖は中断されます。\r\n規制情報の表示と同様、やや重い動作です。");
+			this.ChangeAcc.UseVisualStyleBackColor = true;
+			this.ChangeAcc.CheckedChanged += new System.EventHandler(this.ChangeAcc_CheckedChanged);
+			// 
 			// Setting
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Window;
-			this.ClientSize = new System.Drawing.Size(680, 356);
+			this.ClientSize = new System.Drawing.Size(680, 384);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -608,5 +644,7 @@
 		private System.Windows.Forms.CheckBox RentouKaihi;
 		private System.Windows.Forms.ToolTip toolTip1;
 		private System.Windows.Forms.CheckBox TextSave;
+		private System.Windows.Forms.CheckBox ChangeAcc;
+		private System.Windows.Forms.CheckBox ShowKiseiInfo;
 	}
 }
