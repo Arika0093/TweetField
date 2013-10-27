@@ -31,6 +31,8 @@
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Setting));
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.ChangeAcc = new System.Windows.Forms.CheckBox();
+			this.ShowKiseiInfo = new System.Windows.Forms.CheckBox();
 			this.RentouKaihi = new System.Windows.Forms.CheckBox();
 			this.FontColor = new System.Windows.Forms.Panel();
 			this.WindowHeight = new System.Windows.Forms.NumericUpDown();
@@ -66,8 +68,6 @@
 			this.WindowWidth = new System.Windows.Forms.NumericUpDown();
 			this.TextSave = new System.Windows.Forms.CheckBox();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-			this.ShowKiseiInfo = new System.Windows.Forms.CheckBox();
-			this.ChangeAcc = new System.Windows.Forms.CheckBox();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.WindowHeight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.WindowWidth)).BeginInit();
@@ -137,6 +137,35 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(680, 384);
 			this.tableLayoutPanel1.TabIndex = 0;
+			// 
+			// ChangeAcc
+			// 
+			this.ChangeAcc.AutoSize = true;
+			this.tableLayoutPanel1.SetColumnSpan(this.ChangeAcc, 2);
+			this.ChangeAcc.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ChangeAcc.Location = new System.Drawing.Point(133, 291);
+			this.ChangeAcc.Name = "ChangeAcc";
+			this.ChangeAcc.Size = new System.Drawing.Size(328, 22);
+			this.ChangeAcc.TabIndex = 35;
+			this.ChangeAcc.Text = "規制されたら自動でアカウント切り替え";
+			this.toolTip1.SetToolTip(this.ChangeAcc, "もし投稿規制になった時に、登録してあるアカウントの順を一つずらして投稿します。\r\nリストの終端まで達した場合、最初のアカウントの状態を見て、規制されていればそこで" +
+        "連鎖は中断されます。\r\n規制情報の表示と同様、やや重い動作です。");
+			this.ChangeAcc.UseVisualStyleBackColor = true;
+			this.ChangeAcc.CheckedChanged += new System.EventHandler(this.ChangeAcc_CheckedChanged);
+			// 
+			// ShowKiseiInfo
+			// 
+			this.ShowKiseiInfo.AutoSize = true;
+			this.tableLayoutPanel1.SetColumnSpan(this.ShowKiseiInfo, 2);
+			this.ShowKiseiInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ShowKiseiInfo.Location = new System.Drawing.Point(133, 263);
+			this.ShowKiseiInfo.Name = "ShowKiseiInfo";
+			this.ShowKiseiInfo.Size = new System.Drawing.Size(328, 22);
+			this.ShowKiseiInfo.TabIndex = 34;
+			this.ShowKiseiInfo.Text = "規制情報を表示する";
+			this.toolTip1.SetToolTip(this.ShowKiseiInfo, "あと何回投稿したら規制されるかを表示します。\r\nやや重い動作ですので、気になる方はチェックを外してください。");
+			this.ShowKiseiInfo.UseVisualStyleBackColor = true;
+			this.ShowKiseiInfo.CheckedChanged += new System.EventHandler(this.ShowKiseiInfo_CheckedChanged);
 			// 
 			// RentouKaihi
 			// 
@@ -553,35 +582,6 @@
 			this.TextSave.UseVisualStyleBackColor = true;
 			this.TextSave.CheckedChanged += new System.EventHandler(this.TextSave_CheckedChanged);
 			// 
-			// ShowKiseiInfo
-			// 
-			this.ShowKiseiInfo.AutoSize = true;
-			this.tableLayoutPanel1.SetColumnSpan(this.ShowKiseiInfo, 2);
-			this.ShowKiseiInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ShowKiseiInfo.Location = new System.Drawing.Point(133, 263);
-			this.ShowKiseiInfo.Name = "ShowKiseiInfo";
-			this.ShowKiseiInfo.Size = new System.Drawing.Size(328, 22);
-			this.ShowKiseiInfo.TabIndex = 34;
-			this.ShowKiseiInfo.Text = "規制情報を表示する";
-			this.toolTip1.SetToolTip(this.ShowKiseiInfo, "あと何回投稿したら規制されるかを表示します。\r\nやや重い動作ですので、気になる方はチェックを外してください。");
-			this.ShowKiseiInfo.UseVisualStyleBackColor = true;
-			this.ShowKiseiInfo.CheckedChanged += new System.EventHandler(this.ShowKiseiInfo_CheckedChanged);
-			// 
-			// ChangeAcc
-			// 
-			this.ChangeAcc.AutoSize = true;
-			this.tableLayoutPanel1.SetColumnSpan(this.ChangeAcc, 2);
-			this.ChangeAcc.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ChangeAcc.Location = new System.Drawing.Point(133, 291);
-			this.ChangeAcc.Name = "ChangeAcc";
-			this.ChangeAcc.Size = new System.Drawing.Size(328, 22);
-			this.ChangeAcc.TabIndex = 35;
-			this.ChangeAcc.Text = "規制されたら自動でアカウント切り替え";
-			this.toolTip1.SetToolTip(this.ChangeAcc, "もし投稿規制になった時に、登録してあるアカウントの順を一つずらして投稿します。\r\nリストの終端まで達した場合、最初のアカウントの状態を見て、規制されていればそこで" +
-        "連鎖は中断されます。\r\n規制情報の表示と同様、やや重い動作です。");
-			this.ChangeAcc.UseVisualStyleBackColor = true;
-			this.ChangeAcc.CheckedChanged += new System.EventHandler(this.ChangeAcc_CheckedChanged);
-			// 
 			// Setting
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
@@ -597,6 +597,7 @@
 			this.Name = "Setting";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "アプリケーション設定";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Setting_FormClosing);
 			this.Load += new System.EventHandler(this.Setting_Load);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();

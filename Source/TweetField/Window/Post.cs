@@ -379,7 +379,7 @@ namespace TweetField
 		// Post Tweet
 		private bool TweetPost(String s)
 		{
-			// Empty Textbox and Refresh
+			// if Empty Textbox, Refresh
 			if(AppStg.NoResetString == false){
 				PostText.Text = "";
 				PostText.Refresh();
@@ -388,8 +388,7 @@ namespace TweetField
 			if (AppStg.HideTweetWindow) { Hide(); }
 			bool CheckOK = false;
 			// if Check Kisei
-			if (AppStg.ChangeAccOnKisei)
-			{
+			if (AppStg.ChangeAccOnKisei){
 				int Val = AppStg.UsingAccountVal;
 				// Check
 				do{
@@ -426,7 +425,7 @@ namespace TweetField
 				// Loop
 				foreach(String Tweet in BeforeTweets){
 					// if Cmp
-					if(Tweet == s){
+					if(Tweet != null && Tweet.Length == s.Length){
 						// Add 
 						s += "　";
 						// Restart
@@ -436,16 +435,17 @@ namespace TweetField
 				}
 			};
 			// Check
-			if (String.IsNullOrWhiteSpace(s) || StringLengthBuf(s) > 140 || s == DefTextString)
-			{
+			if (String.IsNullOrWhiteSpace(s) || StringLengthBuf(s) > 140 || s == DefTextString){
 				PostText.Text = s;
 				// false
 				return false;
 			}
+			// GetTweet
+			TwitterStatus TwiStatus;
 			// IF not Picture Tweet
 			if(PicturePath == ""){
 				// Send Tweet
-				TwitServ.SendTweet(new SendTweetOptions { Status = s });
+				TwiStatus = TwitServ.SendTweet(new SendTweetOptions { Status = s });
 			}
 			// If Picture Tweet
 			else{
@@ -454,7 +454,7 @@ namespace TweetField
 				opt.Status = s;
 				opt.Images = new Dictionary<string, Stream> { { "image", stream } };
 				// Send Tweet
-				TwitServ.SendTweetWithMedia(opt);
+				TwiStatus = TwitServ.SendTweetWithMedia(opt);
 				// If Reset Flag
 				if(AppStg.NoResetString == false){
 					// If Temp File
@@ -466,6 +466,11 @@ namespace TweetField
 					PicturePath = "";
 				}
 			}
+			// if ResetTime over
+			if(PostRstTime == null || ((DateTime)PostRstTime - TwiStatus.CreatedDate).Hours < 0){
+				// Set
+				PostRstTime	= TwiStatus.CreatedDate;
+			}
 			// Add List
 			BeforeTweets[LastAddPlace] = s;
 			LastAddPlace = (LastAddPlace + 1)%15;
@@ -475,9 +480,11 @@ namespace TweetField
 			return true;
 		}
 
-		// Get Kisei Num
+		// Get Kisei Number
 		private int GetKiseiNum(TwAccount Acc, bool Reload = false)
 		{
+			// Kisei Num
+			const int RETURN_MAX = 128;
 			// if different
 			if(Account != null && Account.UserName == Acc.UserName && !Reload){
 				// return
@@ -486,13 +493,13 @@ namespace TweetField
 			// copy
 			Account = Acc;
 			// Reset
-			Buf = 128;
+			Buf = RETURN_MAX;
 			// for get my TL
 			ListTweetsOnUserTimelineOptions opt = new ListTweetsOnUserTimelineOptions();
 			// set my account
 			opt.ScreenName = Acc.UserName;
-			// over 128
-			opt.Count = 128;
+			// over RETURN_MAX
+			opt.Count = RETURN_MAX;
 			// Create Twitter Service Instance
 			TwitterService TwitServ = new TwitterService(
 				Account.ConsKey, Account.ConsSecret
@@ -501,19 +508,20 @@ namespace TweetField
 			TwitServ.AuthenticateWith(
 				Account.AccessToken, Account.AccessSecret
 			);
-			// Get now time
-			DateTime Dt = DateTime.UtcNow;
 			// Get
 			var Tweets = TwitServ.ListTweetsOnUserTimeline(opt);
 			// foreach
-			foreach(var Tweet in Tweets)
-			{
-				// Get Tweet's Create Time
-				DateTime Twdt = Tweet.CreatedDate;
+			foreach(var Tweet in Tweets){
 				// Span Get
-				TimeSpan Ts = Dt - Twdt;
+				TimeSpan Ts =
+					(PostRstTime == null ? DateTime.UtcNow : (DateTime)PostRstTime) - Tweet.CreatedDate;
 				// if 3 Hours over
 				if(Ts.Hours >= 3){
+					// if ResetTime is null
+					if(PostRstTime == null){
+						// Set
+						PostRstTime = Tweet.CreatedDate.AddHours(3);
+					}
 					// End
 					break;
 				}
@@ -529,6 +537,9 @@ namespace TweetField
 		{
 			// Visible Change
 			Visible = !Visible;
+			if(Visible){
+				Activate();
+			}
 		}
 
 		// Remover
@@ -575,8 +586,10 @@ namespace TweetField
 		private HotKey PostShow;
 
 		// Instance
-		TwAccount Account = null;
+		private TwAccount Account = null;
 		// Buf
-		int Buf = 0;
+		private int Buf = 0;
+		// PostResetTime
+		private DateTime? PostRstTime = null;
 	}
 }

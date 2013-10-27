@@ -279,19 +279,23 @@ namespace TweetField
 		// Setting Cancel
 		private void Cancel_Click(object sender, EventArgs e)
 		{
-			if(ApSetting.UsingAccountVal < 0){
-				// End
-				Application.Exit();
-			}
 			Close();
 		}
 
 		// Application Exit
 		private void TfExit_Click(object sender, EventArgs e)
 		{
-			Close();
 			// Program End
 			Application.Exit();
+		}
+
+		// Form Closed
+		private void Setting_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			if(ApSetting.UsingAccountVal < 0){
+				// End
+				Application.Exit();
+			}
 		}
 	}
 }

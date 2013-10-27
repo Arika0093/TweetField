@@ -6,7 +6,9 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Input;
 using TweetSharp;
 
 namespace TweetField
@@ -36,23 +38,33 @@ namespace TweetField
 		{
 			// Init
 			InitializeComponent();
+			// Item Add
+			foreach(var Consumer in ConsumerList.ConsLists){
+				if((Keyboard.IsKeyDown(Key.ImeConvert) &&
+					Keyboard.IsKeyDown(Key.ImeNonConvert)) ||
+					Consumer.HiddenItem == false){
+						ConsumersList.Items.Add(Consumer.Name);
+				}
+			}
+			// Select This
+			ConsumersList.SelectedIndex = 0;
 		}
 
 		// Check on Browser
 		private void StartOAuth_Click(object sender, EventArgs e)
 		{
 			// if Only Key or Secret Input
-			if ((ConsKey.Text.Length == 0 && ConsSecret.Text.Length != 0)
-			|| (ConsKey.Text.Length != 0 && ConsSecret.Text.Length == 0))
-			{
+			if ((ConsKey.Text.Length == 0 || ConsSecret.Text.Length == 0) && ConsKey.Enabled){
 				// Show Error Message
-				MessageBox.Show("KeyまたはSecret Keyのどちらかが未入力です。");
+				MessageBox.Show("KeyまたはSecretが未入力です。");
 				// End
 				return;
 			}
 			// Key Setting Check
-			AccUser.ConsKey = (ConsKey.Text.Length == 0 ? ConsumerValue.Key : ConsKey.Text);
-			AccUser.ConsSecret = (ConsKey.Text.Length == 0 ? ConsumerValue.Secret : ConsSecret.Text);
+			AccUser.ConsKey = (ConsKey.Text.Length == 0 ?
+				ConsumerList.ConsLists[ConsumersList.SelectedIndex].Key : ConsKey.Text);
+			AccUser.ConsSecret = (ConsKey.Text.Length == 0 ?
+				ConsumerList.ConsLists[ConsumersList.SelectedIndex].Secret : ConsSecret.Text);
 			// Create Service Instance
 			TwiServ = new TwitterService(AccUser.ConsKey, AccUser.ConsSecret);
 			// Create Access Token
@@ -98,13 +110,24 @@ namespace TweetField
 			}
 			// Account Setting
 			AccUser.UserName		= TwiServ.GetAccountSettings().ScreenName;
-			AccUser.ShowName		= ShowName.Text;
+			AccUser.ShowName		= (ShowName.Text.Length != 0 ? ShowName.Text :
+										TwiServ.GetUserProfileFor(new GetUserProfileForOptions{
+											ScreenName = TwiServ.GetAccountSettings().ScreenName
+										}).Name);
 			AccUser.AccessToken		= Access.Token;
 			AccUser.AccessSecret	= Access.TokenSecret;
 			// Add Flag ON
 			AddAcc = true;
 			// Close
 			Close();
+		}
+
+		// Select Change
+		private void ConsumersList_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ConsKey.Enabled =
+			ConsSecret.Enabled = (ConsumersList.SelectedIndex == ConsumersList.Items.Count-1);
+
 		}
 	}
 }

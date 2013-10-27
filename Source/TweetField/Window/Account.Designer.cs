@@ -46,6 +46,8 @@
 			this.AddAccount = new System.Windows.Forms.Button();
 			this.label9 = new System.Windows.Forms.Label();
 			this.ShowName = new System.Windows.Forms.TextBox();
+			this.ConsumersList = new System.Windows.Forms.ComboBox();
+			this.label10 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -53,29 +55,32 @@
 			// 
 			this.tableLayoutPanel1.ColumnCount = 3;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 155F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 72F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Controls.Add(this.FollowAuther, 2, 6);
-			this.tableLayoutPanel1.Controls.Add(this.label8, 0, 5);
-			this.tableLayoutPanel1.Controls.Add(this.label7, 1, 2);
-			this.tableLayoutPanel1.Controls.Add(this.ConsSecret, 2, 2);
-			this.tableLayoutPanel1.Controls.Add(this.ConsKey, 2, 1);
-			this.tableLayoutPanel1.Controls.Add(this.label5, 0, 8);
+			this.tableLayoutPanel1.Controls.Add(this.FollowAuther, 2, 7);
+			this.tableLayoutPanel1.Controls.Add(this.label8, 0, 6);
+			this.tableLayoutPanel1.Controls.Add(this.label7, 1, 3);
+			this.tableLayoutPanel1.Controls.Add(this.ConsSecret, 2, 3);
+			this.tableLayoutPanel1.Controls.Add(this.ConsKey, 2, 2);
+			this.tableLayoutPanel1.Controls.Add(this.label5, 0, 9);
 			this.tableLayoutPanel1.Controls.Add(this.label4, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.label3, 0, 4);
+			this.tableLayoutPanel1.Controls.Add(this.label3, 0, 5);
 			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 3);
-			this.tableLayoutPanel1.Controls.Add(this.StartOAuth, 1, 3);
-			this.tableLayoutPanel1.Controls.Add(this.PINEdit, 1, 4);
-			this.tableLayoutPanel1.Controls.Add(this.label6, 1, 1);
-			this.tableLayoutPanel1.Controls.Add(this.AddAccount, 1, 8);
-			this.tableLayoutPanel1.Controls.Add(this.label9, 1, 5);
-			this.tableLayoutPanel1.Controls.Add(this.ShowName, 2, 5);
+			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 4);
+			this.tableLayoutPanel1.Controls.Add(this.StartOAuth, 1, 4);
+			this.tableLayoutPanel1.Controls.Add(this.PINEdit, 1, 5);
+			this.tableLayoutPanel1.Controls.Add(this.label6, 1, 2);
+			this.tableLayoutPanel1.Controls.Add(this.AddAccount, 1, 9);
+			this.tableLayoutPanel1.Controls.Add(this.label9, 1, 6);
+			this.tableLayoutPanel1.Controls.Add(this.ShowName, 2, 6);
+			this.tableLayoutPanel1.Controls.Add(this.ConsumersList, 2, 1);
+			this.tableLayoutPanel1.Controls.Add(this.label10, 1, 1);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 9;
+			this.tableLayoutPanel1.RowCount = 10;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
@@ -84,7 +89,7 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(524, 276);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(524, 308);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// FollowAuther
@@ -92,9 +97,9 @@
 			this.FollowAuther.AutoSize = true;
 			this.FollowAuther.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.FollowAuther.Enabled = false;
-			this.FollowAuther.Location = new System.Drawing.Point(230, 207);
+			this.FollowAuther.Location = new System.Drawing.Point(215, 239);
 			this.FollowAuther.Name = "FollowAuther";
-			this.FollowAuther.Size = new System.Drawing.Size(291, 26);
+			this.FollowAuther.Size = new System.Drawing.Size(306, 26);
 			this.FollowAuther.TabIndex = 1;
 			this.FollowAuther.Text = "作者アカウント(@arik_a_)をフォロー";
 			this.FollowAuther.UseVisualStyleBackColor = true;
@@ -103,7 +108,7 @@
 			// 
 			this.label8.AutoSize = true;
 			this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label8.Location = new System.Drawing.Point(3, 172);
+			this.label8.Location = new System.Drawing.Point(3, 204);
 			this.label8.Name = "label8";
 			this.tableLayoutPanel1.SetRowSpan(this.label8, 2);
 			this.label8.Size = new System.Drawing.Size(149, 64);
@@ -115,9 +120,9 @@
 			// 
 			this.label7.AutoSize = true;
 			this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label7.Location = new System.Drawing.Point(158, 68);
+			this.label7.Location = new System.Drawing.Point(158, 100);
 			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(66, 32);
+			this.label7.Size = new System.Drawing.Size(51, 32);
 			this.label7.TabIndex = 10;
 			this.label7.Text = "Secret:";
 			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -125,24 +130,26 @@
 			// ConsSecret
 			// 
 			this.ConsSecret.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.ConsSecret.Location = new System.Drawing.Point(230, 71);
+			this.ConsSecret.Enabled = false;
+			this.ConsSecret.Location = new System.Drawing.Point(215, 103);
 			this.ConsSecret.Name = "ConsSecret";
-			this.ConsSecret.Size = new System.Drawing.Size(291, 25);
+			this.ConsSecret.Size = new System.Drawing.Size(306, 25);
 			this.ConsSecret.TabIndex = 8;
 			// 
 			// ConsKey
 			// 
 			this.ConsKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.ConsKey.Location = new System.Drawing.Point(230, 39);
+			this.ConsKey.Enabled = false;
+			this.ConsKey.Location = new System.Drawing.Point(215, 71);
 			this.ConsKey.Name = "ConsKey";
-			this.ConsKey.Size = new System.Drawing.Size(291, 25);
+			this.ConsKey.Size = new System.Drawing.Size(306, 25);
 			this.ConsKey.TabIndex = 7;
 			// 
 			// label5
 			// 
 			this.label5.AutoSize = true;
 			this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label5.Location = new System.Drawing.Point(3, 236);
+			this.label5.Location = new System.Drawing.Point(3, 268);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(149, 40);
 			this.label5.TabIndex = 4;
@@ -155,17 +162,17 @@
 			this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.label4.Location = new System.Drawing.Point(3, 36);
 			this.label4.Name = "label4";
-			this.tableLayoutPanel1.SetRowSpan(this.label4, 2);
-			this.label4.Size = new System.Drawing.Size(149, 64);
+			this.tableLayoutPanel1.SetRowSpan(this.label4, 3);
+			this.label4.Size = new System.Drawing.Size(149, 96);
 			this.label4.TabIndex = 3;
-			this.label4.Text = "0. API Key Override:\r\n（上級者向け/省略可能）";
+			this.label4.Text = "0. API Key Override: \r\n（上級者向け/省略可能） ";
 			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
 			this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label3.Location = new System.Drawing.Point(3, 140);
+			this.label3.Location = new System.Drawing.Point(3, 172);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(149, 32);
 			this.label3.TabIndex = 2;
@@ -192,7 +199,7 @@
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label2.Location = new System.Drawing.Point(3, 100);
+			this.label2.Location = new System.Drawing.Point(3, 132);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(149, 40);
 			this.label2.TabIndex = 1;
@@ -203,7 +210,7 @@
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.StartOAuth, 2);
 			this.StartOAuth.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.StartOAuth.Location = new System.Drawing.Point(158, 103);
+			this.StartOAuth.Location = new System.Drawing.Point(158, 135);
 			this.StartOAuth.Name = "StartOAuth";
 			this.StartOAuth.Size = new System.Drawing.Size(363, 34);
 			this.StartOAuth.TabIndex = 5;
@@ -216,7 +223,7 @@
 			this.PINEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.tableLayoutPanel1.SetColumnSpan(this.PINEdit, 2);
 			this.PINEdit.Enabled = false;
-			this.PINEdit.Location = new System.Drawing.Point(158, 143);
+			this.PINEdit.Location = new System.Drawing.Point(158, 175);
 			this.PINEdit.Name = "PINEdit";
 			this.PINEdit.Size = new System.Drawing.Size(363, 25);
 			this.PINEdit.TabIndex = 6;
@@ -226,9 +233,9 @@
 			// 
 			this.label6.AutoSize = true;
 			this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label6.Location = new System.Drawing.Point(158, 36);
+			this.label6.Location = new System.Drawing.Point(158, 68);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(66, 32);
+			this.label6.Size = new System.Drawing.Size(51, 32);
 			this.label6.TabIndex = 9;
 			this.label6.Text = "Key:";
 			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -238,7 +245,7 @@
 			this.tableLayoutPanel1.SetColumnSpan(this.AddAccount, 2);
 			this.AddAccount.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.AddAccount.Enabled = false;
-			this.AddAccount.Location = new System.Drawing.Point(158, 239);
+			this.AddAccount.Location = new System.Drawing.Point(158, 271);
 			this.AddAccount.Name = "AddAccount";
 			this.AddAccount.Size = new System.Drawing.Size(363, 34);
 			this.AddAccount.TabIndex = 11;
@@ -250,9 +257,9 @@
 			// 
 			this.label9.AutoSize = true;
 			this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label9.Location = new System.Drawing.Point(158, 172);
+			this.label9.Location = new System.Drawing.Point(158, 204);
 			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(66, 32);
+			this.label9.Size = new System.Drawing.Size(51, 32);
 			this.label9.TabIndex = 13;
 			this.label9.Text = "表示名:";
 			this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -261,17 +268,39 @@
 			// 
 			this.ShowName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.ShowName.Enabled = false;
-			this.ShowName.Location = new System.Drawing.Point(230, 175);
+			this.ShowName.Location = new System.Drawing.Point(215, 207);
 			this.ShowName.Name = "ShowName";
-			this.ShowName.Size = new System.Drawing.Size(291, 25);
+			this.ShowName.Size = new System.Drawing.Size(306, 25);
 			this.ShowName.TabIndex = 14;
+			// 
+			// ConsumersList
+			// 
+			this.ConsumersList.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ConsumersList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.ConsumersList.FormattingEnabled = true;
+			this.ConsumersList.Location = new System.Drawing.Point(215, 39);
+			this.ConsumersList.Name = "ConsumersList";
+			this.ConsumersList.Size = new System.Drawing.Size(306, 26);
+			this.ConsumersList.TabIndex = 15;
+			this.ConsumersList.SelectedIndexChanged += new System.EventHandler(this.ConsumersList_SelectedIndexChanged);
+			// 
+			// label10
+			// 
+			this.label10.AutoSize = true;
+			this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label10.Location = new System.Drawing.Point(158, 36);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(51, 32);
+			this.label10.TabIndex = 16;
+			this.label10.Text = "Via:";
+			this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// Account
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Window;
-			this.ClientSize = new System.Drawing.Size(524, 276);
+			this.ClientSize = new System.Drawing.Size(524, 308);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -308,5 +337,7 @@
 		private System.Windows.Forms.CheckBox FollowAuther;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.TextBox ShowName;
+		private System.Windows.Forms.ComboBox ConsumersList;
+		private System.Windows.Forms.Label label10;
 	}
 }

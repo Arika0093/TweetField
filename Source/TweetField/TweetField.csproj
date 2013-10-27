@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TweetField</RootNamespace>
-    <AssemblyName>powContinent</AssemblyName>
+    <AssemblyName>TwiField</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -61,13 +61,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -77,6 +77,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\TweetSharp.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\Consumer.cs" />
@@ -84,7 +85,7 @@
     <Compile Include="Class\HotKey.cs" />
     <Compile Include="Class\Remove.cs" />
     <Compile Include="Class\Resize.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Class\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Window\Account.cs">
       <SubType>Form</SubType>
@@ -141,6 +142,7 @@
     <EmbeddedResource Include="Window\Setting.resx">
       <DependentUpon>Setting.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Config\app.config" />
     <None Include="Config\packages.config" />
     <None Include="Properties\Settings.settings">
