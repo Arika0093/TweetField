@@ -1,4 +1,4 @@
-ReadMe.txt
+﻿ReadMe.txt
 ----------------------------------------------------------------------------
 【　名　称】TwiField
 【　登録名】TweetField
@@ -9,7 +9,7 @@ ReadMe.txt
 【開発言語】C#
 【　種　類】Free Soft / Open Source
 【 License】GPL v2
-【 Version】Ver. 1.0.0.0
+【 Version】Ver. 1.0.0.1
 【 Project】https://github.com/Arika0093/TweetField
 ----------------------------------------------------------------------------
 【各種機能】

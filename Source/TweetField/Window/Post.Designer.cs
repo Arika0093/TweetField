@@ -32,6 +32,7 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Post));
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.PostText = new System.Windows.Forms.TextBox();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.投稿PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.スクリーンショットの投稿SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,7 +45,6 @@
 			this.poltsの終了XToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-			this.PostText = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
@@ -78,6 +78,21 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(431, 61);
 			this.tableLayoutPanel1.TabIndex = 1;
+			// 
+			// PostText
+			// 
+			this.PostText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.PostText.ContextMenuStrip = this.contextMenuStrip1;
+			this.PostText.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.PostText.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.PostText.Location = new System.Drawing.Point(0, 0);
+			this.PostText.Margin = new System.Windows.Forms.Padding(0);
+			this.PostText.Multiline = true;
+			this.PostText.Name = "PostText";
+			this.PostText.Size = new System.Drawing.Size(431, 41);
+			this.PostText.TabIndex = 1;
+			this.PostText.TextChanged += new System.EventHandler(this.PostText_TextChanged);
+			this.PostText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PostText_KeyDown);
 			// 
 			// contextMenuStrip1
 			// 
@@ -172,21 +187,6 @@
 			this.notifyIcon1.Text = "TwiField";
 			this.notifyIcon1.Visible = true;
 			this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
-			// 
-			// PostText
-			// 
-			this.PostText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.PostText.ContextMenuStrip = this.contextMenuStrip1;
-			this.PostText.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.PostText.ForeColor = System.Drawing.SystemColors.WindowText;
-			this.PostText.Location = new System.Drawing.Point(0, 0);
-			this.PostText.Margin = new System.Windows.Forms.Padding(0);
-			this.PostText.Multiline = true;
-			this.PostText.Name = "PostText";
-			this.PostText.Size = new System.Drawing.Size(431, 41);
-			this.PostText.TabIndex = 1;
-			this.PostText.TextChanged += new System.EventHandler(this.PostText_TextChanged);
-			this.PostText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PostText_KeyDown);
 			// 
 			// Post
 			// 

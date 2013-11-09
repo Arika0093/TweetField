@@ -130,7 +130,7 @@ namespace TweetField
 				// if Result is false
 				if(Result == false){
 					// Not Do Default Key Function
-					e.SuppressKeyPress = true;
+					e.SuppressKeyPress = false;
 					// end
 					return;
 				}
@@ -226,8 +226,7 @@ namespace TweetField
 				// 描画幅を取得
 				stringSize = e.Graphics.MeasureString(DrawAc, Font, pictureBox1.Width, sf);
 				// 描画
-				e.Graphics.DrawString(DrawAc, Font, Draw,
-					0, pictureBox1.Height - stringSize.Height, sf);
+				e.Graphics.DrawString(DrawAc, Font, Draw, 0, pictureBox1.Height - stringSize.Height, sf);
 			}
 		}
 
@@ -351,7 +350,7 @@ namespace TweetField
 			Post_Load(sender, e);
 		}
 		
-		// Close the Post Window
+		// Close the Post Windozw
 		private void 投稿ウィンドウを閉じるCToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Hide();
@@ -393,11 +392,14 @@ namespace TweetField
 				// Check
 				do{
 					int Lenght = GetKiseiNum(AppStg.TwitterAccs[Val]);
+					// If not Under 5
 					if(Lenght >= 5){
+						// Go
 						CheckOK = true;
 						AppStg.UsingAccountVal = Val;
 						break;
 					}
+					// else Change
 					Val = (Val+1)%AppStg.TwitterAccs.Count;
 				}while(Val != AppStg.UsingAccountVal);
 				// if Post unable
@@ -425,7 +427,7 @@ namespace TweetField
 				// Loop
 				foreach(String Tweet in BeforeTweets){
 					// if Cmp
-					if(Tweet != null && Tweet.Length == s.Length){
+					if(Tweet != null && Tweet == s){
 						// Add 
 						s += "　";
 						// Restart
@@ -433,7 +435,12 @@ namespace TweetField
 						break;
 					}
 				}
-			};
+			}
+			// Check String Lenght
+			if(BeforeTweets.Length > 0 && BeforeTweets[0] != null && s.Length == BeforeTweets[0].Length){
+				// Add Space
+				s += "　";
+			}
 			// Check
 			if (String.IsNullOrWhiteSpace(s) || StringLengthBuf(s) > 140 || s == DefTextString){
 				PostText.Text = s;
@@ -474,9 +481,6 @@ namespace TweetField
 			// Add List
 			BeforeTweets[LastAddPlace] = s;
 			LastAddPlace = (LastAddPlace + 1)%15;
-			// RePaint
-			pictureBox1.Refresh();
-			// end
 			return true;
 		}
 
