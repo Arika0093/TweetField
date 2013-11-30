@@ -68,6 +68,7 @@ namespace TweetField
 			HideFormAfterTweet.Checked		= ApSetting.HideTweetWindow;
 			ShowKiseiInfo.Checked			= ApSetting.KiseiInfoShow;
 			ChangeAcc.Checked				= ApSetting.ChangeAccOnKisei;
+			IsGradation.Checked				= ApSetting.Gradation;
 			// Enable Change
 			AccountDelete.Enabled			= ( ApSetting.UsingAccountVal != -1 );
 			OK.Enabled						= ( ApSetting.UsingAccountVal != -1 );
@@ -267,6 +268,13 @@ namespace TweetField
 			ApSetting.ChangeAccOnKisei = ChangeAcc.Checked;
 		}
 
+		// Gradation
+		private void IsGradation_CheckedChanged(object sender, EventArgs e)
+		{
+			// Setting Change
+			ApSetting.Gradation = IsGradation.Checked;
+		}
+
 		// Setting Save
 		private void OK_Click(object sender, EventArgs e)
 		{
@@ -297,5 +305,6 @@ namespace TweetField
 				Application.Exit();
 			}
 		}
+
 	}
 }

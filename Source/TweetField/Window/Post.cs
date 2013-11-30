@@ -125,19 +125,23 @@ namespace TweetField
 			||	( AppStg.PostKeyType == 2 && e.Shift  )					// Push Shift Key(Setting: 2)
 			||	( AppStg.PostKeyType == 3 && e.Alt  )) )				// Push Alt Key(Setting: 3)
 			{
-				// Post Text Tweet
-				bool Result = TweetPost(PostText.Text);
-				// if Result is false
-				if(Result == false){
+				// If Edit Text
+				if(PostText.Text != DefTextString){
+					// Post Text Tweet
+					bool Result = TweetPost(PostText.Text);
+					// if Result is false
+					if(Result == false){
+						// Not Do Default Key Function
+						e.SuppressKeyPress = false;
+						e.Handled = true;
+						// end
+						return;
+					}
+					// Kisei Check
+					GetKiseiNum(AppStg.TwitterAccs[AppStg.UsingAccountVal], true);
 					// Not Do Default Key Function
-					e.SuppressKeyPress = false;
-					// end
-					return;
+					e.SuppressKeyPress = true;
 				}
-				// Kisei Check
-				GetKiseiNum(AppStg.TwitterAccs[AppStg.UsingAccountVal], true);
-				// Not Do Default Key Function
-				e.SuppressKeyPress = true;
 			}
 			// If Push Escape Key
 			if(e.KeyCode == Keys.Escape){
@@ -187,45 +191,51 @@ namespace TweetField
 			// Color Convertor
 			ColorConverter ClConv = new ColorConverter();
 			// ------------------------------
-			//縦に白から黒へのグラデーションのブラシを作成
-			//g.VisibleClipBoundsは表示クリッピング領域に外接する四角形
-			LinearGradientBrush gb = new LinearGradientBrush(
-					///g.VisibleClipBounds,
-					e.ClipRectangle,
-					Color.White,
-					(Color)ClConv.ConvertFromString(AppStg.FooterColor),
-					LinearGradientMode.Vertical);
-			// ガンマ補正を有効に
-			gb.GammaCorrection = true;
-			// 四角を描く
-			e.Graphics.FillRectangle(gb, e.ClipRectangle);
-			// もし文字描画する設定なら
+			// If Draw Gradation
+			if(AppStg.Gradation){
+				// Create Gradation Brush
+				LinearGradientBrush gb = new LinearGradientBrush(
+						e.ClipRectangle,
+						Color.Transparent,
+						(Color)ClConv.ConvertFromString(AppStg.FooterColor),
+						LinearGradientMode.Vertical);
+				// Gamma Correction is true
+				gb.GammaCorrection = true;
+				// Draw rectangle
+				e.Graphics.FillRectangle(gb, e.ClipRectangle);
+			} else {
+				// Create Brush
+				SolidBrush sb = new SolidBrush((Color)ClConv.ConvertFromString(AppStg.FooterColor));
+				// Draw
+				e.Graphics.FillRectangle(sb, e.ClipRectangle);
+			}
+			// If Draw Text
 			if(AppStg.HideInformation == false){
 				// -----------------------------------------------------------
-				// 文字数を取得
-				int LenghtBuf = StringLengthBuf(PostText.Text);
-				//StringFormatオブジェクトの作成
+				// Get
+				int LenghtBuf = 140 - StringLengthBuf(PostText.Text);
+				// Create StringFormat
 				StringFormat sf = new StringFormat();
-				// 描画幅を取得
+				// Get
 				SizeF stringSize = e.Graphics.MeasureString(LenghtBuf.ToString(), Font, pictureBox1.Width, sf);
 				// Get Brush
 				SolidBrush Draw = new SolidBrush((Color)ClConv.ConvertFromString(AppStg.StringColor));
-				// 描画
+				// Draw
 				e.Graphics.DrawString(LenghtBuf.ToString(), Font,
-					LenghtBuf <= 140 ? Draw : Brushes.Red,
+					LenghtBuf >= 0 ? Draw : Brushes.Red,
 					pictureBox1.Width - stringSize.Width,
 					pictureBox1.Height - stringSize.Height, sf);
 				// -----------------------------------------------------------
-				// 描画する文字を指定
+				// Set Draw String
 				String DrawAc = "投稿: " + AppStg.TwitterAccs[AppStg.UsingAccountVal].ShowName +
-					"[@" + AppStg.TwitterAccs[AppStg.UsingAccountVal].UserName + "] " +
+					" [@" + AppStg.TwitterAccs[AppStg.UsingAccountVal].UserName + "] " +
+					( PicturePath.Length != 0 ? "[画像: " + Path.GetFileName(PicturePath) + "] " :
 					( AppStg.KiseiInfoShow ?
-						"[残: " + GetKiseiNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]).ToString() + "] " :
-						"") +
-					( PicturePath.Length != 0 ? "(画像: " + Path.GetFileName(PicturePath) + " )" : "");
-				// 描画幅を取得
+						"[残: " + GetKiseiNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]).ToString() + "] " : "") +
+						( AppStg.HashTagList.Count > 0 ? "[#AutoTag]" : ""));
+				// Get
 				stringSize = e.Graphics.MeasureString(DrawAc, Font, pictureBox1.Width, sf);
-				// 描画
+				// Draw
 				e.Graphics.DrawString(DrawAc, Font, Draw, 0, pictureBox1.Height - stringSize.Height, sf);
 			}
 		}
@@ -329,6 +339,15 @@ namespace TweetField
 			PicturePath = String.Empty;
 		}
 
+		// Open HashTagEditer
+		private void toolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			// Create Instance
+			TagEditer Te = new TagEditer(ref AppStg);
+			// Open
+			Te.ShowDialog(this);
+		}
+
 		// Open the Config Dialog
 		private void 設定ダイアログを開くOToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -365,14 +384,18 @@ namespace TweetField
 			Application.Exit();
 		}
 
-		// Length
+		// Text Length
 		private int StringLengthBuf(String s){
+			int Result = s.Length;
 			if(s == DefTextString){
 				// default
 				return 0;
 			}
+			foreach(var Str in AppStg.HashTagList){
+				Result += Str.Length + 1;
+			}
 			// String Length
-			return s.Length;
+			return Result;
 		}
 
 		// Post Tweet
@@ -385,6 +408,11 @@ namespace TweetField
 			}
 			// if After Close
 			if (AppStg.HideTweetWindow) { Hide(); }
+			// HashTag Add
+			foreach(var Tag in AppStg.HashTagList){
+				// Add
+				s += " " + Tag;
+			}
 			bool CheckOK = false;
 			// if Check Kisei
 			if (AppStg.ChangeAccOnKisei){
@@ -437,13 +465,16 @@ namespace TweetField
 				}
 			}
 			// Check String Lenght
-			if(BeforeTweets.Length > 0 && BeforeTweets[0] != null && s.Length == BeforeTweets[0].Length){
+			if(BeforeTweets != null && BeforeTweets.Length > 0 && BeforeTweets[0] != null && s.Length == BeforeTweets[0].Length){
 				// Add Space
 				s += "　";
 			}
 			// Check
-			if (String.IsNullOrWhiteSpace(s) || StringLengthBuf(s) > 140 || s == DefTextString){
+			if ((PicturePath == "" && String.IsNullOrWhiteSpace(s)) || StringLengthBuf(s) > 140){
+				// Back
 				PostText.Text = s;
+				// Show Message
+				MessageBox.Show("文字数が超過しているか，投稿テキストが空白になっています．");
 				// false
 				return false;
 			}
@@ -474,13 +505,13 @@ namespace TweetField
 				}
 			}
 			// if ResetTime over
-			if(PostRstTime == null || ((DateTime)PostRstTime - TwiStatus.CreatedDate).Hours < 0){
+			if(TwiStatus != null && (PostRstTime == null || ((DateTime)PostRstTime - TwiStatus.CreatedDate).Hours < 0)){
 				// Set
 				PostRstTime	= TwiStatus.CreatedDate;
 			}
 			// Add List
 			BeforeTweets[LastAddPlace] = s;
-			LastAddPlace = (LastAddPlace + 1)%15;
+			LastAddPlace = (LastAddPlace + 1)%10;
 			return true;
 		}
 
@@ -514,6 +545,13 @@ namespace TweetField
 			);
 			// Get
 			var Tweets = TwitServ.ListTweetsOnUserTimeline(opt);
+			// if Tweets is null
+			if(Tweets == null){
+				// Buf Set
+				Buf = -1;
+				// return 
+				return Buf;
+			}
 			// foreach
 			foreach(var Tweet in Tweets){
 				// Span Get
@@ -583,7 +621,7 @@ namespace TweetField
 		private String DefTextString;
 
 		// Before Post(x10)
-		private String[] BeforeTweets = new String[15];
+		private String[] BeforeTweets = new String[10];
 		private int LastAddPlace = 0;
 
 		// HotKey

@@ -1,7 +1,8 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <ApplicationSetting xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <UsingAccountVal>-1</UsingAccountVal>
   <TwitterAccs />
+  <HashTagList />
   <SysFontName>メイリオ</SysFontName>
   <SysFontSize>9.75</SysFontSize>
   <WindowSize>
@@ -13,7 +14,7 @@
   <ShowWindowPosition>0</ShowWindowPosition>
   <PostKeyType>0</PostKeyType>
   <FontColor>Black</FontColor>
-  <FooterColor>DeepSkyBlue</FooterColor>
+  <FooterColor>Turquoise</FooterColor>
   <StringColor>DimGray</StringColor>
   <DualPost>true</DualPost>
   <NoResetString>false</NoResetString>
@@ -21,4 +22,5 @@
   <ChangeAccOnKisei>false</ChangeAccOnKisei>
   <HideTweetWindow>true</HideTweetWindow>
   <HideInformation>false</HideInformation>
+  <Gradation>true</Gradation>
 </ApplicationSetting>

@@ -24,6 +24,9 @@ namespace TweetField
 			TwitterAccs			= new List<TwAccount>();	// Create Enpty List
 			UsingAccountVal		= -1;						// Account Num is Empty
 			// ------------------------------
+			// Tags
+			HashTagList			= new List<string>();		// Create Enpty List
+			// ------------------------------
 			// Set Font
 			SysFontName	= SystemInformation.MenuFont.Name;	// Default Font Name
 			SysFontSize			= 9;						// Default Font Size
@@ -37,7 +40,7 @@ namespace TweetField
 			// Font Color Set
 			FontColor			= ClConv.ConvertToString(Color.Black);
 			// Footer Color Set
-			FooterColor			= ClConv.ConvertToString(Color.DeepSkyBlue);
+			FooterColor			= ClConv.ConvertToString(Color.SkyBlue);
 			// String Color Set
 			StringColor			= ClConv.ConvertToString(Color.DimGray);
 			HideTweetWindow		= true;						// Window Hide After Tweet
@@ -51,6 +54,10 @@ namespace TweetField
 		public int			UsingAccountVal;			// TweetField Default Post Account
 		public List<TwAccount>
 							TwitterAccs;				// Twitter Accounts
+		// ----------------------------------
+		//	Hash Tag
+		// ----------------------------------
+		public List<String>	HashTagList;				// Add Bind Hash Tags
 		// ----------------------------------
 		//	Font Setting
 		// ----------------------------------
@@ -73,6 +80,7 @@ namespace TweetField
 		public bool			ChangeAccOnKisei;			// 
 		public bool			HideTweetWindow;			// Hide Window after Tweet
 		public bool			HideInformation;			// Hide Window out Focus
+		public bool			Gradation;					// Is Draw Gradation
 	}
 
 	public class TwAccount

@@ -38,6 +38,8 @@
 			this.スクリーンショットの投稿SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.クリップボードの画像を添付BToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.添付画像を破棄するDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.設定ダイアログを開くOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -101,32 +103,34 @@
             this.スクリーンショットの投稿SToolStripMenuItem,
             this.クリップボードの画像を添付BToolStripMenuItem,
             this.添付画像を破棄するDToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.toolStripMenuItem1,
             this.toolStripSeparator1,
             this.設定ダイアログを開くOToolStripMenuItem,
             this.toolStripSeparator2,
             this.投稿ウィンドウを閉じるCToolStripMenuItem,
             this.poltsの終了XToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(251, 170);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(263, 220);
 			// 
 			// 投稿PToolStripMenuItem
 			// 
 			this.投稿PToolStripMenuItem.Name = "投稿PToolStripMenuItem";
-			this.投稿PToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+			this.投稿PToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
 			this.投稿PToolStripMenuItem.Text = "画像を添付する(&P)...";
 			this.投稿PToolStripMenuItem.Click += new System.EventHandler(this.投稿PToolStripMenuItem_Click);
 			// 
 			// スクリーンショットの投稿SToolStripMenuItem
 			// 
 			this.スクリーンショットの投稿SToolStripMenuItem.Name = "スクリーンショットの投稿SToolStripMenuItem";
-			this.スクリーンショットの投稿SToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+			this.スクリーンショットの投稿SToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
 			this.スクリーンショットの投稿SToolStripMenuItem.Text = "スクリーンショットの投稿(&S)...";
 			this.スクリーンショットの投稿SToolStripMenuItem.Click += new System.EventHandler(this.スクリーンショットの投稿SToolStripMenuItem_Click);
 			// 
 			// クリップボードの画像を添付BToolStripMenuItem
 			// 
 			this.クリップボードの画像を添付BToolStripMenuItem.Name = "クリップボードの画像を添付BToolStripMenuItem";
-			this.クリップボードの画像を添付BToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+			this.クリップボードの画像を添付BToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
 			this.クリップボードの画像を添付BToolStripMenuItem.Text = "クリップボードの画像を添付(&B)";
 			this.クリップボードの画像を添付BToolStripMenuItem.Click += new System.EventHandler(this.クリップボードの画像を添付BToolStripMenuItem_Click);
 			// 
@@ -134,38 +138,50 @@
 			// 
 			this.添付画像を破棄するDToolStripMenuItem.Enabled = false;
 			this.添付画像を破棄するDToolStripMenuItem.Name = "添付画像を破棄するDToolStripMenuItem";
-			this.添付画像を破棄するDToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+			this.添付画像を破棄するDToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
 			this.添付画像を破棄するDToolStripMenuItem.Text = "添付画像を破棄する(&D)";
 			this.添付画像を破棄するDToolStripMenuItem.Click += new System.EventHandler(this.添付画像を破棄するDToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(259, 6);
+			// 
+			// toolStripMenuItem1
+			// 
+			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(262, 22);
+			this.toolStripMenuItem1.Text = "タグバインドエディタを開く(&T)...";
+			this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
 			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(247, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(259, 6);
 			// 
 			// 設定ダイアログを開くOToolStripMenuItem
 			// 
 			this.設定ダイアログを開くOToolStripMenuItem.Name = "設定ダイアログを開くOToolStripMenuItem";
-			this.設定ダイアログを開くOToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+			this.設定ダイアログを開くOToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
 			this.設定ダイアログを開くOToolStripMenuItem.Text = "設定ダイアログを開く(&O)...";
 			this.設定ダイアログを開くOToolStripMenuItem.Click += new System.EventHandler(this.設定ダイアログを開くOToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator2
 			// 
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(247, 6);
+			this.toolStripSeparator2.Size = new System.Drawing.Size(259, 6);
 			// 
 			// 投稿ウィンドウを閉じるCToolStripMenuItem
 			// 
 			this.投稿ウィンドウを閉じるCToolStripMenuItem.Name = "投稿ウィンドウを閉じるCToolStripMenuItem";
-			this.投稿ウィンドウを閉じるCToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+			this.投稿ウィンドウを閉じるCToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
 			this.投稿ウィンドウを閉じるCToolStripMenuItem.Text = "投稿ウィンドウを閉じる(&E)";
 			this.投稿ウィンドウを閉じるCToolStripMenuItem.Click += new System.EventHandler(this.投稿ウィンドウを閉じるCToolStripMenuItem_Click);
 			// 
 			// poltsの終了XToolStripMenuItem
 			// 
 			this.poltsの終了XToolStripMenuItem.Name = "poltsの終了XToolStripMenuItem";
-			this.poltsの終了XToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+			this.poltsの終了XToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
 			this.poltsの終了XToolStripMenuItem.Text = "アプリケーションの終了(&X)";
 			this.poltsの終了XToolStripMenuItem.Click += new System.EventHandler(this.poltsの終了XToolStripMenuItem_Click);
 			// 
@@ -240,5 +256,7 @@
 		private System.Windows.Forms.ToolStripMenuItem 添付画像を破棄するDToolStripMenuItem;
 		private System.Windows.Forms.NotifyIcon notifyIcon1;
 		private System.Windows.Forms.TextBox PostText;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
 	}
 }

@@ -67,6 +67,7 @@
 			this.label7 = new System.Windows.Forms.Label();
 			this.WindowWidth = new System.Windows.Forms.NumericUpDown();
 			this.TextSave = new System.Windows.Forms.CheckBox();
+			this.IsGradation = new System.Windows.Forms.CheckBox();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.WindowHeight)).BeginInit();
@@ -93,30 +94,31 @@
 			this.tableLayoutPanel1.Controls.Add(this.label8, 0, 6);
 			this.tableLayoutPanel1.Controls.Add(this.HideOffFocus, 3, 10);
 			this.tableLayoutPanel1.Controls.Add(this.SettingKey, 4, 5);
-			this.tableLayoutPanel1.Controls.Add(this.StringColorEdit, 4, 4);
-			this.tableLayoutPanel1.Controls.Add(this.BackgroundColorEdit, 4, 3);
+			this.tableLayoutPanel1.Controls.Add(this.StringColorEdit, 4, 3);
+			this.tableLayoutPanel1.Controls.Add(this.BackgroundColorEdit, 4, 4);
 			this.tableLayoutPanel1.Controls.Add(this.FontSetting, 4, 2);
 			this.tableLayoutPanel1.Controls.Add(this.AccountDelete, 4, 1);
 			this.tableLayoutPanel1.Controls.Add(this.AccountAdd, 3, 1);
 			this.tableLayoutPanel1.Controls.Add(this.PostKey, 1, 7);
 			this.tableLayoutPanel1.Controls.Add(this.ShowHideKey, 1, 5);
-			this.tableLayoutPanel1.Controls.Add(this.StringColorText, 2, 4);
-			this.tableLayoutPanel1.Controls.Add(this.BackgroundColorText, 2, 3);
-			this.tableLayoutPanel1.Controls.Add(this.StringColorView, 1, 4);
+			this.tableLayoutPanel1.Controls.Add(this.StringColorText, 2, 3);
+			this.tableLayoutPanel1.Controls.Add(this.BackgroundColorText, 2, 4);
+			this.tableLayoutPanel1.Controls.Add(this.StringColorView, 1, 3);
 			this.tableLayoutPanel1.Controls.Add(this.FontSize, 3, 2);
 			this.tableLayoutPanel1.Controls.Add(this.label6, 0, 7);
 			this.tableLayoutPanel1.Controls.Add(this.label5, 0, 5);
 			this.tableLayoutPanel1.Controls.Add(this.label4, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
-			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 4);
+			this.tableLayoutPanel1.Controls.Add(this.label3, 0, 4);
+			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 3);
 			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
 			this.tableLayoutPanel1.Controls.Add(this.HideFormAfterTweet, 3, 9);
 			this.tableLayoutPanel1.Controls.Add(this.PostUserAccount, 1, 1);
 			this.tableLayoutPanel1.Controls.Add(this.FontName, 2, 2);
-			this.tableLayoutPanel1.Controls.Add(this.BackgrouondColorView, 1, 3);
+			this.tableLayoutPanel1.Controls.Add(this.BackgrouondColorView, 1, 4);
 			this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.WindowWidth, 3, 6);
 			this.tableLayoutPanel1.Controls.Add(this.TextSave, 1, 10);
+			this.tableLayoutPanel1.Controls.Add(this.IsGradation, 3, 4);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -300,7 +302,7 @@
 			// StringColorEdit
 			// 
 			this.StringColorEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.StringColorEdit.Location = new System.Drawing.Point(575, 135);
+			this.StringColorEdit.Location = new System.Drawing.Point(575, 103);
 			this.StringColorEdit.Name = "StringColorEdit";
 			this.StringColorEdit.Size = new System.Drawing.Size(102, 26);
 			this.StringColorEdit.TabIndex = 17;
@@ -312,7 +314,7 @@
 			// BackgroundColorEdit
 			// 
 			this.BackgroundColorEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.BackgroundColorEdit.Location = new System.Drawing.Point(575, 103);
+			this.BackgroundColorEdit.Location = new System.Drawing.Point(575, 135);
 			this.BackgroundColorEdit.Name = "BackgroundColorEdit";
 			this.BackgroundColorEdit.Size = new System.Drawing.Size(102, 26);
 			this.BackgroundColorEdit.TabIndex = 13;
@@ -389,7 +391,7 @@
 			// 
 			this.StringColorText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.tableLayoutPanel1.SetColumnSpan(this.StringColorText, 2);
-			this.StringColorText.Location = new System.Drawing.Point(205, 135);
+			this.StringColorText.Location = new System.Drawing.Point(205, 103);
 			this.StringColorText.Name = "StringColorText";
 			this.StringColorText.ReadOnly = true;
 			this.StringColorText.Size = new System.Drawing.Size(364, 25);
@@ -398,18 +400,17 @@
 			// BackgroundColorText
 			// 
 			this.BackgroundColorText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.tableLayoutPanel1.SetColumnSpan(this.BackgroundColorText, 2);
-			this.BackgroundColorText.Location = new System.Drawing.Point(205, 103);
+			this.BackgroundColorText.Location = new System.Drawing.Point(205, 135);
 			this.BackgroundColorText.Name = "BackgroundColorText";
 			this.BackgroundColorText.ReadOnly = true;
-			this.BackgroundColorText.Size = new System.Drawing.Size(364, 25);
+			this.BackgroundColorText.Size = new System.Drawing.Size(256, 25);
 			this.BackgroundColorText.TabIndex = 12;
 			// 
 			// StringColorView
 			// 
 			this.StringColorView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.StringColorView.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.StringColorView.Location = new System.Drawing.Point(133, 135);
+			this.StringColorView.Location = new System.Drawing.Point(133, 103);
 			this.StringColorView.Name = "StringColorView";
 			this.StringColorView.Size = new System.Drawing.Size(66, 26);
 			this.StringColorView.TabIndex = 15;
@@ -461,7 +462,7 @@
 			// 
 			this.label3.AutoSize = true;
 			this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label3.Location = new System.Drawing.Point(3, 100);
+			this.label3.Location = new System.Drawing.Point(3, 132);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(124, 32);
 			this.label3.TabIndex = 10;
@@ -472,7 +473,7 @@
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label2.Location = new System.Drawing.Point(3, 132);
+			this.label2.Location = new System.Drawing.Point(3, 100);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(124, 32);
 			this.label2.TabIndex = 14;
@@ -530,7 +531,7 @@
 			// 
 			this.BackgrouondColorView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.BackgrouondColorView.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.BackgrouondColorView.Location = new System.Drawing.Point(133, 103);
+			this.BackgrouondColorView.Location = new System.Drawing.Point(133, 135);
 			this.BackgrouondColorView.Name = "BackgrouondColorView";
 			this.BackgrouondColorView.Size = new System.Drawing.Size(66, 26);
 			this.BackgrouondColorView.TabIndex = 11;
@@ -581,6 +582,19 @@
 			this.toolTip1.SetToolTip(this.TextSave, "呟いた内容を呟き後に削除しないで、そのままにします。");
 			this.TextSave.UseVisualStyleBackColor = true;
 			this.TextSave.CheckedChanged += new System.EventHandler(this.TextSave_CheckedChanged);
+			// 
+			// IsGradation
+			// 
+			this.IsGradation.AutoSize = true;
+			this.IsGradation.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.IsGradation.Location = new System.Drawing.Point(467, 135);
+			this.IsGradation.Name = "IsGradation";
+			this.IsGradation.Size = new System.Drawing.Size(102, 26);
+			this.IsGradation.TabIndex = 36;
+			this.IsGradation.Text = "Gradation化";
+			this.toolTip1.SetToolTip(this.IsGradation, "背景色を白と選択色のグラデーションで表示します．");
+			this.IsGradation.UseVisualStyleBackColor = true;
+			this.IsGradation.CheckedChanged += new System.EventHandler(this.IsGradation_CheckedChanged);
 			// 
 			// Setting
 			// 
@@ -647,5 +661,6 @@
 		private System.Windows.Forms.CheckBox TextSave;
 		private System.Windows.Forms.CheckBox ChangeAcc;
 		private System.Windows.Forms.CheckBox ShowKiseiInfo;
+		private System.Windows.Forms.CheckBox IsGradation;
 	}
 }
