@@ -8,11 +8,14 @@ This application provides you with easy-to-use abundant functions.
 + Post Tweet with Picture
 + Post Tweet with Picture on Clipboard
 + Post Tweet with ScreenShot
++ Automatic Addition about a Hash Tag
 
 2. File Descliption
 ---------
 + TweetField
 	+ Class
+		+ Program.cs  
+			Start This Program.
 		+ AppSetting.cs  
 			Function that Access to XML File.
 		+ Consumer.cs  
@@ -21,7 +24,7 @@ This application provides you with easy-to-use abundant functions.
 			HotKey Manage Class.
 		+ Remove.cs  
 			Form PositionChange Manage Class.
-		+ Remove.cs  
+		+ Resize.cs  
 			Form SizeChange Manage Class.
 	+ Window
 		+ Account.cs
@@ -32,14 +35,26 @@ This application provides you with easy-to-use abundant functions.
 		+ Captcha.Designer.cs
 		+ Captcha.resx  
 			For Captcha to ScreenShot.
+		+ HotKeyEdit.cs
+		+ HotKeyEdit.Designer.cs
+		+ HotKeyEdit.resx  
+			For Edit to Hot Keys.
+		+ PictureCheck.cs
+		+ PictureCheck.Designer.cs
+		+ PictureCheck.resx  
+			For Check Addition Picture Data.
 		+ Post.cs
 		+ Post.Designer.cs
 		+ Post.resx  
-			For Tweet.
+			For Tweet and Graphics.
 		+ Setting.cs
 		+ Setting.Designer.cs
 		+ Setting.resx  
 			For Changed Setting.
+		+ TagEditer.cs
+		+ TagEditer.Designer.cs
+		+ TagEditer.resx  
+			For Edit to Automatic Addition Tag.
 	+ Properties
 		+ AssemblyInfo.cs
 		+ Resource.Designer.cs
@@ -48,8 +63,6 @@ This application provides you with easy-to-use abundant functions.
 		+ Settings.resx  
 	+ Icon.ico  
 		This Applciation's Icon. [ http://www.iconfinder.com/icondetails/103762/128/comment_edit_icon ]
-	+ Program.cs  
-		Start This Program.
 	+ TweetField.csproj  
 + TweetField.sln  
 	Project File.
