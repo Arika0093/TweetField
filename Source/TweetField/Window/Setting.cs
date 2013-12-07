@@ -66,8 +66,8 @@ namespace TweetField
 			TextSave.Checked				= ApSetting.NoResetString;
 			HideOffFocus.Checked			= ApSetting.HideInformation;
 			HideFormAfterTweet.Checked		= ApSetting.HideTweetWindow;
-			ShowKiseiInfo.Checked			= ApSetting.KiseiInfoShow;
-			ChangeAcc.Checked				= ApSetting.ChangeAccOnKisei;
+			ShowRegulationInfo.Checked			= ApSetting.RegulationInfoShow;
+			ChangeAcc.Checked				= ApSetting.ChangeAccOnRegulation;
 			IsGradation.Checked				= ApSetting.Gradation;
 			// Enable Change
 			AccountDelete.Enabled			= ( ApSetting.UsingAccountVal != -1 );
@@ -254,18 +254,18 @@ namespace TweetField
 			ApSetting.HideTweetWindow = HideFormAfterTweet.Checked;
 		}
 
-		// ShowKiseiInfo_Checked
-		private void ShowKiseiInfo_CheckedChanged(object sender, EventArgs e)
+		// ShowRegulationInfo_Checked
+		private void ShowRegulationInfo_CheckedChanged(object sender, EventArgs e)
 		{
 			// Setting Change
-			ApSetting.KiseiInfoShow = ShowKiseiInfo.Checked;
+			ApSetting.RegulationInfoShow = ShowRegulationInfo.Checked;
 		}
 
 		// ChangeAcc_Checked
 		private void ChangeAcc_CheckedChanged(object sender, EventArgs e)
 		{
 			// Setting Change
-			ApSetting.ChangeAccOnKisei = ChangeAcc.Checked;
+			ApSetting.ChangeAccOnRegulation = ChangeAcc.Checked;
 		}
 
 		// Gradation
@@ -273,6 +273,15 @@ namespace TweetField
 		{
 			// Setting Change
 			ApSetting.Gradation = IsGradation.Checked;
+		}
+
+		// HashTag Editer
+		private void HashTagEdit_Click(object sender, EventArgs e)
+		{
+			// Create Instance
+			TagEditer Te = new TagEditer(ref ApSetting);
+			// Open
+			Te.ShowDialog(this);
 		}
 
 		// Setting Save
@@ -305,6 +314,5 @@ namespace TweetField
 				Application.Exit();
 			}
 		}
-
 	}
 }

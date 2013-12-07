@@ -18,7 +18,7 @@ namespace TweetField
 		public Post()
 		{
 			// Hide
-			this.Hide();
+			Visible = false;
 			// Load
 			AppStg = AppSettingAccess.LoadSetting();
 			// if Account Value is 0
@@ -52,8 +52,8 @@ namespace TweetField
 			// Color Convertor
 			ColorConverter ClConv = new ColorConverter();
 			// ---------------------------------------------------
-			// Get Kisei
-			if (AppStg.KiseiInfoShow) { GetKiseiNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]); }
+			// Get Regulation
+			if (AppStg.RegulationInfoShow) { GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]); }
 			// Exchange Font
 			this.Font = new Font(AppStg.SysFontName, AppStg.SysFontSize);
 			// Set Size
@@ -137,8 +137,8 @@ namespace TweetField
 						// end
 						return;
 					}
-					// Kisei Check
-					GetKiseiNum(AppStg.TwitterAccs[AppStg.UsingAccountVal], true);
+					// Regulation Check
+					GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal], true);
 					// Not Do Default Key Function
 					e.SuppressKeyPress = true;
 				}
@@ -230,8 +230,8 @@ namespace TweetField
 				String DrawAc = "投稿: " + AppStg.TwitterAccs[AppStg.UsingAccountVal].ShowName +
 					" [@" + AppStg.TwitterAccs[AppStg.UsingAccountVal].UserName + "] " +
 					( PicturePath.Length != 0 ? "[画像: " + Path.GetFileName(PicturePath) + "] " :
-					( AppStg.KiseiInfoShow ?
-						"[残: " + GetKiseiNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]).ToString() + "] " : "") +
+					( AppStg.RegulationInfoShow ?
+						"[残: " + GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]).ToString() + "] " : "") +
 						( AppStg.HashTagList.Count > 0 ? "[#AutoTag]" : ""));
 				// Get
 				stringSize = e.Graphics.MeasureString(DrawAc, Font, pictureBox1.Width, sf);
@@ -333,19 +333,19 @@ namespace TweetField
 			Refresh();
 		}
 
+		// Check Picture View
+		private void 添付した画像を確認するCToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			// Create Instance
+			var CheckForm = new PictureCheck(_PictPath);
+			// Show
+			CheckForm.ShowDialog();
+		}
+
 		// Delete SelectedPicture
 		private void 添付画像を破棄するDToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			PicturePath = String.Empty;
-		}
-
-		// Open HashTagEditer
-		private void toolStripMenuItem1_Click(object sender, EventArgs e)
-		{
-			// Create Instance
-			TagEditer Te = new TagEditer(ref AppStg);
-			// Open
-			Te.ShowDialog(this);
 		}
 
 		// Open the Config Dialog
@@ -357,7 +357,7 @@ namespace TweetField
 			// Setting Change
 			AppStg.WindowSize = Size;
 			// Go to Account Management			
-			AppStg = stWindow.SettingChange(this);
+			AppStg = stWindow.SettingChange(null);
 			// Dispose
 			PostShow.Dispose();
 			// Set HotKey
@@ -401,41 +401,23 @@ namespace TweetField
 		// Post Tweet
 		private bool TweetPost(String s)
 		{
-			// if Empty Textbox, Refresh
-			if(AppStg.NoResetString == false){
-				PostText.Text = "";
+			// Back Up
+			String BackUpStr = s;
+			// is Empty
+			if ((PicturePath == "" && String.IsNullOrWhiteSpace(s))){
+				// Refresh
 				PostText.Refresh();
+				// false
+				return false;
 			}
+			// if Text is Empty
+			if(!AppStg.NoResetString){ PostText.Text = ""; }
 			// if After Close
-			if (AppStg.HideTweetWindow) { Hide(); }
+			if(AppStg.HideTweetWindow){ Hide(); }
 			// HashTag Add
 			foreach(var Tag in AppStg.HashTagList){
 				// Add
 				s += " " + Tag;
-			}
-			bool CheckOK = false;
-			// if Check Kisei
-			if (AppStg.ChangeAccOnKisei){
-				int Val = AppStg.UsingAccountVal;
-				// Check
-				do{
-					int Lenght = GetKiseiNum(AppStg.TwitterAccs[Val]);
-					// If not Under 5
-					if(Lenght >= 5){
-						// Go
-						CheckOK = true;
-						AppStg.UsingAccountVal = Val;
-						break;
-					}
-					// else Change
-					Val = (Val+1)%AppStg.TwitterAccs.Count;
-				}while(Val != AppStg.UsingAccountVal);
-				// if Post unable
-				if(CheckOK == false){
-					// MessageBox
-					MessageBox.Show("現在登録されている全アカウントで規制されているようです。");
-					return false;
-				}
 			}
 			// Create Twitter Service Instance
 			TwitterService TwitServ = new TwitterService(
@@ -447,34 +429,14 @@ namespace TweetField
 				AppStg.TwitterAccs[AppStg.UsingAccountVal].AccessToken,
 				AppStg.TwitterAccs[AppStg.UsingAccountVal].AccessSecret
 			);
-			CheckOK = true;
-			// Check String
-			while(CheckOK && AppStg.DualPost){
-				// End
-				CheckOK = false;
-				// Loop
-				foreach(String Tweet in BeforeTweets){
-					// if Cmp
-					if(Tweet != null && Tweet == s){
-						// Add 
-						s += "　";
-						// Restart
-						CheckOK = true;
-						break;
-					}
-				}
-			}
-			// Check String Lenght
-			if(BeforeTweets != null && BeforeTweets.Length > 0 && BeforeTweets[0] != null && s.Length == BeforeTweets[0].Length){
-				// Add Space
-				s += "　";
-			}
-			// Check
-			if ((PicturePath == "" && String.IsNullOrWhiteSpace(s)) || StringLengthBuf(s) > 140){
+			// String Add Error
+			if(StringAddSpace(ref s)){
 				// Back
-				PostText.Text = s;
-				// Show Message
-				MessageBox.Show("文字数が超過しているか，投稿テキストが空白になっています．");
+				PostText.Text = BackUpStr;
+				// Message
+				MessageBox.Show("その文字列は既に投稿されています．\n"+
+					"このエラーを回避するためには，連投回避オプションにチェックを入れるか，\n"+
+					"10ツイート以内に同じツイートをしないようにしてください．");
 				// false
 				return false;
 			}
@@ -509,26 +471,31 @@ namespace TweetField
 				// Set
 				PostRstTime	= TwiStatus.CreatedDate;
 			}
+			// if Tweet is NULL and Regulation Num is under 0, Account Change
+			if(TwiStatus == null && GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]) <= 0 && AccountChange()){
+				// RePost
+				TweetPost(s);
+			}
 			// Add List
 			BeforeTweets[LastAddPlace] = s;
 			LastAddPlace = (LastAddPlace + 1)%10;
 			return true;
 		}
 
-		// Get Kisei Number
-		private int GetKiseiNum(TwAccount Acc, bool Reload = false)
+		// Get Regulation Number
+		private int GetRegulationNum(TwAccount Acc, bool Reload = false)
 		{
-			// Kisei Num
+			// Regulation Num
 			const int RETURN_MAX = 128;
 			// if different
 			if(Account != null && Account.UserName == Acc.UserName && !Reload){
 				// return
-				return Buf;
+				return RemainRegulationNum;
 			}
 			// copy
 			Account = Acc;
 			// Reset
-			Buf = RETURN_MAX;
+			RemainRegulationNum = RETURN_MAX;
 			// for get my TL
 			ListTweetsOnUserTimelineOptions opt = new ListTweetsOnUserTimelineOptions();
 			// set my account
@@ -548,9 +515,9 @@ namespace TweetField
 			// if Tweets is null
 			if(Tweets == null){
 				// Buf Set
-				Buf = -1;
+				RemainRegulationNum = -1;
 				// return 
-				return Buf;
+				return RemainRegulationNum;
 			}
 			// foreach
 			foreach(var Tweet in Tweets){
@@ -568,10 +535,62 @@ namespace TweetField
 					break;
 				}
 				// Value Minus
-				Buf--;
+				RemainRegulationNum--;
 			}
 			// Result
-			return Buf;
+			return RemainRegulationNum;
+		}
+
+		// Account Change
+		private bool AccountChange()
+		{
+			// Get Now Select
+			int nSelect = AppStg.UsingAccountVal;
+			// Is Account Change
+			if(AppStg.ChangeAccOnRegulation == false){
+				// Message
+				MessageBox.Show("現在規制されているようです．アカウントを切り替えるか，規制が解除されるまでしばらくお待ち下さい．");
+				return false;
+			}
+			// Loop
+			for(int Val = nSelect; Val == nSelect-1; Val = (Val+1)%AppStg.TwitterAccs.Count){
+				// If Regulation Num Over 5 
+				if(GetRegulationNum(AppStg.TwitterAccs[Val]) >= 5){
+					// Account Change
+					AppStg.UsingAccountVal = Val;
+					// End
+					return true;
+				}
+			}
+			// Error
+			MessageBox.Show("現在登録されている全てのアカウントで規制されているようです．");
+			return false;
+		}
+
+		// For Dual Post
+		private bool StringAddSpace(ref String s)
+		{
+			// Check String Lenght
+			if(BeforeTweets[0] != null && s.Length == BeforeTweets[0].Length){
+				// Add Space
+				s += "　";
+			}
+			// Check String
+			foreach(String Tweet in BeforeTweets){
+				// if Cmp
+				if(Tweet != null && Tweet == s){
+					// if not Add Space
+					if(AppStg.DualPost == false){
+						// End
+						return false;
+					}
+					// Add 
+					s += "　";
+					// Restart
+					StringAddSpace(ref s);
+				}
+			}
+			return false;
 		}
 
 		// HotKey Push
@@ -610,7 +629,8 @@ namespace TweetField
 					PictureType = 0;
 				}
 				_PictPath = value;
-				添付画像を破棄するDToolStripMenuItem.Enabled =	(value != String.Empty);
+				添付画像を破棄するDToolStripMenuItem.Enabled	 = (value != String.Empty);
+				添付した画像を確認するCToolStripMenuItem.Enabled = (value != String.Empty);
 				pictureBox1.Refresh();
 			}
 		}
@@ -629,8 +649,8 @@ namespace TweetField
 
 		// Instance
 		private TwAccount Account = null;
-		// Buf
-		private int Buf = 0;
+		// RemainRegulationNum
+		private int RemainRegulationNum = 0;
 		// PostResetTime
 		private DateTime? PostRstTime = null;
 	}

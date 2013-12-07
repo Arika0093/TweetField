@@ -63,13 +63,19 @@ namespace TweetField
 		// Add List
 		private void button1_Click(object sender, EventArgs e)
 		{
-			// Add Item
-			listBox1.Items.Add("#" + textBox1.Text);
-			Items.Add("#" + textBox1.Text);
-			// Clear Text
-			textBox1.Clear();
-			// Text Change
-			label1.Text = "現在のタグ文字数: " + GetTagStringLenght().ToString();
+			// Split Text
+			String[] SplitTag = textBox1.Text.Split(
+				new char[]{' ', ',', '.', '#', '-', ';'}, StringSplitOptions.RemoveEmptyEntries);
+			// Foreach
+			foreach(var Str in SplitTag){
+				// Add Item
+				listBox1.Items.Add("#" + Str);
+				Items.Add("#" + Str);
+				// Clear Text
+				textBox1.Clear();
+				// Text Change
+				label1.Text = "現在のタグ文字数: " + GetTagStringLenght().ToString();
+			}
 		}
 
 		// Delete Item
@@ -79,6 +85,7 @@ namespace TweetField
 			int Selected = listBox1.SelectedIndex;
 			Items.Remove((String)listBox1.Items[Selected]);
 			listBox1.Items.RemoveAt(Selected);
+			listBox1.SelectedIndex = Selected-1;
 			// Text Change
 			label1.Text = "現在のタグ文字数: " + GetTagStringLenght().ToString();
 		}

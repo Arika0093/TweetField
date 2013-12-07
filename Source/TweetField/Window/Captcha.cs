@@ -26,7 +26,9 @@ namespace TweetField
 			ShowDialog();
 			// Set Rectangle
 			CapTriangle = new Rectangle(
-				CapStart.X, CapStart.Y, CapLocal.X, CapLocal.Y);
+				Math.Min(CapStart.X-1,CapStart.X+CapLocal.X-1), 
+				Math.Min(CapStart.Y-1,CapStart.Y+CapLocal.Y-1),
+				Math.Abs(CapLocal.X), Math.Abs(CapLocal.Y));
 			// if Size Sum <= 30
 			if(CapTriangle.Width + CapTriangle.Height <= 30){
 				// Return Null
@@ -91,10 +93,14 @@ namespace TweetField
 			e.Graphics.FillRectangle(Brushes.White, e.ClipRectangle);
 			// Draw Triangle Mouse Moving Point of Red(Transparent Key)
 			e.Graphics.FillRectangle(Brushes.Red,
-				CapStart.X-1, CapStart.Y-1, CapLocal.X, CapLocal.Y);
+				Math.Min(CapStart.X-1,CapStart.X+CapLocal.X-1), 
+				Math.Min(CapStart.Y-1,CapStart.Y+CapLocal.Y-1),
+				Math.Abs(CapLocal.X), Math.Abs(CapLocal.Y));
 			// Draw Triangle Mouse Moving Point of Black
 			e.Graphics.DrawRectangle(Pens.Black,
-				CapStart.X-1, CapStart.Y-1, CapLocal.X+1, CapLocal.Y+1);
+				Math.Min(CapStart.X-1,CapStart.X+CapLocal.X-1), 
+				Math.Min(CapStart.Y-1,CapStart.Y+CapLocal.Y-1),
+				Math.Abs(CapLocal.X), Math.Abs(CapLocal.Y));
 		}
 
 		// Exit

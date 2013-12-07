@@ -76,8 +76,8 @@ namespace TweetField
 		public String		StringColor;				// String Color
 		public bool			DualPost;					// Add Some String
 		public bool			NoResetString;				// 
-		public bool			KiseiInfoShow;				// 
-		public bool			ChangeAccOnKisei;			// 
+		public bool			RegulationInfoShow;				// 
+		public bool			ChangeAccOnRegulation;			// 
 		public bool			HideTweetWindow;			// Hide Window after Tweet
 		public bool			HideInformation;			// Hide Window out Focus
 		public bool			Gradation;					// Is Draw Gradation

@@ -32,7 +32,7 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Setting));
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.ChangeAcc = new System.Windows.Forms.CheckBox();
-			this.ShowKiseiInfo = new System.Windows.Forms.CheckBox();
+			this.ShowRegulationInfo = new System.Windows.Forms.CheckBox();
 			this.RentouKaihi = new System.Windows.Forms.CheckBox();
 			this.FontColor = new System.Windows.Forms.Panel();
 			this.WindowHeight = new System.Windows.Forms.NumericUpDown();
@@ -69,6 +69,7 @@
 			this.TextSave = new System.Windows.Forms.CheckBox();
 			this.IsGradation = new System.Windows.Forms.CheckBox();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.HashTagEdit = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.WindowHeight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.WindowWidth)).BeginInit();
@@ -83,7 +84,7 @@
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
 			this.tableLayoutPanel1.Controls.Add(this.ChangeAcc, 1, 9);
-			this.tableLayoutPanel1.Controls.Add(this.ShowKiseiInfo, 1, 8);
+			this.tableLayoutPanel1.Controls.Add(this.ShowRegulationInfo, 1, 8);
 			this.tableLayoutPanel1.Controls.Add(this.RentouKaihi, 3, 8);
 			this.tableLayoutPanel1.Controls.Add(this.FontColor, 1, 2);
 			this.tableLayoutPanel1.Controls.Add(this.WindowHeight, 4, 6);
@@ -119,6 +120,7 @@
 			this.tableLayoutPanel1.Controls.Add(this.WindowWidth, 3, 6);
 			this.tableLayoutPanel1.Controls.Add(this.TextSave, 1, 10);
 			this.tableLayoutPanel1.Controls.Add(this.IsGradation, 3, 4);
+			this.tableLayoutPanel1.Controls.Add(this.HashTagEdit, 3, 7);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -148,26 +150,26 @@
 			this.ChangeAcc.Location = new System.Drawing.Point(133, 291);
 			this.ChangeAcc.Name = "ChangeAcc";
 			this.ChangeAcc.Size = new System.Drawing.Size(328, 22);
-			this.ChangeAcc.TabIndex = 35;
+			this.ChangeAcc.TabIndex = 31;
 			this.ChangeAcc.Text = "規制されたら自動でアカウント切り替え";
 			this.toolTip1.SetToolTip(this.ChangeAcc, "もし投稿規制になった時に、登録してあるアカウントの順を一つずらして投稿します。\r\nリストの終端まで達した場合、最初のアカウントの状態を見て、規制されていればそこで" +
         "連鎖は中断されます。\r\n規制情報の表示と同様、やや重い動作です。");
 			this.ChangeAcc.UseVisualStyleBackColor = true;
 			this.ChangeAcc.CheckedChanged += new System.EventHandler(this.ChangeAcc_CheckedChanged);
 			// 
-			// ShowKiseiInfo
+			// ShowRegulationInfo
 			// 
-			this.ShowKiseiInfo.AutoSize = true;
-			this.tableLayoutPanel1.SetColumnSpan(this.ShowKiseiInfo, 2);
-			this.ShowKiseiInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ShowKiseiInfo.Location = new System.Drawing.Point(133, 263);
-			this.ShowKiseiInfo.Name = "ShowKiseiInfo";
-			this.ShowKiseiInfo.Size = new System.Drawing.Size(328, 22);
-			this.ShowKiseiInfo.TabIndex = 34;
-			this.ShowKiseiInfo.Text = "規制情報を表示する";
-			this.toolTip1.SetToolTip(this.ShowKiseiInfo, "あと何回投稿したら規制されるかを表示します。\r\nやや重い動作ですので、気になる方はチェックを外してください。");
-			this.ShowKiseiInfo.UseVisualStyleBackColor = true;
-			this.ShowKiseiInfo.CheckedChanged += new System.EventHandler(this.ShowKiseiInfo_CheckedChanged);
+			this.ShowRegulationInfo.AutoSize = true;
+			this.tableLayoutPanel1.SetColumnSpan(this.ShowRegulationInfo, 2);
+			this.ShowRegulationInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ShowRegulationInfo.Location = new System.Drawing.Point(133, 263);
+			this.ShowRegulationInfo.Name = "ShowRegulationInfo";
+			this.ShowRegulationInfo.Size = new System.Drawing.Size(328, 22);
+			this.ShowRegulationInfo.TabIndex = 29;
+			this.ShowRegulationInfo.Text = "規制情報を表示する";
+			this.toolTip1.SetToolTip(this.ShowRegulationInfo, "あと何回投稿したら規制されるかを表示します。\r\nやや重い動作ですので、気になる方はチェックを外してください。");
+			this.ShowRegulationInfo.UseVisualStyleBackColor = true;
+			this.ShowRegulationInfo.CheckedChanged += new System.EventHandler(this.ShowRegulationInfo_CheckedChanged);
 			// 
 			// RentouKaihi
 			// 
@@ -177,7 +179,7 @@
 			this.RentouKaihi.Location = new System.Drawing.Point(467, 263);
 			this.RentouKaihi.Name = "RentouKaihi";
 			this.RentouKaihi.Size = new System.Drawing.Size(210, 22);
-			this.RentouKaihi.TabIndex = 28;
+			this.RentouKaihi.TabIndex = 30;
 			this.RentouKaihi.Text = "自動で連投回避する";
 			this.toolTip1.SetToolTip(this.RentouKaihi, "同じ内容をつぶやこうとした場合に自動で全角スペースを付加して\r\n連投を可能にします。");
 			this.RentouKaihi.UseVisualStyleBackColor = true;
@@ -203,7 +205,7 @@
             0});
 			this.WindowHeight.Name = "WindowHeight";
 			this.WindowHeight.Size = new System.Drawing.Size(102, 25);
-			this.WindowHeight.TabIndex = 24;
+			this.WindowHeight.TabIndex = 25;
 			this.WindowHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.toolTip1.SetToolTip(this.WindowHeight, "起動時のウインドウの縦幅を指定します。\r\n");
 			this.WindowHeight.ValueChanged += new System.EventHandler(this.WindowHeight_ValueChanged);
@@ -214,8 +216,9 @@
 			this.TfExit.Location = new System.Drawing.Point(575, 347);
 			this.TfExit.Name = "TfExit";
 			this.TfExit.Size = new System.Drawing.Size(102, 34);
-			this.TfExit.TabIndex = 33;
+			this.TfExit.TabIndex = 38;
 			this.TfExit.Text = "終了(&X)";
+			this.toolTip1.SetToolTip(this.TfExit, "TwiFieldを終了します．");
 			this.TfExit.UseVisualStyleBackColor = true;
 			this.TfExit.Click += new System.EventHandler(this.TfExit_Click);
 			// 
@@ -225,8 +228,9 @@
 			this.Cancel.Location = new System.Drawing.Point(467, 347);
 			this.Cancel.Name = "Cancel";
 			this.Cancel.Size = new System.Drawing.Size(102, 34);
-			this.Cancel.TabIndex = 32;
+			this.Cancel.TabIndex = 37;
 			this.Cancel.Text = "キャンセル(&C)";
+			this.toolTip1.SetToolTip(this.Cancel, "設定を保存せずにウインドウを閉じます．");
 			this.Cancel.UseVisualStyleBackColor = true;
 			this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
 			// 
@@ -237,8 +241,9 @@
 			this.OK.Location = new System.Drawing.Point(133, 347);
 			this.OK.Name = "OK";
 			this.OK.Size = new System.Drawing.Size(328, 34);
-			this.OK.TabIndex = 31;
+			this.OK.TabIndex = 36;
 			this.OK.Text = "保存(&S)";
+			this.toolTip1.SetToolTip(this.OK, "設定を保存してウインドウを閉じます．");
 			this.OK.UseVisualStyleBackColor = true;
 			this.OK.Click += new System.EventHandler(this.OK_Click);
 			// 
@@ -257,7 +262,7 @@
 			this.ShowPosition.Location = new System.Drawing.Point(133, 199);
 			this.ShowPosition.Name = "ShowPosition";
 			this.ShowPosition.Size = new System.Drawing.Size(328, 26);
-			this.ShowPosition.TabIndex = 22;
+			this.ShowPosition.TabIndex = 23;
 			this.toolTip1.SetToolTip(this.ShowPosition, "起動時のウインドウの表示位置を指定します。");
 			this.ShowPosition.SelectedIndexChanged += new System.EventHandler(this.ShowPosition_SelectedIndexChanged);
 			// 
@@ -268,7 +273,7 @@
 			this.label8.Location = new System.Drawing.Point(3, 196);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(124, 32);
-			this.label8.TabIndex = 21;
+			this.label8.TabIndex = 22;
 			this.label8.Text = "表示設定: ";
 			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
@@ -281,7 +286,7 @@
 			this.HideOffFocus.Name = "HideOffFocus";
 			this.tableLayoutPanel1.SetRowSpan(this.HideOffFocus, 2);
 			this.HideOffFocus.Size = new System.Drawing.Size(210, 22);
-			this.HideOffFocus.TabIndex = 30;
+			this.HideOffFocus.TabIndex = 34;
 			this.HideOffFocus.Text = "文字情報を隠す";
 			this.toolTip1.SetToolTip(this.HideOffFocus, "残文字数などの情報を隠します。");
 			this.HideOffFocus.UseVisualStyleBackColor = true;
@@ -293,7 +298,7 @@
 			this.SettingKey.Location = new System.Drawing.Point(575, 167);
 			this.SettingKey.Name = "SettingKey";
 			this.SettingKey.Size = new System.Drawing.Size(102, 26);
-			this.SettingKey.TabIndex = 20;
+			this.SettingKey.TabIndex = 21;
 			this.SettingKey.Text = "キーを指定";
 			this.toolTip1.SetToolTip(this.SettingKey, "ショートカットキーを指定します。ここで指定したキーを押すことで\r\n投稿ウインドウを瞬時に表示させることができます。");
 			this.SettingKey.UseVisualStyleBackColor = true;
@@ -305,7 +310,7 @@
 			this.StringColorEdit.Location = new System.Drawing.Point(575, 103);
 			this.StringColorEdit.Name = "StringColorEdit";
 			this.StringColorEdit.Size = new System.Drawing.Size(102, 26);
-			this.StringColorEdit.TabIndex = 17;
+			this.StringColorEdit.TabIndex = 13;
 			this.StringColorEdit.Text = "色を指定";
 			this.toolTip1.SetToolTip(this.StringColorEdit, "投稿アカウントや残文字数などの表示の文字色を指定します。");
 			this.StringColorEdit.UseVisualStyleBackColor = true;
@@ -317,7 +322,7 @@
 			this.BackgroundColorEdit.Location = new System.Drawing.Point(575, 135);
 			this.BackgroundColorEdit.Name = "BackgroundColorEdit";
 			this.BackgroundColorEdit.Size = new System.Drawing.Size(102, 26);
-			this.BackgroundColorEdit.TabIndex = 13;
+			this.BackgroundColorEdit.TabIndex = 18;
 			this.BackgroundColorEdit.Text = "色を指定";
 			this.toolTip1.SetToolTip(this.BackgroundColorEdit, "投稿ウインドウ下部の色を指定します。");
 			this.BackgroundColorEdit.UseVisualStyleBackColor = true;
@@ -355,13 +360,13 @@
 			this.AccountAdd.Size = new System.Drawing.Size(102, 26);
 			this.AccountAdd.TabIndex = 3;
 			this.AccountAdd.Text = "アカウント追加";
-			this.toolTip1.SetToolTip(this.AccountAdd, "Powerfl Continentで使用するアカウントを追加します。");
+			this.toolTip1.SetToolTip(this.AccountAdd, "TwiFieldで使用するアカウントを追加します。");
 			this.AccountAdd.UseVisualStyleBackColor = true;
 			this.AccountAdd.Click += new System.EventHandler(this.AccountAdd_Click);
 			// 
 			// PostKey
 			// 
-			this.tableLayoutPanel1.SetColumnSpan(this.PostKey, 4);
+			this.tableLayoutPanel1.SetColumnSpan(this.PostKey, 2);
 			this.PostKey.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.PostKey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.PostKey.FormattingEnabled = true;
@@ -372,8 +377,8 @@
             "Alt + Enter"});
 			this.PostKey.Location = new System.Drawing.Point(133, 231);
 			this.PostKey.Name = "PostKey";
-			this.PostKey.Size = new System.Drawing.Size(544, 26);
-			this.PostKey.TabIndex = 26;
+			this.PostKey.Size = new System.Drawing.Size(328, 26);
+			this.PostKey.TabIndex = 27;
 			this.toolTip1.SetToolTip(this.PostKey, "ウインドウがアクティブな時に、ここで指定したキーを押すことで\r\nテキストボックス内の内容を呟きます。");
 			this.PostKey.SelectedIndexChanged += new System.EventHandler(this.PostKey_SelectedIndexChanged);
 			// 
@@ -385,7 +390,7 @@
 			this.ShowHideKey.Name = "ShowHideKey";
 			this.ShowHideKey.ReadOnly = true;
 			this.ShowHideKey.Size = new System.Drawing.Size(436, 25);
-			this.ShowHideKey.TabIndex = 19;
+			this.ShowHideKey.TabIndex = 20;
 			// 
 			// StringColorText
 			// 
@@ -395,7 +400,7 @@
 			this.StringColorText.Name = "StringColorText";
 			this.StringColorText.ReadOnly = true;
 			this.StringColorText.Size = new System.Drawing.Size(364, 25);
-			this.StringColorText.TabIndex = 16;
+			this.StringColorText.TabIndex = 12;
 			// 
 			// BackgroundColorText
 			// 
@@ -404,7 +409,7 @@
 			this.BackgroundColorText.Name = "BackgroundColorText";
 			this.BackgroundColorText.ReadOnly = true;
 			this.BackgroundColorText.Size = new System.Drawing.Size(256, 25);
-			this.BackgroundColorText.TabIndex = 12;
+			this.BackgroundColorText.TabIndex = 16;
 			// 
 			// StringColorView
 			// 
@@ -413,7 +418,7 @@
 			this.StringColorView.Location = new System.Drawing.Point(133, 103);
 			this.StringColorView.Name = "StringColorView";
 			this.StringColorView.Size = new System.Drawing.Size(66, 26);
-			this.StringColorView.TabIndex = 15;
+			this.StringColorView.TabIndex = 11;
 			// 
 			// FontSize
 			// 
@@ -432,7 +437,7 @@
 			this.label6.Location = new System.Drawing.Point(3, 228);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(124, 32);
-			this.label6.TabIndex = 25;
+			this.label6.TabIndex = 26;
 			this.label6.Text = "投稿キー: ";
 			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
@@ -443,7 +448,7 @@
 			this.label5.Location = new System.Drawing.Point(3, 164);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(124, 32);
-			this.label5.TabIndex = 18;
+			this.label5.TabIndex = 19;
 			this.label5.Text = "表示/非表示キー: ";
 			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
@@ -465,7 +470,7 @@
 			this.label3.Location = new System.Drawing.Point(3, 132);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(124, 32);
-			this.label3.TabIndex = 10;
+			this.label3.TabIndex = 14;
 			this.label3.Text = "背景色: ";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
@@ -476,7 +481,7 @@
 			this.label2.Location = new System.Drawing.Point(3, 100);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(124, 32);
-			this.label2.TabIndex = 14;
+			this.label2.TabIndex = 10;
 			this.label2.Text = "情報表示文字色: ";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
@@ -499,7 +504,7 @@
 			this.HideFormAfterTweet.Location = new System.Drawing.Point(467, 291);
 			this.HideFormAfterTweet.Name = "HideFormAfterTweet";
 			this.HideFormAfterTweet.Size = new System.Drawing.Size(210, 22);
-			this.HideFormAfterTweet.TabIndex = 29;
+			this.HideFormAfterTweet.TabIndex = 32;
 			this.HideFormAfterTweet.Text = "投稿後フォームを隠す";
 			this.toolTip1.SetToolTip(this.HideFormAfterTweet, "ツイート後にウインドウを隠します。");
 			this.HideFormAfterTweet.UseVisualStyleBackColor = true;
@@ -534,7 +539,7 @@
 			this.BackgrouondColorView.Location = new System.Drawing.Point(133, 135);
 			this.BackgrouondColorView.Name = "BackgrouondColorView";
 			this.BackgrouondColorView.Size = new System.Drawing.Size(66, 26);
-			this.BackgrouondColorView.TabIndex = 11;
+			this.BackgrouondColorView.TabIndex = 15;
 			// 
 			// label7
 			// 
@@ -550,7 +555,7 @@
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(674, 30);
 			this.label7.TabIndex = 0;
-			this.label7.Text = "投稿関連の設定";
+			this.label7.Text = "設定";
 			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// WindowWidth
@@ -564,7 +569,7 @@
             0});
 			this.WindowWidth.Name = "WindowWidth";
 			this.WindowWidth.Size = new System.Drawing.Size(102, 25);
-			this.WindowWidth.TabIndex = 23;
+			this.WindowWidth.TabIndex = 24;
 			this.WindowWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.toolTip1.SetToolTip(this.WindowWidth, "起動時のウインドウの横幅を指定します。");
 			this.WindowWidth.ValueChanged += new System.EventHandler(this.WindowWidth_ValueChanged);
@@ -577,7 +582,7 @@
 			this.TextSave.Location = new System.Drawing.Point(133, 319);
 			this.TextSave.Name = "TextSave";
 			this.TextSave.Size = new System.Drawing.Size(328, 22);
-			this.TextSave.TabIndex = 27;
+			this.TextSave.TabIndex = 33;
 			this.TextSave.Text = "投稿後に文章を保持する";
 			this.toolTip1.SetToolTip(this.TextSave, "呟いた内容を呟き後に削除しないで、そのままにします。");
 			this.TextSave.UseVisualStyleBackColor = true;
@@ -590,11 +595,24 @@
 			this.IsGradation.Location = new System.Drawing.Point(467, 135);
 			this.IsGradation.Name = "IsGradation";
 			this.IsGradation.Size = new System.Drawing.Size(102, 26);
-			this.IsGradation.TabIndex = 36;
+			this.IsGradation.TabIndex = 17;
 			this.IsGradation.Text = "Gradation化";
 			this.toolTip1.SetToolTip(this.IsGradation, "背景色を白と選択色のグラデーションで表示します．");
 			this.IsGradation.UseVisualStyleBackColor = true;
 			this.IsGradation.CheckedChanged += new System.EventHandler(this.IsGradation_CheckedChanged);
+			// 
+			// HashTagEdit
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.HashTagEdit, 2);
+			this.HashTagEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.HashTagEdit.Location = new System.Drawing.Point(467, 231);
+			this.HashTagEdit.Name = "HashTagEdit";
+			this.HashTagEdit.Size = new System.Drawing.Size(210, 26);
+			this.HashTagEdit.TabIndex = 28;
+			this.HashTagEdit.Text = "#TagEditerを開く";
+			this.toolTip1.SetToolTip(this.HashTagEdit, "ツイート時に自動で付加するハッシュタグを編集します．");
+			this.HashTagEdit.UseVisualStyleBackColor = true;
+			this.HashTagEdit.Click += new System.EventHandler(this.HashTagEdit_Click);
 			// 
 			// Setting
 			// 
@@ -660,7 +678,8 @@
 		private System.Windows.Forms.ToolTip toolTip1;
 		private System.Windows.Forms.CheckBox TextSave;
 		private System.Windows.Forms.CheckBox ChangeAcc;
-		private System.Windows.Forms.CheckBox ShowKiseiInfo;
+		private System.Windows.Forms.CheckBox ShowRegulationInfo;
 		private System.Windows.Forms.CheckBox IsGradation;
+		private System.Windows.Forms.Button HashTagEdit;
 	}
 }

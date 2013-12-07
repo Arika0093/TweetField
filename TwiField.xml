@@ -18,8 +18,8 @@
   <StringColor>DimGray</StringColor>
   <DualPost>true</DualPost>
   <NoResetString>false</NoResetString>
-  <KiseiInfoShow>true</KiseiInfoShow>
-  <ChangeAccOnKisei>false</ChangeAccOnKisei>
+  <RegulationInfoShow>true</RegulationInfoShow>
+  <ChangeAccOnRegulation>false</ChangeAccOnRegulation>
   <HideTweetWindow>true</HideTweetWindow>
   <HideInformation>false</HideInformation>
   <Gradation>true</Gradation>

@@ -105,6 +105,12 @@
     <Compile Include="Window\HotKeyEdit.Designer.cs">
       <DependentUpon>HotKeyEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Window\PictureCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\PictureCheck.Designer.cs">
+      <DependentUpon>PictureCheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="Window\Post.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Window\HotKeyEdit.resx">
       <DependentUpon>HotKeyEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window\PictureCheck.resx">
+      <DependentUpon>PictureCheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Window\Post.resx">
       <DependentUpon>Post.cs</DependentUpon>
