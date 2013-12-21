@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.Reflection;
 using TweetSharp;
 
 namespace TweetField
@@ -227,12 +229,7 @@ namespace TweetField
 					pictureBox1.Height - stringSize.Height, sf);
 				// -----------------------------------------------------------
 				// Set Draw String
-				String DrawAc = "投稿: " + AppStg.TwitterAccs[AppStg.UsingAccountVal].ShowName +
-					" [@" + AppStg.TwitterAccs[AppStg.UsingAccountVal].UserName + "] " +
-					( PicturePath.Length != 0 ? "[画像: " + Path.GetFileName(PicturePath) + "] " :
-					( AppStg.RegulationInfoShow ?
-						"[残: " + GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]).ToString() + "] " : "") +
-						( AppStg.HashTagList.Count > 0 ? "[#AutoTag]" : ""));
+				String DrawAc = PictureBoxShowText();
 				// Get
 				stringSize = e.Graphics.MeasureString(DrawAc, Font, pictureBox1.Width, sf);
 				// Draw
@@ -287,10 +284,15 @@ namespace TweetField
 		{
 			// Create Instance
 			Captcha cpWindow = new Captcha();
+			// Hide TweetWindow
+			Hide();
 			// Get Rect
 			Rectangle ScRect = cpWindow.GetCaptcha();
 			// if Minimam Size
 			if(ScRect.Width == 0){
+				// Show & Active
+				Show();
+				Activate();
 				// End
 				return;
 			}
@@ -308,6 +310,9 @@ namespace TweetField
 			クリップボードの画像を添付BToolStripMenuItem_Click(sender, e);
 			// Add FilePath
 			PictureType = 1;
+			// Show & Active
+			Show();
+			Activate();
 			// Refresh
 			Refresh();
 		}
@@ -485,58 +490,72 @@ namespace TweetField
 		// Get Regulation Number
 		private int GetRegulationNum(TwAccount Acc, bool Reload = false)
 		{
-			// Regulation Num
-			const int RETURN_MAX = 128;
-			// if different
-			if(Account != null && Account.UserName == Acc.UserName && !Reload){
-				// return
-				return RemainRegulationNum;
-			}
-			// copy
-			Account = Acc;
-			// Reset
-			RemainRegulationNum = RETURN_MAX;
-			// for get my TL
-			ListTweetsOnUserTimelineOptions opt = new ListTweetsOnUserTimelineOptions();
-			// set my account
-			opt.ScreenName = Acc.UserName;
-			// over RETURN_MAX
-			opt.Count = RETURN_MAX;
-			// Create Twitter Service Instance
-			TwitterService TwitServ = new TwitterService(
-				Account.ConsKey, Account.ConsSecret
-			);
-			// OAuth
-			TwitServ.AuthenticateWith(
-				Account.AccessToken, Account.AccessSecret
-			);
-			// Get
-			var Tweets = TwitServ.ListTweetsOnUserTimeline(opt);
-			// if Tweets is null
-			if(Tweets == null){
-				// Buf Set
-				RemainRegulationNum = -1;
-				// return 
-				return RemainRegulationNum;
-			}
-			// foreach
-			foreach(var Tweet in Tweets){
-				// Span Get
-				TimeSpan Ts =
-					(PostRstTime == null ? DateTime.UtcNow : (DateTime)PostRstTime) - Tweet.CreatedDate;
-				// if 3 Hours over
-				if(Ts.Hours >= 3){
-					// if ResetTime is null
-					if(PostRstTime == null){
-						// Set
-						PostRstTime = Tweet.CreatedDate.AddHours(3);
-					}
-					// End
-					break;
+			try{
+				// Regulation Num
+				const int RETURN_MAX = 128;
+				// if different
+				if(Account != null && Account.UserName == Acc.UserName && !Reload){
+					// return
+					return RemainRegulationNum;
 				}
-				// Value Minus
-				RemainRegulationNum--;
-			}
+				// copy
+				Account = Acc;
+				// Reset
+				RemainRegulationNum = RETURN_MAX;
+				// for get my TL
+				ListTweetsOnUserTimelineOptions opt = new ListTweetsOnUserTimelineOptions();
+				// set my account
+				opt.ScreenName = Acc.UserName;
+				// over RETURN_MAX
+				opt.Count = RETURN_MAX;
+				// Create Twitter Service Instance
+				TwitterService TwitServ = new TwitterService(
+					Account.ConsKey, Account.ConsSecret
+				);
+				// OAuth
+				TwitServ.AuthenticateWith(
+					Account.AccessToken, Account.AccessSecret
+				);
+				// Get
+				var Tweets = TwitServ.ListTweetsOnUserTimeline(opt);
+				// if Tweets is null
+				if(Tweets == null){
+					// Buf Set
+					RemainRegulationNum = -1;
+					// return 
+					return RemainRegulationNum;
+				}
+				// Save Before Tweet
+				TwitterStatus BeforeTwi = null;
+				// foreach
+				foreach(var Tweet in Tweets){
+					// Span Get
+					TimeSpan Ts =
+						(PostRstTime == null ? DateTime.UtcNow : (DateTime)PostRstTime) - Tweet.CreatedDate;
+					// if 3 Hours over
+					if(Ts.Hours >= 3){
+						// if ResetTime is null
+						if(PostRstTime == null){
+							// if BeforeTwi is null
+							if(BeforeTwi != null){
+								// Set
+								PostRstTime = BeforeTwi.CreatedDate.AddHours(3);
+							}
+							// else
+							else{
+								// Reset
+								PostRstTime = null;
+							}
+						}
+						// End
+						break;
+					}
+					// Value Minus
+					RemainRegulationNum--;
+					// Save
+					BeforeTwi = Tweet;
+				}
+			}catch( Exception ){}
 			// Result
 			return RemainRegulationNum;
 		}
@@ -591,6 +610,39 @@ namespace TweetField
 				}
 			}
 			return false;
+		}
+
+		// PictureBox Text
+		private String PictureBoxShowText()
+		{
+			// Return String
+			String Result = "";
+			// Post Account Add
+			Result += "投稿: " + AppStg.TwitterAccs[AppStg.UsingAccountVal].ShowName +
+					" [@" + AppStg.TwitterAccs[AppStg.UsingAccountVal].UserName + "] ";
+			// If not add Picture
+			if(PicturePath.Length != 0){
+				// Add Picture Name
+				Result += "[画像: " + Path.GetFileName(PicturePath) + "] ";
+			}
+			// else if Show Regulation Info
+			else if(AppStg.RegulationInfoShow){
+				// Add Regulation Num
+				Result += "[残: " + GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]).ToString();
+				// If ResetTime is not null
+				if(PostRstTime != null){
+					Result += " / Reset: " + PostRstTime.Value.ToLocalTime().ToLongTimeString();
+				}
+				// Add End Text
+				Result += "] ";
+			}
+			// if AutoTag Add
+			if(AppStg.HashTagList.Count > 0){
+				// Add
+				Result += "[#AutoTag]";
+			}
+			// return
+			return Result;
 		}
 
 		// HotKey Push

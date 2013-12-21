@@ -65,12 +65,12 @@ namespace TweetField
 		{
 			// Split Text
 			String[] SplitTag = textBox1.Text.Split(
-				new char[]{' ', ',', '.', '#', '-', ';'}, StringSplitOptions.RemoveEmptyEntries);
+				new char[]{' ', ',', '.', '-', ';'}, StringSplitOptions.RemoveEmptyEntries);
 			// Foreach
 			foreach(var Str in SplitTag){
 				// Add Item
-				listBox1.Items.Add("#" + Str);
-				Items.Add("#" + Str);
+				listBox1.Items.Add(Str);
+				Items.Add(Str);
 				// Clear Text
 				textBox1.Clear();
 				// Text Change

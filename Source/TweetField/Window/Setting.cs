@@ -66,7 +66,8 @@ namespace TweetField
 			TextSave.Checked				= ApSetting.NoResetString;
 			HideOffFocus.Checked			= ApSetting.HideInformation;
 			HideFormAfterTweet.Checked		= ApSetting.HideTweetWindow;
-			ShowRegulationInfo.Checked			= ApSetting.RegulationInfoShow;
+			ShowRegulationInfo.Checked		= ApSetting.RegulationInfoShow;
+			ChangeAcc.Enabled				= ApSetting.RegulationInfoShow;
 			ChangeAcc.Checked				= ApSetting.ChangeAccOnRegulation;
 			IsGradation.Checked				= ApSetting.Gradation;
 			// Enable Change
@@ -258,7 +259,14 @@ namespace TweetField
 		private void ShowRegulationInfo_CheckedChanged(object sender, EventArgs e)
 		{
 			// Setting Change
-			ApSetting.RegulationInfoShow = ShowRegulationInfo.Checked;
+			ApSetting.RegulationInfoShow	= ShowRegulationInfo.Checked;
+			// If Regulation isnot used
+			if(!ApSetting.RegulationInfoShow){
+				// Change Account is not 
+				ApSetting.ChangeAccOnRegulation = false;
+			}
+			// Reload
+			SettingReload();
 		}
 
 		// ChangeAcc_Checked

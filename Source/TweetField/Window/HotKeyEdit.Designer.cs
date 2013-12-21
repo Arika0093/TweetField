@@ -47,32 +47,32 @@
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.Controls.Add(this.button2, 2, 5);
-			this.tableLayoutPanel1.Controls.Add(this.checkBox3, 1, 3);
-			this.tableLayoutPanel1.Controls.Add(this.checkBox2, 1, 2);
+			this.tableLayoutPanel1.Controls.Add(this.button2, 2, 4);
+			this.tableLayoutPanel1.Controls.Add(this.checkBox3, 1, 2);
+			this.tableLayoutPanel1.Controls.Add(this.checkBox2, 2, 1);
 			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.checkBox1, 1, 1);
-			this.tableLayoutPanel1.Controls.Add(this.button1, 1, 5);
+			this.tableLayoutPanel1.Controls.Add(this.button1, 1, 4);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 6;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+			this.tableLayoutPanel1.RowCount = 5;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(375, 128);
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(375, 104);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// button2
 			// 
 			this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.button2.Location = new System.Drawing.Point(237, 99);
+			this.button2.Location = new System.Drawing.Point(237, 75);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(135, 26);
 			this.button2.TabIndex = 7;
@@ -85,7 +85,7 @@
 			this.checkBox3.AutoSize = true;
 			this.tableLayoutPanel1.SetColumnSpan(this.checkBox3, 2);
 			this.checkBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkBox3.Location = new System.Drawing.Point(96, 75);
+			this.checkBox3.Location = new System.Drawing.Point(96, 51);
 			this.checkBox3.Name = "checkBox3";
 			this.checkBox3.Size = new System.Drawing.Size(276, 18);
 			this.checkBox3.TabIndex = 5;
@@ -95,11 +95,10 @@
 			// checkBox2
 			// 
 			this.checkBox2.AutoSize = true;
-			this.tableLayoutPanel1.SetColumnSpan(this.checkBox2, 2);
 			this.checkBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkBox2.Location = new System.Drawing.Point(96, 51);
+			this.checkBox2.Location = new System.Drawing.Point(237, 27);
 			this.checkBox2.Name = "checkBox2";
-			this.checkBox2.Size = new System.Drawing.Size(276, 18);
+			this.checkBox2.Size = new System.Drawing.Size(135, 18);
 			this.checkBox2.TabIndex = 4;
 			this.checkBox2.Text = "Shift";
 			this.checkBox2.UseVisualStyleBackColor = true;
@@ -110,8 +109,8 @@
 			this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.label2.Location = new System.Drawing.Point(3, 24);
 			this.label2.Name = "label2";
-			this.tableLayoutPanel1.SetRowSpan(this.label2, 3);
-			this.label2.Size = new System.Drawing.Size(87, 72);
+			this.tableLayoutPanel1.SetRowSpan(this.label2, 2);
+			this.label2.Size = new System.Drawing.Size(87, 48);
 			this.label2.TabIndex = 1;
 			this.label2.Text = "修飾キー: ";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -131,6 +130,7 @@
 			// 
 			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.tableLayoutPanel1.SetColumnSpan(this.textBox1, 2);
+			this.textBox1.ImeMode = System.Windows.Forms.ImeMode.Off;
 			this.textBox1.Location = new System.Drawing.Point(94, 1);
 			this.textBox1.Margin = new System.Windows.Forms.Padding(1);
 			this.textBox1.Name = "textBox1";
@@ -141,11 +141,10 @@
 			// checkBox1
 			// 
 			this.checkBox1.AutoSize = true;
-			this.tableLayoutPanel1.SetColumnSpan(this.checkBox1, 2);
 			this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.checkBox1.Location = new System.Drawing.Point(96, 27);
 			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(276, 18);
+			this.checkBox1.Size = new System.Drawing.Size(135, 18);
 			this.checkBox1.TabIndex = 3;
 			this.checkBox1.Text = "Ctrl";
 			this.checkBox1.UseVisualStyleBackColor = true;
@@ -153,7 +152,7 @@
 			// button1
 			// 
 			this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.button1.Location = new System.Drawing.Point(96, 99);
+			this.button1.Location = new System.Drawing.Point(96, 75);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(135, 26);
 			this.button1.TabIndex = 6;
@@ -167,7 +166,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.button2;
-			this.ClientSize = new System.Drawing.Size(375, 128);
+			this.ClientSize = new System.Drawing.Size(375, 104);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

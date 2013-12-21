@@ -9,7 +9,7 @@
 【開発言語】C#
 【　種　類】Free Soft / Open Source
 【 License】GPL v2
-【 Version】Ver. 1.2.0.0
+【 Version】Ver. 1.2.5103.27980
 【 Project】https://github.com/Arika0093/TweetField
 ----------------------------------------------------------------------------
 【各種機能】
