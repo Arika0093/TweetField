@@ -9,7 +9,7 @@
 【開発言語】C#
 【　種　類】Free Soft / Open Source
 【 License】GPL v2
-【 Version】Ver. 1.2.5103.27980
+【 Version】Ver. 1.3
 【 Project】https://github.com/Arika0093/TweetField
 ----------------------------------------------------------------------------
 【各種機能】
@@ -21,6 +21,10 @@
 　・規制時にアカウントを自動で切り替える機能を実装
 　・ツイート時のハッシュタグ自動付加にも対応
 　・添付した画像を確認することが可能に
+
+【Download】
+　・Githubのページの右側にある[Download ZIP]をクリックすると
+　　ダウンロードできます．
 
 【使用方法】
 　1. TwiField.exeを実行します。

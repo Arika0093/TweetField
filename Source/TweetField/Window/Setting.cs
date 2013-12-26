@@ -152,17 +152,12 @@ namespace TweetField
 		private void BackgroundColorEdit_Click(object sender, EventArgs e)
 		{
 			// Create Instance
-			ColorDialog ColorDlg = new ColorDialog();
-			// Color Convertor
-			ColorConverter ClConv = new ColorConverter();
+			var ColorDlg = new ColorSelect();
 			// ---------------------------------------------------
-			// Set Defualt Data
-			ColorDlg.Color			= BackgrouondColorView.BackColor;
-			ColorDlg.FullOpen		= true;
 			// Show Dialog
 			if(ColorDlg.ShowDialog() == DialogResult.OK){
 				// Set Color
-				ApSetting.FooterColor = ClConv.ConvertToString(ColorDlg.Color);
+				ApSetting.FooterColor = ColorDlg.ColorStr;
 				// Reload
 				SettingReload();
 			}
@@ -172,18 +167,12 @@ namespace TweetField
 		private void StringColorEdit_Click(object sender, EventArgs e)
 		{
 			// Create Instance
-			ColorDialog ColorDlg = new ColorDialog();
-			// Color Convertor
-			ColorConverter ClConv = new ColorConverter();
+			var ColorDlg = new ColorSelect();
 			// ---------------------------------------------------
-			// Set Defualt Data
-			ColorDlg.Color = StringColorView.BackColor;
-			ColorDlg.FullOpen = true;
 			// Show Dialog
-			if (ColorDlg.ShowDialog() == DialogResult.OK)
-			{
+			if(ColorDlg.ShowDialog() == DialogResult.OK){
 				// Set Color
-				ApSetting.StringColor = ClConv.ConvertToString(ColorDlg.Color);
+				ApSetting.StringColor = ColorDlg.ColorStr;
 				// Reload
 				SettingReload();
 			}
@@ -310,6 +299,8 @@ namespace TweetField
 		// Application Exit
 		private void TfExit_Click(object sender, EventArgs e)
 		{
+			// Result is Abort
+			DialogResult = DialogResult.Abort;
 			// Program End
 			Application.Exit();
 		}

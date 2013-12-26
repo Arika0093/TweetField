@@ -363,6 +363,13 @@ namespace TweetField
 			AppStg.WindowSize = Size;
 			// Go to Account Management			
 			AppStg = stWindow.SettingChange(null);
+			// if result is abort
+			if(stWindow.DialogResult == DialogResult.Abort){
+				// End
+				Close();
+				// return
+				return;
+			}
 			// Dispose
 			PostShow.Dispose();
 			// Set HotKey
@@ -472,9 +479,9 @@ namespace TweetField
 				}
 			}
 			// if ResetTime over
-			if(TwiStatus != null && (PostRstTime == null || ((DateTime)PostRstTime - TwiStatus.CreatedDate).Hours < 0)){
+			if(TwiStatus != null && (PostRstTime == null || ((DateTime)PostRstTime - TwiStatus.CreatedDate).TotalSeconds < 0)){
 				// Set
-				PostRstTime	= TwiStatus.CreatedDate;
+				PostRstTime	= TwiStatus.CreatedDate.AddHours(3);
 			}
 			// if Tweet is NULL and Regulation Num is under 0, Account Change
 			if(TwiStatus == null && GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]) <= 0 && AccountChange()){
@@ -493,6 +500,11 @@ namespace TweetField
 			try{
 				// Regulation Num
 				const int RETURN_MAX = 128;
+				// if not used  RegulationNum
+				if(AppStg.RegulationInfoShow == false){
+					// return MAX
+					return RETURN_MAX;
+				}
 				// if different
 				if(Account != null && Account.UserName == Acc.UserName && !Reload){
 					// return
@@ -700,7 +712,7 @@ namespace TweetField
 		private HotKey PostShow;
 
 		// Instance
-		private TwAccount Account = null;
+		TwAccount Account = null;
 		// RemainRegulationNum
 		private int RemainRegulationNum = 0;
 		// PostResetTime
