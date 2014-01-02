@@ -68,9 +68,11 @@ namespace TweetField
 				new char[]{' ', ',', '.', '-', ';'}, StringSplitOptions.RemoveEmptyEntries);
 			// Foreach
 			foreach(var Str in SplitTag){
+				// AddString Create
+				var AddStr = (this.checkBox1.Checked ? "#" : "") + Str;
 				// Add Item
-				listBox1.Items.Add(Str);
-				Items.Add(Str);
+				listBox1.Items.Add(AddStr);
+				Items.Add(AddStr);
 				// Clear Text
 				textBox1.Clear();
 				// Text Change

@@ -431,6 +431,20 @@ namespace TweetField
 				// Add
 				s += " " + Tag;
 			}
+			// String Add Error
+			if(StringAddSpace(ref s)){
+				// Message
+				return PostErrorMessageShow(BackUpStr, "その文字列は既に投稿されています．\n"+
+					"このエラーを回避するためには，連投回避オプションにチェックを入れるか" +
+					"10ツイート以内に同じツイートをしないようにしてください．");
+			}
+			// if Lenght is over 140
+			if(StringLengthBuf(s) > 140){
+				// Message
+				return PostErrorMessageShow(BackUpStr, "文字数が超過しています[文字数: " +
+					StringLengthBuf(s).ToString() + "]．\n" +
+					"規制回避のためのスペース追加で超過した可能性があります．");
+			}
 			// Create Twitter Service Instance
 			TwitterService TwitServ = new TwitterService(
 				AppStg.TwitterAccs[AppStg.UsingAccountVal].ConsKey,
@@ -441,17 +455,6 @@ namespace TweetField
 				AppStg.TwitterAccs[AppStg.UsingAccountVal].AccessToken,
 				AppStg.TwitterAccs[AppStg.UsingAccountVal].AccessSecret
 			);
-			// String Add Error
-			if(StringAddSpace(ref s)){
-				// Back
-				PostText.Text = BackUpStr;
-				// Message
-				MessageBox.Show("その文字列は既に投稿されています．\n"+
-					"このエラーを回避するためには，連投回避オプションにチェックを入れるか，\n"+
-					"10ツイート以内に同じツイートをしないようにしてください．");
-				// false
-				return false;
-			}
 			// GetTweet
 			TwitterStatus TwiStatus;
 			// IF not Picture Tweet
@@ -467,7 +470,7 @@ namespace TweetField
 				opt.Images = new Dictionary<string, Stream> { { "image", stream } };
 				// Send Tweet
 				TwiStatus = TwitServ.SendTweetWithMedia(opt);
-				// If Reset Flag
+				// If no Reset Flag
 				if(AppStg.NoResetString == false){
 					// If Temp File
 					if(PictureType >= 1){
@@ -479,14 +482,26 @@ namespace TweetField
 				}
 			}
 			// if ResetTime over
-			if(TwiStatus != null && (PostRstTime == null || ((DateTime)PostRstTime - TwiStatus.CreatedDate).TotalSeconds < 0)){
+			if(TwiStatus != null
+				&& (PostRstTime == null
+				|| ((DateTime)PostRstTime - TwiStatus.CreatedDate).TotalSeconds < 0)){
 				// Set
 				PostRstTime	= TwiStatus.CreatedDate.AddHours(3);
 			}
+			// Get Regulation Num
+			var Regu = GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]);
 			// if Tweet is NULL and Regulation Num is under 0, Account Change
-			if(TwiStatus == null && GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]) <= 0 && AccountChange()){
+			if(TwiStatus == null
+				&& Regu != null
+				&& Regu <= 0
+				&& AccountChange(BackUpStr)){
 				// RePost
-				TweetPost(s);
+				return TweetPost(s);
+			}
+			// else if Tweet is NULL
+			else if(TwiStatus == null){
+				// Error Show
+				return PostErrorMessageShow(s);
 			}
 			// Add List
 			BeforeTweets[LastAddPlace] = s;
@@ -495,13 +510,15 @@ namespace TweetField
 		}
 
 		// Get Regulation Number
-		private int GetRegulationNum(TwAccount Acc, bool Reload = false)
+		private int? GetRegulationNum(TwAccount Acc, bool Reload = false)
 		{
 			try{
 				// Regulation Num
-				const int RETURN_MAX = 128;
+				const int RETURN_MAX = 124;
 				// if not used  RegulationNum
 				if(AppStg.RegulationInfoShow == false){
+					// set
+					RemainRegulationNum = RETURN_MAX;
 					// return MAX
 					return RETURN_MAX;
 				}
@@ -533,7 +550,7 @@ namespace TweetField
 				// if Tweets is null
 				if(Tweets == null){
 					// Buf Set
-					RemainRegulationNum = -1;
+					RemainRegulationNum = null;
 					// return 
 					return RemainRegulationNum;
 				}
@@ -573,20 +590,21 @@ namespace TweetField
 		}
 
 		// Account Change
-		private bool AccountChange()
+		private bool AccountChange(String Post)
 		{
 			// Get Now Select
 			int nSelect = AppStg.UsingAccountVal;
 			// Is Account Change
 			if(AppStg.ChangeAccOnRegulation == false){
 				// Message
-				MessageBox.Show("現在規制されているようです．アカウントを切り替えるか，規制が解除されるまでしばらくお待ち下さい．");
+				PostErrorMessageShow(Post,
+					"現在規制されているようです．アカウントを切り替えるか，規制が解除されるまでしばらくお待ち下さい．");
 				return false;
 			}
 			// Loop
 			for(int Val = nSelect; Val == nSelect-1; Val = (Val+1)%AppStg.TwitterAccs.Count){
-				// If Regulation Num Over 5 
-				if(GetRegulationNum(AppStg.TwitterAccs[Val]) >= 5){
+				// If Regulation Num Over 0
+				if(GetRegulationNum(AppStg.TwitterAccs[Val]) > 0){
 					// Account Change
 					AppStg.UsingAccountVal = Val;
 					// End
@@ -594,7 +612,8 @@ namespace TweetField
 				}
 			}
 			// Error
-			MessageBox.Show("現在登録されている全てのアカウントで規制されているようです．");
+			PostErrorMessageShow(Post,
+				"現在登録されている全てのアカウントで規制されているようです．");
 			return false;
 		}
 
@@ -639,8 +658,10 @@ namespace TweetField
 			}
 			// else if Show Regulation Info
 			else if(AppStg.RegulationInfoShow){
+				// Get Regulation Num
+				var Regu = GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]);
 				// Add Regulation Num
-				Result += "[残: " + GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]).ToString();
+				Result += "[残: " + (Regu != null ? Regu.ToString() : "ERROR");
 				// If ResetTime is not null
 				if(PostRstTime != null){
 					Result += " / Reset: " + PostRstTime.Value.ToLocalTime().ToLongTimeString();
@@ -655,6 +676,31 @@ namespace TweetField
 			}
 			// return
 			return Result;
+		}
+
+		// Post Error Show
+		private bool PostErrorMessageShow(String PostData, String Reason = "")
+		{
+			// Switch UserSelect
+			switch(new PostError(PostData, Reason).ShowDialog(this)){
+				case DialogResult.Ignore:
+					// Retry
+					TweetPost(PostData);
+					return true;
+				case DialogResult.Retry:
+					// Return
+					PostText.Text = PostData;
+					// Repaint
+					pictureBox1.Refresh();
+					// Show
+					Show();
+					Activate();
+					return false;
+				case DialogResult.Cancel:
+					return false;
+				default:
+					return false;
+			}
 		}
 
 		// HotKey Push
@@ -714,7 +760,7 @@ namespace TweetField
 		// Instance
 		TwAccount Account = null;
 		// RemainRegulationNum
-		private int RemainRegulationNum = 0;
+		private int? RemainRegulationNum;
 		// PostResetTime
 		private DateTime? PostRstTime = null;
 	}

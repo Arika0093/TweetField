@@ -20,9 +20,10 @@ namespace TweetField
 			pictureBox1.Load(PicturePath);
 			// Change Client Size
 			ClientSize = new Size(
-				Math.Max(pictureBox1.Image.Width, label1.Width),
+				Math.Max(pictureBox1.Image.Width, tableLayoutPanel1.Width),
 				pictureBox1.Image.Height + label1.Height);
 		}
+
 		// Closed
 		private void PictureCheck_FormClosed(object sender, FormClosedEventArgs e)
 		{
@@ -35,6 +36,21 @@ namespace TweetField
 		{
 			// Close
 			Close();
+		}
+
+		// Picture Save
+		private void button1_Click(object sender, EventArgs e)
+		{
+			// Save Dialog
+			var Dlg = new SaveFileDialog();
+			// Set
+			Dlg.Filter = "画像形式|*.png;*.jpg;*.bmp;*.gif;*.tif|すべてのファイル|*.*";
+			Dlg.DefaultExt = "png";
+			// Show
+			if(Dlg.ShowDialog() == DialogResult.OK){
+				// Save
+				pictureBox1.Image.Save(Dlg.FileName);
+			}
 		}
 	}
 }
