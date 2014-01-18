@@ -15,20 +15,24 @@ namespace TweetField
 		[STAThread]
 		static void Main()
 		{
-			// Create Mutex
-			Mutex mutex = new Mutex(false, "TweetField");
-			// Dual Run Check
-			if (mutex.WaitOne(0, false) == false){
-				// Show
-				MessageBox.Show("既に起動しています。");
-				// End
-				return;
+			try {
+				// Create Mutex
+				Mutex mutex = new Mutex(false, "TweetField");
+				// Dual Run Check
+				if (mutex.WaitOne(0, false) == false){
+					// Show
+					MessageBox.Show("既に起動しています。");
+					// End
+					return;
+				}
+				Application.EnableVisualStyles();
+				Application.SetCompatibleTextRenderingDefault(false);
+				Application.Run(new Post());
+				// Release Mutex
+				mutex.ReleaseMutex();
+			} catch( Exception ){
+				// Nothing
 			}
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Post());
-			// Release Mutex
-			mutex.ReleaseMutex();
 		}
 	}
 }

@@ -68,8 +68,8 @@
 			this.WindowWidth = new System.Windows.Forms.NumericUpDown();
 			this.TextSave = new System.Windows.Forms.CheckBox();
 			this.IsGradation = new System.Windows.Forms.CheckBox();
+			this.APISetting = new System.Windows.Forms.Button();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-			this.HashTagEdit = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.WindowHeight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.WindowWidth)).BeginInit();
@@ -120,7 +120,7 @@
 			this.tableLayoutPanel1.Controls.Add(this.WindowWidth, 3, 6);
 			this.tableLayoutPanel1.Controls.Add(this.TextSave, 1, 10);
 			this.tableLayoutPanel1.Controls.Add(this.IsGradation, 3, 4);
-			this.tableLayoutPanel1.Controls.Add(this.HashTagEdit, 3, 7);
+			this.tableLayoutPanel1.Controls.Add(this.APISetting, 3, 7);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -601,18 +601,18 @@
 			this.IsGradation.UseVisualStyleBackColor = true;
 			this.IsGradation.CheckedChanged += new System.EventHandler(this.IsGradation_CheckedChanged);
 			// 
-			// HashTagEdit
+			// APISetting
 			// 
-			this.tableLayoutPanel1.SetColumnSpan(this.HashTagEdit, 2);
-			this.HashTagEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.HashTagEdit.Location = new System.Drawing.Point(467, 231);
-			this.HashTagEdit.Name = "HashTagEdit";
-			this.HashTagEdit.Size = new System.Drawing.Size(210, 26);
-			this.HashTagEdit.TabIndex = 28;
-			this.HashTagEdit.Text = "#TagEditerを開く";
-			this.toolTip1.SetToolTip(this.HashTagEdit, "ツイート時に自動で付加するハッシュタグを編集します．");
-			this.HashTagEdit.UseVisualStyleBackColor = true;
-			this.HashTagEdit.Click += new System.EventHandler(this.HashTagEdit_Click);
+			this.tableLayoutPanel1.SetColumnSpan(this.APISetting, 2);
+			this.APISetting.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.APISetting.Location = new System.Drawing.Point(467, 231);
+			this.APISetting.Name = "APISetting";
+			this.APISetting.Size = new System.Drawing.Size(210, 26);
+			this.APISetting.TabIndex = 28;
+			this.APISetting.Text = "MS Translator APIを登録する";
+			this.toolTip1.SetToolTip(this.APISetting, "Microsoft Translator APIのキーを登録します．\r\nキーを登録することで，英訳/和訳機能を使用することができます．");
+			this.APISetting.UseVisualStyleBackColor = true;
+			this.APISetting.Click += new System.EventHandler(this.APISetting_Click);
 			// 
 			// Setting
 			// 
@@ -680,6 +680,6 @@
 		private System.Windows.Forms.CheckBox ChangeAcc;
 		private System.Windows.Forms.CheckBox ShowRegulationInfo;
 		private System.Windows.Forms.CheckBox IsGradation;
-		private System.Windows.Forms.Button HashTagEdit;
+		private System.Windows.Forms.Button APISetting;
 	}
 }

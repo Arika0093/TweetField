@@ -24,12 +24,18 @@ namespace TweetField
 			// Load
 			AppStg = AppSettingAccess.LoadSetting();
 			// if Account Value is 0
-			if (AppStg.UsingAccountVal < 0)
-			{
+			if (AppStg.UsingAccountVal < 0){
 				// Create Instance
 				var stWindow = new Setting(AppStg);
 				// Setting Change
 				AppStg = stWindow.SettingChange(this);
+				// If Result is not OK
+				if(stWindow.DialogResult != DialogResult.OK){
+					// Exit
+					Close();
+					Application.Exit();
+					return;
+				}
 			}
 			// Reset
 			InitializeComponent();
@@ -112,6 +118,12 @@ namespace TweetField
 				+ PostKey + "キーを押すことで呟きを投稿します。";
 			// Image Set
 			PostText.ForeColor = (Color)ClConv.ConvertFromString(AppStg.FontColor);
+			// Menu Create
+			CreateMenuList(AppStg);
+			// Visible Change
+			テキストを英訳NToolStripMenuItem.Visible	= (AppStg.ConsumerID != "");
+			テキストを和訳JToolStripMenuItem.Visible	= (AppStg.ConsumerID != "");
+			toolStripSeparator4.Visible				= (AppStg.ConsumerID != "");
 			// Active
 			Activate();
 			ActiveControl = PostText;
@@ -145,10 +157,19 @@ namespace TweetField
 					e.SuppressKeyPress = true;
 				}
 			}
+			// If Push Ctrl + A
+			else if(e.KeyCode == Keys.A && e.Control){
+				// All Select
+				PostText.SelectAll();
+				// Not Do Default Key Function
+				e.SuppressKeyPress = true;
+			}
 			// If Push Escape Key
-			if(e.KeyCode == Keys.Escape){
+			else if(e.KeyCode == Keys.Escape){
 				// Form Close
 				Hide();
+				// Not Do Default Key Function
+				e.SuppressKeyPress = true;
 			}
 		}
 
@@ -178,6 +199,19 @@ namespace TweetField
 		private void PostText_TextChanged(object sender, EventArgs e)
 		{
 			pictureBox1.Refresh();
+		}
+
+		// Close Event
+		private void Post_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			if(e.CloseReason == CloseReason.UserClosing){
+				Hide();
+				e.Cancel = true;
+				return;
+			}
+			AppSettingAccess.SaveSetting(AppStg);
+			notifyIcon1.Visible = false;
+			PostShow.Dispose();
 		}
 
 		// Size Change
@@ -237,19 +271,6 @@ namespace TweetField
 			}
 		}
 
-		// Close Event
-		private void Post_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			if(e.CloseReason == CloseReason.UserClosing){
-				Hide();
-				e.Cancel = true;
-				return;
-			}
-			AppSettingAccess.SaveSetting(AppStg);
-			notifyIcon1.Visible = false;
-			PostShow.Dispose();
-		}
-
 		// Double Click Task Icon
 		private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
@@ -257,6 +278,31 @@ namespace TweetField
 			Activate();
 		}
 	
+		// Edit Auto Hash Tag
+		private void ハッシュタグの設定HToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			// Create Instance
+			var Dlg = new TagEditer(ref AppStg);
+			// Show
+			Dlg.ShowDialog();
+		}
+
+		// Edit My CopyPaste Word
+		private void コピペワード編集EToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			// Create Instance
+			var Dlg = new CopyPasteView(ref AppStg, PostText.SelectedText);
+			// Show
+			Dlg.ShowDialog();
+			// if Call
+			if(Dlg.CallString != ""){
+				// Add Text
+				PostText.SelectedText = Dlg.CallString;
+			}
+			// Menu Reload
+			CreateMenuList(AppStg);
+		}
+
 		// Post Picture Select
 		private void 投稿PToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -432,7 +478,7 @@ namespace TweetField
 				s += " " + Tag;
 			}
 			// String Add Error
-			if(StringAddSpace(ref s)){
+			if(!StringAddSpace(ref s)){
 				// Message
 				return PostErrorMessageShow(BackUpStr, "その文字列は既に投稿されています．\n"+
 					"このエラーを回避するためには，連投回避オプションにチェックを入れるか" +
@@ -493,10 +539,9 @@ namespace TweetField
 			// if Tweet is NULL and Regulation Num is under 0, Account Change
 			if(TwiStatus == null
 				&& Regu != null
-				&& Regu <= 0
-				&& AccountChange(BackUpStr)){
-				// RePost
-				return TweetPost(s);
+				&& Regu <= 0){
+				// Error Show and RePost
+				return !AccountChange(BackUpStr) && TweetPost(s);
 			}
 			// else if Tweet is NULL
 			else if(TwiStatus == null){
@@ -594,15 +639,21 @@ namespace TweetField
 		{
 			// Get Now Select
 			int nSelect = AppStg.UsingAccountVal;
+			int acCount = AppStg.TwitterAccs.Count;
+			// If Account Num is not over 2
+			if(acCount <= 1){
+				// Message
+				return PostErrorMessageShow(Post,
+					"現在規制されているようです．新しくアカウントを登録するか，規制が解除されるまでしばらくお待ち下さい．");
+			}
 			// Is Account Change
 			if(AppStg.ChangeAccOnRegulation == false){
 				// Message
-				PostErrorMessageShow(Post,
+				return PostErrorMessageShow(Post,
 					"現在規制されているようです．アカウントを切り替えるか，規制が解除されるまでしばらくお待ち下さい．");
-				return false;
 			}
 			// Loop
-			for(int Val = nSelect; Val == nSelect-1; Val = (Val+1)%AppStg.TwitterAccs.Count){
+			for(int Val = (nSelect+1)%acCount; Val == (nSelect+acCount-2)%acCount; Val = (Val+1)%acCount){
 				// If Regulation Num Over 0
 				if(GetRegulationNum(AppStg.TwitterAccs[Val]) > 0){
 					// Account Change
@@ -612,25 +663,24 @@ namespace TweetField
 				}
 			}
 			// Error
-			PostErrorMessageShow(Post,
+			return PostErrorMessageShow(Post,
 				"現在登録されている全てのアカウントで規制されているようです．");
-			return false;
 		}
 
 		// For Dual Post
 		private bool StringAddSpace(ref String s)
 		{
 			// Check String Lenght
-			if(BeforeTweets[0] != null && s.Length == BeforeTweets[0].Length){
+			if(AppStg.DualPost && BeforeTweets[0] != null && s.Length == BeforeTweets[0].Length){
 				// Add Space
 				s += "　";
 			}
 			// Check String
 			foreach(String Tweet in BeforeTweets){
-				// if Cmp
+				// if Equal
 				if(Tweet != null && Tweet == s){
-					// if not Add Space
-					if(AppStg.DualPost == false){
+					// if not allow add space
+					if(!AppStg.DualPost){
 						// End
 						return false;
 					}
@@ -640,7 +690,7 @@ namespace TweetField
 					StringAddSpace(ref s);
 				}
 			}
-			return false;
+			return true;
 		}
 
 		// PictureBox Text
@@ -692,6 +742,9 @@ namespace TweetField
 					PostText.Text = PostData;
 					// Repaint
 					pictureBox1.Refresh();
+					// Color Changed
+					PostText.ForeColor	= SystemColors.WindowText;
+					PostText.Text		= "";
 					// Show
 					Show();
 					Activate();
@@ -700,6 +753,55 @@ namespace TweetField
 					return false;
 				default:
 					return false;
+			}
+		}
+
+		// Create Menu List
+		private void CreateMenuList(ApplicationSetting As)
+		{
+			// --- Cleared
+			// Copy
+			ToolStripItem[] MenuLists = new ToolStripItem[
+				文字列処理SToolStripMenuItem.DropDownItems.Count];
+			文字列処理SToolStripMenuItem.DropDownItems.CopyTo(MenuLists, 0);
+			// All Get and Remove
+			foreach(ToolStripItem Item in MenuLists){
+				// if Name isnot ADDMENUITEMS, continue
+				if(Item.Name != "ADDMENUITEMS"){ continue; }
+				// Remove
+				文字列処理SToolStripMenuItem.DropDownItems.Remove(Item);
+			}
+			// --- Add
+			// Search Show Setting
+			var AddList = As.CopyPasteWords.FindAll(delegate(CopyWords Cw){ return Cw.IsMenuShow; });
+			// If Empty, UnVisible Separator
+			toolStripSeparator1.Visible = (AddList.Count != 0);
+			// If not Empty, Create Menus
+			if(AddList.Count > 0){
+				// Insert Place
+				int AddIndex = 0;
+				// foreach
+				foreach(var Val in AddList){
+					// Create New Menu
+					var NewItem = new ToolStripMenuItem(); 
+					// Set Property
+					NewItem.Text = Val.ShortText;
+					NewItem.Name = "ADDMENUITEMS";
+					// Event Set
+					NewItem.Click += delegate(object o, EventArgs e){
+						// If not Selected
+						if(PostText.SelectedText == "" && Val.Text.Contains("%Select%")){
+							// All Selected
+							PostText.SelectAll();
+						}
+						// Add Text
+						PostText.SelectedText = Val.GetString(PostText.SelectedText);
+					};
+					// Add New Menu Item
+					文字列処理SToolStripMenuItem.DropDownItems.Insert(AddIndex, NewItem);
+					// Place Add
+					AddIndex++;
+				}
 			}
 		}
 
@@ -739,8 +841,8 @@ namespace TweetField
 					PictureType = 0;
 				}
 				_PictPath = value;
-				添付画像を破棄するDToolStripMenuItem.Enabled	 = (value != String.Empty);
-				添付した画像を確認するCToolStripMenuItem.Enabled = (value != String.Empty);
+				添付画像を破棄するDToolStripMenuItem.Visible	 = (value != String.Empty);
+				添付した画像を確認するCToolStripMenuItem.Visible = (value != String.Empty);
 				pictureBox1.Refresh();
 			}
 		}

@@ -9,6 +9,9 @@
     <Width>497</Width>
     <Height>65</Height>
   </WindowSize>
+  <CopyPasteWords />
+  <HashTagList />
+  <HashTagHistory />
   <ShowKeyChar>Space</ShowKeyChar>
   <ShowModKey>2</ShowModKey>
   <ShowWindowPosition>0</ShowWindowPosition>
@@ -22,5 +25,5 @@
   <ChangeAccOnRegulation>false</ChangeAccOnRegulation>
   <HideTweetWindow>true</HideTweetWindow>
   <HideInformation>false</HideInformation>
-  <Gradation>true</Gradation>
+  <Gradation>false</Gradation>
 </ApplicationSetting>

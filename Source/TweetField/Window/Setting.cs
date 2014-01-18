@@ -28,7 +28,7 @@ namespace TweetField
 			// Show
 			ShowDialog(Parent);
 			// Return
-			return AppSettingAccess.LoadSetting();
+			return (DialogResult == DialogResult.OK ? AppSettingAccess.LoadSetting() : null);
 		}
 
 		// Some Setting Reload
@@ -216,6 +216,15 @@ namespace TweetField
 			ApSetting.PostKeyType = PostKey.SelectedIndex;
 		}
 
+		// API Set
+		private void APISetting_Click(object sender, EventArgs e)
+		{
+			// Show Dialog
+			new TranslatorSet(ref ApSetting).ShowDialog();
+			// Reload
+			SettingReload();
+		}
+
 		// Rentou Kaihi
 		private void RentouKaihi_CheckedChanged(object sender, EventArgs e)
 		{
@@ -272,20 +281,13 @@ namespace TweetField
 			ApSetting.Gradation = IsGradation.Checked;
 		}
 
-		// HashTag Editer
-		private void HashTagEdit_Click(object sender, EventArgs e)
-		{
-			// Create Instance
-			TagEditer Te = new TagEditer(ref ApSetting);
-			// Open
-			Te.ShowDialog(this);
-		}
-
 		// Setting Save
 		private void OK_Click(object sender, EventArgs e)
 		{
 			// Save
 			AppSettingAccess.SaveSetting(ApSetting);
+			// Result OK
+			DialogResult = DialogResult.OK;
 			// Close
 			Close();
 		}
@@ -293,6 +295,8 @@ namespace TweetField
 		// Setting Cancel
 		private void Cancel_Click(object sender, EventArgs e)
 		{
+			// Result Cancel
+			DialogResult = DialogResult.Cancel;
 			Close();
 		}
 

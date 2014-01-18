@@ -26,6 +26,8 @@ namespace TweetField
 				// Add
 				listBox1.Items.Add(Str);
 			}
+			// History Set
+			textBox1.AutoCompleteCustomSource.AddRange(As.HashTagHistory.ToArray());
 			// Copy
 			Items = new List<string>(As.HashTagList);
 			// Text Change
@@ -68,15 +70,17 @@ namespace TweetField
 				new char[]{' ', ',', '.', '-', ';'}, StringSplitOptions.RemoveEmptyEntries);
 			// Foreach
 			foreach(var Str in SplitTag){
-				// AddString Create
-				var AddStr = (this.checkBox1.Checked ? "#" : "") + Str;
+				// AddHash String Create
+				var AddHash = (this.checkBox1.Checked && !Str.StartsWith("#") ? "#" : "") + Str;
 				// Add Item
-				listBox1.Items.Add(AddStr);
-				Items.Add(AddStr);
+				listBox1.Items.Add(AddHash);
+				Items.Add(AddHash);
 				// Clear Text
 				textBox1.Clear();
 				// Text Change
 				label1.Text = "現在のタグ文字数: " + GetTagStringLenght().ToString();
+				// History Add
+				Aps.HashTagHistory.Add(AddHash.Replace("#", ""));
 			}
 		}
 

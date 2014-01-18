@@ -17,19 +17,25 @@ namespace TweetField
 		// ----------------------------------
 		public ApplicationSetting()
 		{
-			// Color Convertor
-			ColorConverter ClConv = new ColorConverter();
 			// ------------------------------
 			// Account Setting
 			TwitterAccs			= new List<TwAccount>();	// Create Enpty List
 			UsingAccountVal		= -1;						// Account Num is Empty
 			// ------------------------------
+			// CopyWords
+			CopyPasteWords		= new List<CopyWords>();	// Create Enpty List
+			// ------------------------------
 			// Tags
 			HashTagList			= new List<string>();		// Create Enpty List
+			HashTagHistory		= new List<string>();		// Create Enpty List
 			// ------------------------------
 			// Set Font
 			SysFontName	= SystemInformation.MenuFont.Name;	// Default Font Name
 			SysFontSize			= 9;						// Default Font Size
+			// ------------------------------
+			// Translator API Key
+			ConsumerID			= "";						// Empty
+			ClientSecret		= "";						// Empty
 			// ------------------------------
 			// Set PostWindow Setting
 			ShowKeyChar			= Keys.None;				// Show/Hide Key
@@ -38,15 +44,16 @@ namespace TweetField
 			WindowSize			= new Size(433, 63);		// Default Size
 			PostKeyType			= 0;						// Enter Post
 			// Font Color Set
-			FontColor			= ClConv.ConvertToString(Color.Black);
+			FontColor			= "Black";
 			// Footer Color Set
-			FooterColor			= ClConv.ConvertToString(Color.SkyBlue);
+			FooterColor			= "DodgerBlue";
 			// String Color Set
-			StringColor			= ClConv.ConvertToString(Color.DimGray);
+			StringColor			= "White";
 			HideTweetWindow		= true;						// Window Hide After Tweet
 			DualPost			= false;
 			NoResetString		= false;
 			HideInformation		= false;					// Hide Out of Focus
+			Gradation			= false;
 		}
 		// ----------------------------------
 		//	Twitter Account Data
@@ -55,14 +62,25 @@ namespace TweetField
 		public List<TwAccount>
 							TwitterAccs;				// Twitter Accounts
 		// ----------------------------------
+		//	CopyPaste Word
+		// ----------------------------------
+		public List<CopyWords>
+							CopyPasteWords;				// Copype Texts
+		// ----------------------------------
 		//	Hash Tag
 		// ----------------------------------
 		public List<String>	HashTagList;				// Add Bind Hash Tags
+		public List<String>	HashTagHistory;				// HashTag Suggest History
 		// ----------------------------------
 		//	Font Setting
 		// ----------------------------------
 		public String		SysFontName;				// System Using FontName
 		public float		SysFontSize;				// System Using FontSize
+		// ----------------------------------
+		//	Translate
+		// ----------------------------------
+		public String		ConsumerID;					// MS Translator API Consumer ID
+		public String		ClientSecret;				// Secret Words
 		// ----------------------------------
 		//	Tweet Window Setting
 		// ----------------------------------
@@ -94,6 +112,45 @@ namespace TweetField
 		public String		ConsSecret;					// Consumer Secret Key
 		public String		AccessToken;				// Token
 		public String		AccessSecret;				// SecretToken
+	}
+
+	public class CopyWords
+	{
+		// ----------------------------------
+		//	Data
+		// ----------------------------------
+		public String		Text;						// Text
+		public String		ShortText;					// ShortText(For Menu Show)
+		public bool			IsMenuShow;					// MenuShow?
+		public bool			IsRandomize;				// Random Select?
+		// ----------------------------------
+		//	Function
+		// ----------------------------------
+		public String		GetString(String Selected)
+		{
+			// Result
+			String Result = "";
+			// If Randomize
+			if(IsRandomize){
+				// Random Calc
+				var Rndm = new Random();
+				// Result Text
+				String[] Results = Text.Split( new String[]{ "|||" }, StringSplitOptions.RemoveEmptyEntries);
+				// Get Randomize
+				Result = Results[Rndm.Next(Results.Length)];
+			}
+			// Else
+			else {
+				// Get
+				Result = Text;
+			}
+			// Replace to SelectText
+			Result = Result.Replace("%Select%", Selected);
+			// Replace from \n to \r\n
+			Result = Result.Replace("\n", "\r\n").Trim(new char[]{' ', '\r', '\n'});
+			// Return
+			return Result;
+		}
 	}
 
 	public class AppSettingAccess

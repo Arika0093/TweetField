@@ -34,9 +34,18 @@
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.PostText = new System.Windows.Forms.TextBox();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.文字列処理SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.テキストを英訳NToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.テキストを和訳JToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+			this.ハッシュタグの設定HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.コピペワード編集EToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.画像PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.投稿PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.クリップボードの画像を添付BToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.スクリーンショットの投稿SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.添付した画像を確認するCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.添付画像を破棄するDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.設定ダイアログを開くOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +54,6 @@
 			this.poltsの終了XToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-			this.添付した画像を確認するCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
@@ -98,18 +106,76 @@
 			// contextMenuStrip1
 			// 
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.投稿PToolStripMenuItem,
-            this.クリップボードの画像を添付BToolStripMenuItem,
-            this.スクリーンショットの投稿SToolStripMenuItem,
-            this.添付した画像を確認するCToolStripMenuItem,
-            this.添付画像を破棄するDToolStripMenuItem,
+            this.文字列処理SToolStripMenuItem,
+            this.画像PToolStripMenuItem,
             this.toolStripSeparator3,
             this.設定ダイアログを開くOToolStripMenuItem,
             this.toolStripSeparator2,
             this.投稿ウィンドウを閉じるCToolStripMenuItem,
             this.poltsの終了XToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(251, 214);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(228, 126);
+			// 
+			// 文字列処理SToolStripMenuItem
+			// 
+			this.文字列処理SToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator1,
+            this.テキストを英訳NToolStripMenuItem,
+            this.テキストを和訳JToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.コピペワード編集EToolStripMenuItem,
+            this.ハッシュタグの設定HToolStripMenuItem});
+			this.文字列処理SToolStripMenuItem.Name = "文字列処理SToolStripMenuItem";
+			this.文字列処理SToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+			this.文字列処理SToolStripMenuItem.Text = "文字列処理(&S)";
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(252, 6);
+			// 
+			// テキストを英訳NToolStripMenuItem
+			// 
+			this.テキストを英訳NToolStripMenuItem.Name = "テキストを英訳NToolStripMenuItem";
+			this.テキストを英訳NToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+			this.テキストを英訳NToolStripMenuItem.Text = "テキストを英訳(&E)";
+			// 
+			// テキストを和訳JToolStripMenuItem
+			// 
+			this.テキストを和訳JToolStripMenuItem.Name = "テキストを和訳JToolStripMenuItem";
+			this.テキストを和訳JToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+			this.テキストを和訳JToolStripMenuItem.Text = "テキストを和訳(&J)";
+			// 
+			// toolStripSeparator4
+			// 
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			this.toolStripSeparator4.Size = new System.Drawing.Size(252, 6);
+			// 
+			// ハッシュタグの設定HToolStripMenuItem
+			// 
+			this.ハッシュタグの設定HToolStripMenuItem.Name = "ハッシュタグの設定HToolStripMenuItem";
+			this.ハッシュタグの設定HToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+			this.ハッシュタグの設定HToolStripMenuItem.Text = "ハッシュタグの設定(&H)...";
+			this.ハッシュタグの設定HToolStripMenuItem.Click += new System.EventHandler(this.ハッシュタグの設定HToolStripMenuItem_Click);
+			// 
+			// コピペワード編集EToolStripMenuItem
+			// 
+			this.コピペワード編集EToolStripMenuItem.Name = "コピペワード編集EToolStripMenuItem";
+			this.コピペワード編集EToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+			this.コピペワード編集EToolStripMenuItem.Text = "コピペワード呼び出し/編集(&C)...";
+			this.コピペワード編集EToolStripMenuItem.Click += new System.EventHandler(this.コピペワード編集EToolStripMenuItem_Click);
+			// 
+			// 画像PToolStripMenuItem
+			// 
+			this.画像PToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.投稿PToolStripMenuItem,
+            this.クリップボードの画像を添付BToolStripMenuItem,
+            this.スクリーンショットの投稿SToolStripMenuItem,
+            this.添付した画像を確認するCToolStripMenuItem,
+            this.添付画像を破棄するDToolStripMenuItem});
+			this.画像PToolStripMenuItem.Name = "画像PToolStripMenuItem";
+			this.画像PToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+			this.画像PToolStripMenuItem.Text = "画像(&P)";
 			// 
 			// 投稿PToolStripMenuItem
 			// 
@@ -132,42 +198,50 @@
 			this.スクリーンショットの投稿SToolStripMenuItem.Text = "スクリーンショットの投稿(&S)...";
 			this.スクリーンショットの投稿SToolStripMenuItem.Click += new System.EventHandler(this.スクリーンショットの投稿SToolStripMenuItem_Click);
 			// 
+			// 添付した画像を確認するCToolStripMenuItem
+			// 
+			this.添付した画像を確認するCToolStripMenuItem.Name = "添付した画像を確認するCToolStripMenuItem";
+			this.添付した画像を確認するCToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+			this.添付した画像を確認するCToolStripMenuItem.Text = "添付した画像を確認する(&C)...";
+			this.添付した画像を確認するCToolStripMenuItem.Visible = false;
+			this.添付した画像を確認するCToolStripMenuItem.Click += new System.EventHandler(this.添付した画像を確認するCToolStripMenuItem_Click);
+			// 
 			// 添付画像を破棄するDToolStripMenuItem
 			// 
-			this.添付画像を破棄するDToolStripMenuItem.Enabled = false;
 			this.添付画像を破棄するDToolStripMenuItem.Name = "添付画像を破棄するDToolStripMenuItem";
 			this.添付画像を破棄するDToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
 			this.添付画像を破棄するDToolStripMenuItem.Text = "添付画像を破棄する(&D)";
+			this.添付画像を破棄するDToolStripMenuItem.Visible = false;
 			this.添付画像を破棄するDToolStripMenuItem.Click += new System.EventHandler(this.添付画像を破棄するDToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator3
 			// 
 			this.toolStripSeparator3.Name = "toolStripSeparator3";
-			this.toolStripSeparator3.Size = new System.Drawing.Size(247, 6);
+			this.toolStripSeparator3.Size = new System.Drawing.Size(224, 6);
 			// 
 			// 設定ダイアログを開くOToolStripMenuItem
 			// 
 			this.設定ダイアログを開くOToolStripMenuItem.Name = "設定ダイアログを開くOToolStripMenuItem";
-			this.設定ダイアログを開くOToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+			this.設定ダイアログを開くOToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
 			this.設定ダイアログを開くOToolStripMenuItem.Text = "設定ダイアログを開く(&O)...";
 			this.設定ダイアログを開くOToolStripMenuItem.Click += new System.EventHandler(this.設定ダイアログを開くOToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator2
 			// 
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(247, 6);
+			this.toolStripSeparator2.Size = new System.Drawing.Size(224, 6);
 			// 
 			// 投稿ウィンドウを閉じるCToolStripMenuItem
 			// 
 			this.投稿ウィンドウを閉じるCToolStripMenuItem.Name = "投稿ウィンドウを閉じるCToolStripMenuItem";
-			this.投稿ウィンドウを閉じるCToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+			this.投稿ウィンドウを閉じるCToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
 			this.投稿ウィンドウを閉じるCToolStripMenuItem.Text = "投稿ウィンドウを閉じる(&E)";
 			this.投稿ウィンドウを閉じるCToolStripMenuItem.Click += new System.EventHandler(this.投稿ウィンドウを閉じるCToolStripMenuItem_Click);
 			// 
 			// poltsの終了XToolStripMenuItem
 			// 
 			this.poltsの終了XToolStripMenuItem.Name = "poltsの終了XToolStripMenuItem";
-			this.poltsの終了XToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+			this.poltsの終了XToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
 			this.poltsの終了XToolStripMenuItem.Text = "アプリケーションの終了(&X)";
 			this.poltsの終了XToolStripMenuItem.Click += new System.EventHandler(this.poltsの終了XToolStripMenuItem_Click);
 			// 
@@ -189,14 +263,6 @@
 			this.notifyIcon1.Text = "TwiField";
 			this.notifyIcon1.Visible = true;
 			this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
-			// 
-			// 添付した画像を確認するCToolStripMenuItem
-			// 
-			this.添付した画像を確認するCToolStripMenuItem.Enabled = false;
-			this.添付した画像を確認するCToolStripMenuItem.Name = "添付した画像を確認するCToolStripMenuItem";
-			this.添付した画像を確認するCToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
-			this.添付した画像を確認するCToolStripMenuItem.Text = "添付した画像を確認する(&C)...";
-			this.添付した画像を確認するCToolStripMenuItem.Click += new System.EventHandler(this.添付した画像を確認するCToolStripMenuItem_Click);
 			// 
 			// Post
 			// 
@@ -251,5 +317,13 @@
 		private System.Windows.Forms.TextBox PostText;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripMenuItem 添付した画像を確認するCToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem 画像PToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem 文字列処理SToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem ハッシュタグの設定HToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripMenuItem コピペワード編集EToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+		private System.Windows.Forms.ToolStripMenuItem テキストを英訳NToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem テキストを和訳JToolStripMenuItem;
 	}
 }

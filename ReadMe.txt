@@ -2,14 +2,13 @@
 ----------------------------------------------------------------------------
 【　名　称】TwiField
 【　登録名】TweetField
-【　著作権】Copyright (C) 2013 Arika.
+【　著作権】Copyright (C) 2013-2014 Arika.
 【　連絡先】Delete0093@Gmail.com
 【動作確認】Windows8 64Bit
 【開発環境】Microsoft Visual Studio Professional
 【開発言語】C#
 【　種　類】Free Soft / Open Source
-【 License】GPL v2
-【 Version】Ver. 1.4
+【 Version】Ver. 1.5
 【 Project】https://github.com/Arika0093/TweetField
 ----------------------------------------------------------------------------
 【各種機能】
@@ -21,6 +20,7 @@
 　・規制時にアカウントを自動で切り替える機能を実装
 　・ツイート時のハッシュタグ自動付加にも対応
 　・添付した画像を確認することが可能に
+　・登録したワードを自由に呼び出し可能に
 
 【Download】
 　・Githubのページの右側にある[Download ZIP]をクリックすると

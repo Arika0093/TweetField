@@ -51,7 +51,7 @@
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(416, 179);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(363, 179);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// pictureBox1
@@ -61,7 +61,7 @@
 			this.pictureBox1.Location = new System.Drawing.Point(1, 1);
 			this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
 			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(414, 148);
+			this.pictureBox1.Size = new System.Drawing.Size(361, 148);
 			this.pictureBox1.TabIndex = 0;
 			this.pictureBox1.TabStop = false;
 			this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -72,7 +72,7 @@
 			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.label1.Location = new System.Drawing.Point(118, 150);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(294, 28);
+			this.label1.Size = new System.Drawing.Size(241, 28);
 			this.label1.TabIndex = 1;
 			this.label1.Text = "画像をクリックするかAlt+F4で閉じます．";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -93,7 +93,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(416, 179);
+			this.ClientSize = new System.Drawing.Size(363, 179);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
