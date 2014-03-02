@@ -74,7 +74,7 @@ namespace TweetField
 				moveForm.Width - (noDragAreaWidth * 2), moveForm.Height - (noDragAreaWidth * 2));
 
 			// クリックした位置が移動が有効になる範囲であれば、移動中にする
-			if (moveArea.Contains(e.Location))
+			if (moveArea.Contains(moveForm.PointToClient(Control.MousePosition)))
 			{
 				// 移動中にする
 				moveStatus = true;

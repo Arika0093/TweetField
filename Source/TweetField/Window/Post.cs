@@ -19,8 +19,6 @@ namespace TweetField
 		// Constructor
 		public Post()
 		{
-			// Hide
-			Visible = false;
 			// Load
 			AppStg = AppSettingAccess.LoadSetting();
 			// if Account Value is 0
@@ -30,7 +28,7 @@ namespace TweetField
 				// Setting Change
 				AppStg = stWindow.SettingChange(this);
 				// If Result is not OK
-				if(stWindow.DialogResult != DialogResult.OK){
+				if(stWindow.DialogResult != DialogResult.OK || AppStg == null){
 					// Exit
 					Close();
 					Application.Exit();
@@ -45,6 +43,7 @@ namespace TweetField
 			// Add Event
 			FormResizer.AddMouseEvent(PostText);
 			FormResizer.AddMouseEvent(pictureBox1);
+			FormResizer.AddMouseEvent(UserIcon);
 			FormMover.AddEventHandler(PostText);
 			FormMover.AddEventHandler(pictureBox1);
 			// Set HotKey
@@ -124,6 +123,8 @@ namespace TweetField
 			テキストを英訳NToolStripMenuItem.Visible	= (AppStg.ConsumerID != "");
 			テキストを和訳JToolStripMenuItem.Visible	= (AppStg.ConsumerID != "");
 			toolStripSeparator4.Visible				= (AppStg.ConsumerID != "");
+			// MyIcon Get & Set
+			MyIconGetAndSet(AppStg.TwitterAccs[AppStg.UsingAccountVal]);
 			// Active
 			Activate();
 			ActiveControl = PostText;
@@ -146,7 +147,6 @@ namespace TweetField
 					// if Result is false
 					if(Result == false){
 						// Not Do Default Key Function
-						e.SuppressKeyPress = false;
 						e.Handled = true;
 						// end
 						return;
@@ -269,6 +269,20 @@ namespace TweetField
 				// Draw
 				e.Graphics.DrawString(DrawAc, Font, Draw, 0, pictureBox1.Height - stringSize.Height, sf);
 			}
+		}
+
+		// Icon Click
+		private void UserIcon_Click(object sender, EventArgs e)
+		{
+			// If Account Count <= 1
+			if(AppStg.TwitterAccs.Count <= 1){
+				// Nothing
+				return;
+			}
+			// Account Change ( +1 )
+			AppStg.UsingAccountVal = (AppStg.UsingAccountVal+1)%AppStg.TwitterAccs.Count;
+			// Reload
+			Post_Load(null, null);
 		}
 
 		// Double Click Task Icon
@@ -404,18 +418,18 @@ namespace TweetField
 		{
 			// Create Instance
 			Setting stWindow = new Setting(AppStg);
+			ApplicationSetting As;
 			// ----------------------------------------
 			// Setting Change
 			AppStg.WindowSize = Size;
 			// Go to Account Management			
-			AppStg = stWindow.SettingChange(null);
+			As = stWindow.SettingChange(null);
 			// if result is abort
-			if(stWindow.DialogResult == DialogResult.Abort){
-				// End
-				Close();
+			if(stWindow.DialogResult == DialogResult.Abort || As == null){
 				// return
 				return;
 			}
+			AppStg = As;
 			// Dispose
 			PostShow.Dispose();
 			// Set HotKey
@@ -478,7 +492,7 @@ namespace TweetField
 				s += " " + Tag;
 			}
 			// String Add Error
-			if(!StringAddSpace(ref s)){
+			if(PicturePath == "" && !StringAddSpace(ref s)){
 				// Message
 				return PostErrorMessageShow(BackUpStr, "その文字列は既に投稿されています．\n"+
 					"このエラーを回避するためには，連投回避オプションにチェックを入れるか" +
@@ -740,16 +754,19 @@ namespace TweetField
 				case DialogResult.Retry:
 					// Return
 					PostText.Text = PostData;
-					// Repaint
-					pictureBox1.Refresh();
-					// Color Changed
-					PostText.ForeColor	= SystemColors.WindowText;
-					PostText.Text		= "";
+					// Select Reset
+					PostText.Select(PostText.Text.Length,0);
+					// TextColor Reset
+					PostText.ForeColor = Color.Black;
 					// Show
 					Show();
 					Activate();
 					return false;
 				case DialogResult.Cancel:
+					// Text Reset
+					PostText.Text = "";
+					// TextColor Reset
+					PostText.ForeColor = Color.Black;
 					return false;
 				default:
 					return false;
@@ -803,6 +820,19 @@ namespace TweetField
 					AddIndex++;
 				}
 			}
+		}
+
+		// Get / Set Icon
+		private void MyIconGetAndSet(TwAccount Ta)
+		{
+			// Create Twitter Service Instance
+			TwitterService TwitServ = new TwitterService(Ta.ConsKey, Ta.ConsSecret);
+			// OAuth
+			TwitServ.AuthenticateWith(Ta.AccessToken,Ta.AccessSecret);
+			// Get MyData
+			var UserData = TwitServ.GetUserProfile(new GetUserProfileOptions());
+			// Icon Set
+			UserIcon.ImageLocation = UserData.ProfileImageUrl;
 		}
 
 		// HotKey Push

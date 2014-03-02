@@ -142,7 +142,7 @@
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(389, 16);
 			this.label2.TabIndex = 7;
-			this.label2.Text = "登録したキーを入力します．詳細はReadMeをお読み下さい．";
+			this.label2.Text = "登録したキーを入力します（現在は無効です）";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// label1

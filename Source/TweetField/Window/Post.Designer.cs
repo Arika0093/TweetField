@@ -39,8 +39,8 @@
 			this.テキストを英訳NToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.テキストを和訳JToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-			this.ハッシュタグの設定HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.コピペワード編集EToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ハッシュタグの設定HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.画像PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.投稿PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.クリップボードの画像を添付BToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,21 +52,24 @@
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.投稿ウィンドウを閉じるCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.poltsの終了XToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.UserIcon = new System.Windows.Forms.PictureBox();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.UserIcon)).BeginInit();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// pictureBox1
 			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.pictureBox1, 2);
 			this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pictureBox1.Location = new System.Drawing.Point(0, 41);
+			this.pictureBox1.Location = new System.Drawing.Point(0, 34);
 			this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
 			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(431, 20);
+			this.pictureBox1.Size = new System.Drawing.Size(424, 18);
 			this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBox1.TabIndex = 0;
 			this.pictureBox1.TabStop = false;
@@ -74,18 +77,21 @@
 			// 
 			// tableLayoutPanel1
 			// 
-			this.tableLayoutPanel1.ColumnCount = 1;
+			this.tableLayoutPanel1.ColumnCount = 2;
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.PostText, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.PostText, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.UserIcon, 0, 0);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 18F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(431, 61);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(424, 52);
 			this.tableLayoutPanel1.TabIndex = 1;
 			// 
 			// PostText
@@ -94,11 +100,11 @@
 			this.PostText.ContextMenuStrip = this.contextMenuStrip1;
 			this.PostText.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.PostText.ForeColor = System.Drawing.SystemColors.WindowText;
-			this.PostText.Location = new System.Drawing.Point(0, 0);
+			this.PostText.Location = new System.Drawing.Point(35, 0);
 			this.PostText.Margin = new System.Windows.Forms.Padding(0);
 			this.PostText.Multiline = true;
 			this.PostText.Name = "PostText";
-			this.PostText.Size = new System.Drawing.Size(431, 41);
+			this.PostText.Size = new System.Drawing.Size(389, 34);
 			this.PostText.TabIndex = 1;
 			this.PostText.TextChanged += new System.EventHandler(this.PostText_TextChanged);
 			this.PostText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PostText_KeyDown);
@@ -151,19 +157,19 @@
 			this.toolStripSeparator4.Name = "toolStripSeparator4";
 			this.toolStripSeparator4.Size = new System.Drawing.Size(252, 6);
 			// 
-			// ハッシュタグの設定HToolStripMenuItem
-			// 
-			this.ハッシュタグの設定HToolStripMenuItem.Name = "ハッシュタグの設定HToolStripMenuItem";
-			this.ハッシュタグの設定HToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-			this.ハッシュタグの設定HToolStripMenuItem.Text = "ハッシュタグの設定(&H)...";
-			this.ハッシュタグの設定HToolStripMenuItem.Click += new System.EventHandler(this.ハッシュタグの設定HToolStripMenuItem_Click);
-			// 
 			// コピペワード編集EToolStripMenuItem
 			// 
 			this.コピペワード編集EToolStripMenuItem.Name = "コピペワード編集EToolStripMenuItem";
 			this.コピペワード編集EToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
 			this.コピペワード編集EToolStripMenuItem.Text = "コピペワード呼び出し/編集(&C)...";
 			this.コピペワード編集EToolStripMenuItem.Click += new System.EventHandler(this.コピペワード編集EToolStripMenuItem_Click);
+			// 
+			// ハッシュタグの設定HToolStripMenuItem
+			// 
+			this.ハッシュタグの設定HToolStripMenuItem.Name = "ハッシュタグの設定HToolStripMenuItem";
+			this.ハッシュタグの設定HToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+			this.ハッシュタグの設定HToolStripMenuItem.Text = "ハッシュタグの設定(&H)...";
+			this.ハッシュタグの設定HToolStripMenuItem.Click += new System.EventHandler(this.ハッシュタグの設定HToolStripMenuItem_Click);
 			// 
 			// 画像PToolStripMenuItem
 			// 
@@ -245,6 +251,19 @@
 			this.poltsの終了XToolStripMenuItem.Text = "アプリケーションの終了(&X)";
 			this.poltsの終了XToolStripMenuItem.Click += new System.EventHandler(this.poltsの終了XToolStripMenuItem_Click);
 			// 
+			// UserIcon
+			// 
+			this.UserIcon.Cursor = System.Windows.Forms.Cursors.Default;
+			this.UserIcon.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.UserIcon.Location = new System.Drawing.Point(1, 1);
+			this.UserIcon.Margin = new System.Windows.Forms.Padding(1);
+			this.UserIcon.Name = "UserIcon";
+			this.UserIcon.Size = new System.Drawing.Size(33, 32);
+			this.UserIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.UserIcon.TabIndex = 2;
+			this.UserIcon.TabStop = false;
+			this.UserIcon.Click += new System.EventHandler(this.UserIcon_Click);
+			// 
 			// panel1
 			// 
 			this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -253,7 +272,7 @@
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Margin = new System.Windows.Forms.Padding(0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(433, 63);
+			this.panel1.Size = new System.Drawing.Size(426, 54);
 			this.panel1.TabIndex = 2;
 			// 
 			// notifyIcon1
@@ -270,7 +289,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.SystemColors.Window;
-			this.ClientSize = new System.Drawing.Size(433, 63);
+			this.ClientSize = new System.Drawing.Size(426, 54);
 			this.ContextMenuStrip = this.contextMenuStrip1;
 			this.Controls.Add(this.panel1);
 			this.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -294,6 +313,7 @@
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.contextMenuStrip1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.UserIcon)).EndInit();
 			this.panel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 
@@ -325,5 +345,6 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripMenuItem テキストを英訳NToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem テキストを和訳JToolStripMenuItem;
+		private System.Windows.Forms.PictureBox UserIcon;
 	}
 }

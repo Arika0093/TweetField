@@ -81,8 +81,6 @@ namespace TweetField
 			CwList.Add(Cws);
 			// Add ListView
 			listBox1.Items.Add(Cws.ShortText);
-			// Enable Changed
-			button4.Enabled = true;
 		}
 
 		// Edit
@@ -118,8 +116,6 @@ namespace TweetField
 			CwList.RemoveAt(SlcIndex);
 			// Remove Target
 			listBox1.Items.RemoveAt(SlcIndex);
-			// Enable Changed
-			button4.Enabled = (listBox1.Items.Count != 0);
 		}
 
 		// OK

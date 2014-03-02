@@ -8,7 +8,7 @@
 【開発環境】Microsoft Visual Studio Professional
 【開発言語】C#
 【　種　類】Free Soft / Open Source
-【 Version】Ver. 1.5
+【 Version】Ver. 1.6
 【 Project】https://github.com/Arika0093/TweetField
 ----------------------------------------------------------------------------
 【各種機能】

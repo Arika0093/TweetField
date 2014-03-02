@@ -19,6 +19,7 @@ namespace TweetField
 			// Text Set
 			textBox1.Text = (ErrorReason != "" ? ErrorReason : "原因不明のエラー");
 			textBox2.Text = PostText;
+			textBox1.Select(textBox1.Text.Length, 0);
 		}
 
 		private void button1_Click(object sender, EventArgs e)

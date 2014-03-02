@@ -605,6 +605,7 @@
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.APISetting, 2);
 			this.APISetting.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.APISetting.Enabled = false;
 			this.APISetting.Location = new System.Drawing.Point(467, 231);
 			this.APISetting.Name = "APISetting";
 			this.APISetting.Size = new System.Drawing.Size(210, 26);

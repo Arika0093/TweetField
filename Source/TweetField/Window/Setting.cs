@@ -305,6 +305,8 @@ namespace TweetField
 		{
 			// Result is Abort
 			DialogResult = DialogResult.Abort;
+			// Close
+			Close();
 			// Program End
 			Application.Exit();
 		}
