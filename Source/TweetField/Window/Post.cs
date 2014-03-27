@@ -283,6 +283,8 @@ namespace TweetField
 			AppStg.UsingAccountVal = (AppStg.UsingAccountVal+1)%AppStg.TwitterAccs.Count;
 			// Reload
 			Post_Load(null, null);
+			// RePaint
+			pictureBox1.Refresh();
 		}
 
 		// Double Click Task Icon

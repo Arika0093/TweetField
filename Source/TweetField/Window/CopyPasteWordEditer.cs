@@ -27,14 +27,13 @@ namespace TweetField
 			textBox2.Text = Cw.Text.Replace("\n", "\r\n");
 			checkBox1.Checked = Cw.IsMenuShow;
 			checkBox2.Checked = Cw.IsRandomize;
-			button1.Enabled = (Cw.Text != "");
 		}
 
 		// MenuShow Changed
 		private void checkBox1_CheckedChanged(object sender, EventArgs e)
 		{
 			// Enable Change
-			textBox1.Enabled = checkBox1.Checked;
+			// textBox1.Enabled = checkBox1.Checked;
 		}
 
 		// MainText Edited

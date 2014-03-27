@@ -154,6 +154,7 @@ namespace TweetField
 			// Create Instance
 			var ColorDlg = new ColorSelect();
 			// ---------------------------------------------------
+			ColorDlg.ColorStr = ApSetting.FooterColor;
 			// Show Dialog
 			if(ColorDlg.ShowDialog() == DialogResult.OK){
 				// Set Color
@@ -169,6 +170,7 @@ namespace TweetField
 			// Create Instance
 			var ColorDlg = new ColorSelect();
 			// ---------------------------------------------------
+			ColorDlg.ColorStr = ApSetting.StringColor;
 			// Show Dialog
 			if(ColorDlg.ShowDialog() == DialogResult.OK){
 				// Set Color

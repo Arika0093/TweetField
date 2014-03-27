@@ -23,6 +23,23 @@ namespace TweetField
 			LoadAllColor();
 		}
 
+		// @load
+		private void ColorSelect_Load(object sender, EventArgs e)
+		{
+			// if color selected
+			if(ColorStr != ""){
+				// Item Search and Get
+				var Item = ColorList.FindItemWithText(ColorStr, true, 0);	
+				// if Item is not null
+				if(Item != null){
+					// Set
+					Item.Selected = true;
+					Item.Focused = true;
+				}
+			}
+			ColorList.Select();
+		}
+
 		// Add All Color
 		private void LoadAllColor()
 		{
