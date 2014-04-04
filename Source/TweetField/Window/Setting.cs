@@ -59,8 +59,6 @@ namespace TweetField
 			StringColorText.Text			= ApSetting.StringColor;
 			ShowHideKey.Text				= HotKey.GetKeyString(ApSetting.ShowKeyChar, ApSetting.ShowModKey);
 			ShowPosition.SelectedIndex		= ApSetting.ShowWindowPosition;
-			WindowWidth.Value				= ApSetting.WindowSize.Width;
-			WindowHeight.Value				= ApSetting.WindowSize.Height;
 			PostKey.SelectedIndex			= ApSetting.PostKeyType;
 			RentouKaihi.Checked				= ApSetting.DualPost;
 			TextSave.Checked				= ApSetting.NoResetString;
@@ -78,7 +76,14 @@ namespace TweetField
 		// Call On Load
 		private void Setting_Load(object sender, EventArgs e)
 		{
+			// Setting Load
 			SettingReload();
+			// Get own Assembly
+			System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
+			// Get Version
+			Version Ver = asm.GetName().Version;
+			// Set
+			ApplicationVersion.Text = Ver.ToString();
 		}
 
 		// Account Select
@@ -115,6 +120,11 @@ namespace TweetField
 		// Delete Account
 		private void AccountDelete_Click(object sender, EventArgs e)
 		{
+			// Warning Message
+			if(MessageBox.Show("選択中のアカウントを削除します．この動作は元に戻せません．よろしいですか？", "警告",
+				MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK){
+				return;
+			}
 			// Remove
 			ApSetting.TwitterAccs.RemoveAt(PostUserAccount.SelectedIndex);
 			// Selected -1
@@ -197,18 +207,6 @@ namespace TweetField
 		{
 			// Setting Change
 			ApSetting.ShowWindowPosition = ShowPosition.SelectedIndex;
-		}
-
-		// Width Change
-		private void WindowWidth_ValueChanged(object sender, EventArgs e)
-		{
-			ApSetting.WindowSize.Width = (int)WindowWidth.Value;
-		}
-
-		// Height Change
-		private void WindowHeight_ValueChanged(object sender, EventArgs e)
-		{
-			ApSetting.WindowSize.Height = (int)WindowHeight.Value;
 		}
 
 		// Post Key Changed
@@ -320,6 +318,27 @@ namespace TweetField
 				// End
 				Application.Exit();
 			}
+		}
+
+		// Mail to Auther
+		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			// Open Mail Address
+			System.Diagnostics.Process.Start("mailto:Delete0093@Gmail.com");
+		}
+
+		// Access to Official Site
+		private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			// Open Mail Address
+			System.Diagnostics.Process.Start("http://practice.sarashi.com/pages/TwiField/TwiField.html");
+		}
+
+		// Access to Github
+		private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			// Open Mail Address
+			System.Diagnostics.Process.Start("https://github.com/Arika0093/TweetField");
 		}
 	}
 }

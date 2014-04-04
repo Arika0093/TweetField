@@ -575,7 +575,7 @@ namespace TweetField
 		{
 			try{
 				// Regulation Num
-				const int RETURN_MAX = 124;
+				const int RETURN_MAX = 300;
 				// if not used  RegulationNum
 				if(AppStg.RegulationInfoShow == false){
 					// set
