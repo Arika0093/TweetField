@@ -23,7 +23,7 @@ namespace TweetField
 			Cw = Cws;
 			// Set
 			textBox1.Text = Cw.ShortText;
-			textBox1.Enabled = Cw.IsMenuShow;
+			//textBox1.Enabled = Cw.IsMenuShow;
 			textBox2.Text = Cw.Text.Replace("\n", "\r\n");
 			checkBox1.Checked = Cw.IsMenuShow;
 			checkBox2.Checked = Cw.IsRandomize;

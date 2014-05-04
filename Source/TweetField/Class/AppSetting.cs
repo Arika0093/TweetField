@@ -38,6 +38,11 @@ namespace TweetField
 			ClientSecret		= "";						// Empty
 			// ------------------------------
 			// Set PostWindow Setting
+			// Default Format
+			InformationText		= "投稿: #ShowName [@#UserID] +Information";
+			InformationRegu		= "[残: #RegulationNum / Reset: #RegulationResetLongTime]";
+			InformationPict		= "[画像: #PicturePath]";
+			// Basic
 			ShowKeyChar			= Keys.None;				// Show/Hide Key
 			ShowModKey			= (int)MOD_KEY.CONTROL;		// Mod Key
 			ShowWindowPosition	= 0;						// Show LeftDown
@@ -49,6 +54,11 @@ namespace TweetField
 			FooterColor			= "DodgerBlue";
 			// String Color Set
 			StringColor			= "White";
+			// Other
+			IconShowed			= true;
+			SplitText			= true;
+			SplitAtSpace		= true;
+			SplitInsert_NEXT	= false;
 			HideTweetWindow		= true;						// Window Hide After Tweet
 			DualPost			= false;
 			NoResetString		= false;
@@ -84,6 +94,9 @@ namespace TweetField
 		// ----------------------------------
 		//	Tweet Window Setting
 		// ----------------------------------
+		public String		InformationText;			// Information Text Format @ PictureControl
+		public String		InformationRegu;			// Information Text(Regulation Ver)
+		public String		InformationPict;			// Information Text(Picture Ver)
 		public Size			WindowSize;					// PostForm Window Size
 		public Keys			ShowKeyChar;				// Show/Hide Key
 		public int			ShowModKey;					// Key Option
@@ -94,8 +107,12 @@ namespace TweetField
 		public String		StringColor;				// String Color
 		public bool			DualPost;					// Add Some String
 		public bool			NoResetString;				// 
-		public bool			RegulationInfoShow;				// 
-		public bool			ChangeAccOnRegulation;			// 
+		public bool			RegulationInfoShow;			// 
+		public bool			ChangeAccOnRegulation;		//
+		public bool			IconShowed;					// If false, Icon in PostBox doesn't show
+		public bool			SplitText;					// If true, Split text when over text's lenght 140
+		public bool			SplitAtSpace;				// If true, Split text at space, peliod, and enter
+		public bool			SplitInsert_NEXT;			// If true. Splited text
 		public bool			HideTweetWindow;			// Hide Window after Tweet
 		public bool			HideInformation;			// Hide Window out Focus
 		public bool			Gradation;					// Is Draw Gradation

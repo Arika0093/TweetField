@@ -10,6 +10,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using TweetSharp;
 
 namespace TweetField
@@ -117,12 +118,11 @@ namespace TweetField
 				+ PostKey + "キーを押すことで呟きを投稿します。";
 			// Image Set
 			PostText.ForeColor = (Color)ClConv.ConvertFromString(AppStg.FontColor);
+			// PictureBox Size Set
+			tableLayoutPanel1.RowStyles[1] = new RowStyle(SizeType.Absolute,
+				(AppStg.HideInformation ? 0 : 22));
 			// Menu Create
 			CreateMenuList(AppStg);
-			// Visible Change
-			テキストを英訳NToolStripMenuItem.Visible	= (AppStg.ConsumerID != "");
-			テキストを和訳JToolStripMenuItem.Visible	= (AppStg.ConsumerID != "");
-			toolStripSeparator4.Visible				= (AppStg.ConsumerID != "");
 			// MyIcon Get & Set
 			MyIconGetAndSet(AppStg.TwitterAccs[AppStg.UsingAccountVal]);
 			// Active
@@ -144,6 +144,8 @@ namespace TweetField
 				if(PostText.Text != DefTextString){
 					// Post Text Tweet
 					bool Result = TweetPost(PostText.Text);
+					// TextColor Reset
+					PostText.ForeColor = Color.Black;
 					// if Result is false
 					if(Result == false){
 						// Not Do Default Key Function
@@ -228,7 +230,7 @@ namespace TweetField
 			ColorConverter ClConv = new ColorConverter();
 			// ------------------------------
 			// If Draw Gradation
-			if(AppStg.Gradation){
+			if(AppStg.Gradation && AppStg.HideInformation == false){
 				// Create Gradation Brush
 				LinearGradientBrush gb = new LinearGradientBrush(
 						e.ClipRectangle,
@@ -258,7 +260,7 @@ namespace TweetField
 				SolidBrush Draw = new SolidBrush((Color)ClConv.ConvertFromString(AppStg.StringColor));
 				// Draw
 				e.Graphics.DrawString(LenghtBuf.ToString(), Font,
-					LenghtBuf >= 0 ? Draw : Brushes.Red,
+					LenghtBuf >= 0 ? Draw : ( AppStg.SplitText ?  Brushes.Pink :  Brushes.Red),
 					pictureBox1.Width - stringSize.Width,
 					pictureBox1.Height - stringSize.Height, sf);
 				// -----------------------------------------------------------
@@ -293,7 +295,22 @@ namespace TweetField
 			Show();
 			Activate();
 		}
-	
+
+		// Translate Japanese <- -> English
+		private void テキストを英訳NToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			// If is Text Japanese
+			if(!Regex.Match(PostText.Text, "^[a-zA-Z]").Success){
+				// Open Google Translate(Ja -> En)
+				new Browser("https://translate.google.co.jp/#ja/en/" + PostText.Text).Show();
+			}
+			// else
+			else {
+				// Open Google Translate(En -> Ja)
+				new Browser("https://translate.google.co.jp/#en/ja/" + PostText.Text).Show();
+			}
+		}
+
 		// Edit Auto Hash Tag
 		private void ハッシュタグの設定HToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -502,10 +519,14 @@ namespace TweetField
 			}
 			// if Lenght is over 140
 			if(StringLengthBuf(s) > 140){
-				// Message
-				return PostErrorMessageShow(BackUpStr, "文字数が超過しています[文字数: " +
-					StringLengthBuf(s).ToString() + "]．\n" +
-					"規制回避のためのスペース追加で超過した可能性があります．");
+				if(AppStg.SplitText){
+					return TweetLongPost(s);
+				} else {
+					// Message
+					return PostErrorMessageShow(BackUpStr, "文字数が超過しています[文字数: " +
+						StringLengthBuf(s).ToString() + "]．\n" +
+						"規制回避のためのスペース追加で超過した可能性があります．また，分割連投オプションで回避できる場合があります．");
+				}
 			}
 			// Create Twitter Service Instance
 			TwitterService TwitServ = new TwitterService(
@@ -567,6 +588,38 @@ namespace TweetField
 			// Add List
 			BeforeTweets[LastAddPlace] = s;
 			LastAddPlace = (LastAddPlace + 1)%10;
+			return true;
+		}
+
+		// Post Long Tweet
+		private bool TweetLongPost(String s, bool MaxPost = true)
+		{
+			// Hit Chars
+			List<char> HitChars = new List<char>(new char[]{'、', '。', '，', '．', '\n'});
+			// Temp
+			int PostTextLenght = (MaxPost ? 140 : 139);
+			// If Add [Next], true
+			bool IsAddNext = (AppStg.SplitInsert_NEXT && s.Length > PostTextLenght);
+			// ----------------------------------------
+			// If Split Place Set
+			if(AppStg.SplitAtSpace && s.Length > PostTextLenght){
+				for(int i = PostTextLenght; ; i--){
+					if(HitChars.Exists(delegate(char c){ return c == s[i]; })){
+						PostTextLenght = i + 1;
+						break;
+					}
+				}
+			}
+			// Post Text Set
+			String PostStr = s.Substring(0, Math.Min(PostTextLenght, s.Length)) + (IsAddNext ? "[続く]" : "");
+			// Post Tweet
+			TweetPost(PostStr);
+			// if Text Lenght over PostTextLenght
+			if(s.Length > PostTextLenght){
+				// RePost
+				return TweetLongPost(s.Substring(PostTextLenght, s.Length - PostTextLenght), !MaxPost);
+			}
+			// End
 			return true;
 		}
 
@@ -713,33 +766,38 @@ namespace TweetField
 		private String PictureBoxShowText()
 		{
 			// Return String
-			String Result = "";
-			// Post Account Add
-			Result += "投稿: " + AppStg.TwitterAccs[AppStg.UsingAccountVal].ShowName +
-					" [@" + AppStg.TwitterAccs[AppStg.UsingAccountVal].UserName + "] ";
-			// If not add Picture
+			String Result = AppStg.InformationText;
+			// If add Picture
 			if(PicturePath.Length != 0){
 				// Add Picture Name
-				Result += "[画像: " + Path.GetFileName(PicturePath) + "] ";
+				Result = Result.Replace("+Information", AppStg.InformationPict);
+				Result = Result.Replace("+PictureInfo", AppStg.InformationPict);
 			}
-			// else if Show Regulation Info
-			else if(AppStg.RegulationInfoShow){
-				// Get Regulation Num
-				var Regu = GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]);
-				// Add Regulation Num
-				Result += "[残: " + (Regu != null ? Regu.ToString() : "ERROR");
-				// If ResetTime is not null
-				if(PostRstTime != null){
-					Result += " / Reset: " + PostRstTime.Value.ToLocalTime().ToLongTimeString();
-				}
-				// Add End Text
-				Result += "] ";
+			// if Show Regulation Info
+			if(AppStg.RegulationInfoShow){
+				Result = Result.Replace("+Information", AppStg.InformationRegu);
+				Result = Result.Replace("+RegulationInfo", AppStg.InformationRegu);
 			}
-			// if AutoTag Add
-			if(AppStg.HashTagList.Count > 0){
-				// Add
-				Result += "[#AutoTag]";
-			}
+			// Default Value
+			Result = Result.Replace("+Information", "");
+			Result = Result.Replace("+PictureInfo", "");
+			Result = Result.Replace("+RegulationInfo", "");
+			// Regulation Value
+			var RgVal = GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]);
+			// Replace
+			Result = Result.Replace("#ShowName", AppStg.TwitterAccs[AppStg.UsingAccountVal].ShowName);
+			Result = Result.Replace("#UserID", AppStg.TwitterAccs[AppStg.UsingAccountVal].UserName);
+			Result = Result.Replace("#RegulationNum", (RgVal != null ? RgVal.ToString() : "ERROR"));
+			Result = Result.Replace("#RegulationResetLongTime",
+				(PostRstTime != null ? PostRstTime.Value.ToLocalTime().ToLongTimeString(): "----"));
+			Result = Result.Replace("#RegulationResetShortTime",
+				(PostRstTime != null ? PostRstTime.Value.ToLocalTime().ToShortTimeString(): "----"));
+			Result = Result.Replace("#RegulationResetDate",
+				(PostRstTime != null ? PostRstTime.Value.ToLocalTime().ToShortDateString(): "----"));
+			Result = Result.Replace("#RegulationResetDateAndTime",
+				(PostRstTime != null ? PostRstTime.Value.ToLocalTime().ToShortDateString() + PostRstTime.Value.ToLocalTime().ToShortTimeString(): "----"));
+			Result = Result.Replace("#PictureFullPath", PicturePath);
+			Result = Result.Replace("#PicturePath", Path.GetFileName(PicturePath));
 			// return
 			return Result;
 		}
@@ -752,6 +810,8 @@ namespace TweetField
 				case DialogResult.Ignore:
 					// Retry
 					TweetPost(PostData);
+					// TextColor Reset
+					PostText.ForeColor = Color.Black;
 					return true;
 				case DialogResult.Retry:
 					// Return
@@ -827,6 +887,13 @@ namespace TweetField
 		// Get / Set Icon
 		private void MyIconGetAndSet(TwAccount Ta)
 		{
+			// If Icon not Showed
+			if(AppStg.IconShowed == false){
+				// Width = 0
+				tableLayoutPanel1.ColumnStyles[0] = new ColumnStyle(SizeType.Absolute, 0);
+				// end
+				return;
+			}
 			// Create Twitter Service Instance
 			TwitterService TwitServ = new TwitterService(Ta.ConsKey, Ta.ConsSecret);
 			// OAuth
@@ -835,6 +902,8 @@ namespace TweetField
 			var UserData = TwitServ.GetUserProfile(new GetUserProfileOptions());
 			// Icon Set
 			UserIcon.ImageLocation = UserData.ProfileImageUrl;
+			// Width set
+			tableLayoutPanel1.ColumnStyles[0] = new ColumnStyle(SizeType.Absolute, 41);
 		}
 
 		// HotKey Push

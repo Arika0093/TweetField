@@ -72,7 +72,7 @@ namespace TweetField
 			// Get Uri
 			Uri uri = TwiServ.GetAuthenticationUrl(reqToken);
 			// Open Browse
-			System.Diagnostics.Process.Start(uri.ToString());
+			new Browser(uri.ToString()).Show();
 			// Enable Change
 			PINEdit.Enabled = true;
 		}

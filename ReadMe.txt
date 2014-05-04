@@ -8,7 +8,7 @@
 【開発環境】Microsoft Visual Studio Professional
 【開発言語】C#
 【　種　類】Free Soft / Open Source
-【 Version】Ver. 1.7
+【 Version】Ver. 1.8
 【 Project】https://github.com/Arika0093/TweetField
 ----------------------------------------------------------------------------
 【各種機能】
@@ -21,6 +21,7 @@
 　・ツイート時のハッシュタグ自動付加にも対応
 　・添付した画像を確認することが可能に
 　・登録したワードを自由に呼び出し可能に
+　・長文の連投回避機能を搭載
 
 【Download】
 　・Githubのページの右側にある[Download ZIP]をクリックすると

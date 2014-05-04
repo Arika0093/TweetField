@@ -37,7 +37,6 @@
 			this.文字列処理SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.テキストを英訳NToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.テキストを和訳JToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.コピペワード編集EToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ハッシュタグの設定HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,7 +126,6 @@
 			this.文字列処理SToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator1,
             this.テキストを英訳NToolStripMenuItem,
-            this.テキストを和訳JToolStripMenuItem,
             this.toolStripSeparator4,
             this.コピペワード編集EToolStripMenuItem,
             this.ハッシュタグの設定HToolStripMenuItem});
@@ -144,13 +142,8 @@
 			// 
 			this.テキストを英訳NToolStripMenuItem.Name = "テキストを英訳NToolStripMenuItem";
 			this.テキストを英訳NToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-			this.テキストを英訳NToolStripMenuItem.Text = "テキストを英訳(&E)";
-			// 
-			// テキストを和訳JToolStripMenuItem
-			// 
-			this.テキストを和訳JToolStripMenuItem.Name = "テキストを和訳JToolStripMenuItem";
-			this.テキストを和訳JToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-			this.テキストを和訳JToolStripMenuItem.Text = "テキストを和訳(&J)";
+			this.テキストを英訳NToolStripMenuItem.Text = "テキストを翻訳(&T)";
+			this.テキストを英訳NToolStripMenuItem.Click += new System.EventHandler(this.テキストを英訳NToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator4
 			// 
@@ -297,7 +290,6 @@
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.MinimumSize = new System.Drawing.Size(209, 46);
 			this.Name = "Post";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
@@ -344,7 +336,6 @@
 		private System.Windows.Forms.ToolStripMenuItem コピペワード編集EToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripMenuItem テキストを英訳NToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem テキストを和訳JToolStripMenuItem;
 		private System.Windows.Forms.PictureBox UserIcon;
 	}
 }

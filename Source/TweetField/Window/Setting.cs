@@ -49,11 +49,10 @@ namespace TweetField
 			}
 			// Account Setting
 			PostUserAccount.SelectedIndex	= ApSetting.UsingAccountVal;
-			// Setting Item
 			FontColor.BackColor				= (Color)ClConv.ConvertFromString(ApSetting.FontColor);
 			FontName.Text					= ApSetting.SysFontName;
 			FontSize.Text					= ApSetting.SysFontSize.ToString();
-			BackgrouondColorView.BackColor	= (Color)ClConv.ConvertFromString(ApSetting.FooterColor);
+			BackgroundColorView.BackColor	= (Color)ClConv.ConvertFromString(ApSetting.FooterColor);
 			BackgroundColorText.Text		= ApSetting.FooterColor;
 			StringColorView.BackColor		= (Color)ClConv.ConvertFromString(ApSetting.StringColor);
 			StringColorText.Text			= ApSetting.StringColor;
@@ -65,10 +64,16 @@ namespace TweetField
 			HideOffFocus.Checked			= ApSetting.HideInformation;
 			HideFormAfterTweet.Checked		= ApSetting.HideTweetWindow;
 			ShowRegulationInfo.Checked		= ApSetting.RegulationInfoShow;
-			ChangeAcc.Enabled				= ApSetting.RegulationInfoShow;
 			ChangeAcc.Checked				= ApSetting.ChangeAccOnRegulation;
 			IsGradation.Checked				= ApSetting.Gradation;
+			IsIconShow.Checked				= ApSetting.IconShowed;
+			AutoTextSplit.Checked			= ApSetting.SplitText;
+			SplitAtPoint.Checked			= ApSetting.SplitAtSpace;
+			SplitInsertNext.Checked			= ApSetting.SplitInsert_NEXT;
 			// Enable Change
+			ChangeAcc.Enabled				= ApSetting.RegulationInfoShow;
+			SplitAtPoint.Enabled			= ApSetting.SplitText;
+			SplitInsertNext.Enabled			= ApSetting.SplitText;
 			AccountDelete.Enabled			= ( ApSetting.UsingAccountVal != -1 );
 			OK.Enabled						= ( ApSetting.UsingAccountVal != -1 );
 		}
@@ -281,6 +286,32 @@ namespace TweetField
 			ApSetting.Gradation = IsGradation.Checked;
 		}
 
+		// Icon Showed
+		private void IsIconShow_CheckedChanged(object sender, EventArgs e)
+		{
+			ApSetting.IconShowed = IsIconShow.Checked;
+		}
+
+		// Split Text
+		private void AutoTextSplit_CheckedChanged(object sender, EventArgs e)
+		{
+			ApSetting.SplitText = AutoTextSplit.Checked;
+			// Reload
+			SettingReload();
+		}
+
+		// Split at space
+		private void SplitAtPoint_CheckedChanged(object sender, EventArgs e)
+		{
+			ApSetting.SplitAtSpace = SplitAtPoint.Checked;
+		}
+
+		// Split Insert Next
+		private void SplitInsertNext_CheckedChanged(object sender, EventArgs e)
+		{
+			ApSetting.SplitInsert_NEXT = SplitInsertNext.Checked;
+		}
+
 		// Setting Save
 		private void OK_Click(object sender, EventArgs e)
 		{
@@ -330,15 +361,15 @@ namespace TweetField
 		// Access to Official Site
 		private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			// Open Mail Address
-			System.Diagnostics.Process.Start("http://practice.sarashi.com/pages/TwiField/TwiField.html");
+			// Open Site
+			new Browser("http://practice.sarashi.com/pages/TwiField/TwiField.html").Show();
 		}
 
 		// Access to Github
 		private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			// Open Mail Address
-			System.Diagnostics.Process.Start("https://github.com/Arika0093/TweetField");
+			// Open Github
+			new Browser("https://github.com/Arika0093/TweetField").Show();
 		}
 	}
 }

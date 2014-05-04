@@ -29,13 +29,13 @@
 		private void InitializeComponent()
 		{
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.button3 = new System.Windows.Forms.Button();
+			this.button2 = new System.Windows.Forms.Button();
 			this.label3 = new System.Windows.Forms.Label();
 			this.button5 = new System.Windows.Forms.Button();
 			this.button4 = new System.Windows.Forms.Button();
 			this.listBox1 = new System.Windows.Forms.ListBox();
 			this.Call = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
@@ -66,6 +66,28 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(459, 348);
 			this.tableLayoutPanel1.TabIndex = 1;
+			// 
+			// button3
+			// 
+			this.button3.Enabled = false;
+			this.button3.Location = new System.Drawing.Point(369, 284);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(87, 27);
+			this.button3.TabIndex = 12;
+			this.button3.Text = "削除(&D)";
+			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.button3_Click);
+			// 
+			// button2
+			// 
+			this.button2.Enabled = false;
+			this.button2.Location = new System.Drawing.Point(276, 284);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(87, 27);
+			this.button2.TabIndex = 11;
+			this.button2.Text = "編集(&E)";
+			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
 			// label3
 			// 
@@ -131,28 +153,6 @@
 			this.Call.UseVisualStyleBackColor = true;
 			this.Call.Click += new System.EventHandler(this.Call_Click);
 			// 
-			// button2
-			// 
-			this.button2.Enabled = false;
-			this.button2.Location = new System.Drawing.Point(276, 284);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(87, 27);
-			this.button2.TabIndex = 11;
-			this.button2.Text = "編集(&E)";
-			this.button2.UseVisualStyleBackColor = true;
-			this.button2.Click += new System.EventHandler(this.button2_Click);
-			// 
-			// button3
-			// 
-			this.button3.Enabled = false;
-			this.button3.Location = new System.Drawing.Point(369, 284);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(87, 27);
-			this.button3.TabIndex = 12;
-			this.button3.Text = "削除(&D)";
-			this.button3.UseVisualStyleBackColor = true;
-			this.button3.Click += new System.EventHandler(this.button3_Click);
-			// 
 			// button1
 			// 
 			this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -173,7 +173,11 @@
 			this.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "CopyPasteView";
+			this.ShowIcon = false;
+			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "コピペワード呼び出し/一覧";
 			this.tableLayoutPanel1.ResumeLayout(false);
