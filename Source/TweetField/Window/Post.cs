@@ -114,7 +114,7 @@ namespace TweetField
 					break;
 			}
 			// Set Default String
-			DefTextString = "この欄に呟く内容を入力します。右クリックでメニューを表示します。\r\n"
+			DefTextString = "この欄に呟く内容を入力します。右クリックでメニューを表示します。\r\r\n"
 				+ PostKey + "キーを押すことで呟きを投稿します。";
 			// Image Set
 			PostText.ForeColor = (Color)ClConv.ConvertFromString(AppStg.FontColor);
@@ -158,6 +158,21 @@ namespace TweetField
 					// Not Do Default Key Function
 					e.SuppressKeyPress = true;
 				}
+			}
+			// If Push Ctrl + V
+			else if(e.KeyCode == Keys.V && e.Control){
+				// If Text Exist at Clipboard
+				if(Clipboard.ContainsText()){
+					// Paste Text
+					PostText.Text = Clipboard.GetText();
+				}
+				// Else If Image Exist at Clipboard
+				else if(Clipboard.ContainsImage()){
+					// Paste Image
+					クリップボードの画像を添付BToolStripMenuItem_Click(null, null);
+				}
+				// Not Do Default Key Function
+				e.SuppressKeyPress = true;
 			}
 			// If Push Ctrl + A
 			else if(e.KeyCode == Keys.A && e.Control){
@@ -513,9 +528,11 @@ namespace TweetField
 			// String Add Error
 			if(PicturePath == "" && !StringAddSpace(ref s)){
 				// Message
-				return PostErrorMessageShow(BackUpStr, "その文字列は既に投稿されています．\n"+
-					"このエラーを回避するためには，連投回避オプションにチェックを入れるか" +
-					"10ツイート以内に同じツイートをしないようにしてください．");
+				return PostErrorMessageShow(BackUpStr, "その文字列は既に投稿されています．\r\n"+
+					"このエラーを回避するためには，以下の対策をお取り下さい．\r\n" + 
+					"・連投回避オプションにチェックを入れる\r\n" +
+					"・直前の投稿から10秒以内に同じ文字数のツイートをしない\r\n" +
+					"・10ツイート以内に同じツイートをしない");
 			}
 			// if Lenght is over 140
 			if(StringLengthBuf(s) > 140){
@@ -524,7 +541,7 @@ namespace TweetField
 				} else {
 					// Message
 					return PostErrorMessageShow(BackUpStr, "文字数が超過しています[文字数: " +
-						StringLengthBuf(s).ToString() + "]．\n" +
+						StringLengthBuf(s).ToString() + "]．\r\n" +
 						"規制回避のためのスペース追加で超過した可能性があります．また，分割連投オプションで回避できる場合があります．");
 				}
 			}
@@ -570,6 +587,8 @@ namespace TweetField
 				|| ((DateTime)PostRstTime - TwiStatus.CreatedDate).TotalSeconds < 0)){
 				// Set
 				PostRstTime	= TwiStatus.CreatedDate.AddHours(3);
+				LatestPstTime = DateTime.Now;
+				LatestPostTextLenght = TwiStatus.Text.Length;
 			}
 			// Get Regulation Num
 			var Regu = GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal]);
@@ -740,7 +759,10 @@ namespace TweetField
 		private bool StringAddSpace(ref String s)
 		{
 			// Check String Lenght
-			if(AppStg.DualPost && BeforeTweets[0] != null && s.Length == BeforeTweets[0].Length){
+			if(AppStg.DualPost
+			&& LatestPstTime != null
+			&& (DateTime.Now - (DateTime)LatestPstTime).Seconds <= 10
+			&& LatestPostTextLenght == s.Length){
 				// Add Space
 				s += "　";
 			}
@@ -964,7 +986,9 @@ namespace TweetField
 		TwAccount Account = null;
 		// RemainRegulationNum
 		private int? RemainRegulationNum;
+		private int LatestPostTextLenght = 0;
 		// PostResetTime
 		private DateTime? PostRstTime = null;
+		private DateTime? LatestPstTime = null;
 	}
 }

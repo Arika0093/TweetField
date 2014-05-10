@@ -53,13 +53,12 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Hammock.ClientProfile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\Hammock.ClientProfile.dll</HintPath>
+    <Reference Include="Hammock">
+      <HintPath>..\packages\TweetSharp-Unofficial.2.3.1.2\lib\4.0\Hammock.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\TweetSharp-Unofficial.2.3.1.2\lib\4.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
@@ -75,7 +74,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="TweetSharp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\TweetSharp.dll</HintPath>
+      <HintPath>..\packages\TweetSharp-Unofficial.2.3.1.2\lib\4.0\TweetSharp.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -93,11 +92,41 @@
     <Compile Include="Window\Account.Designer.cs">
       <DependentUpon>Account.cs</DependentUpon>
     </Compile>
+    <Compile Include="Window\Browser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\Browser.Designer.cs">
+      <DependentUpon>Browser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Window\Captcha.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Window\Captcha.Designer.cs">
       <DependentUpon>Captcha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Window\ColorSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\ColorSelect.Designer.cs">
+      <DependentUpon>ColorSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Window\CopyPasteView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\CopyPasteView.Designer.cs">
+      <DependentUpon>CopyPasteView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Window\CopyPasteWordEditer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\CopyPasteWordEditer.Designer.cs">
+      <DependentUpon>CopyPasteWordEditer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Window\Exception.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\Exception.Designer.cs">
+      <DependentUpon>Exception.cs</DependentUpon>
     </Compile>
     <Compile Include="Window\HotKeyEdit.cs">
       <SubType>Form</SubType>
@@ -117,6 +146,12 @@
     <Compile Include="Window\Post.Designer.cs">
       <DependentUpon>Post.cs</DependentUpon>
     </Compile>
+    <Compile Include="Window\PostError.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\PostError.Designer.cs">
+      <DependentUpon>PostError.cs</DependentUpon>
+    </Compile>
     <Compile Include="Window\Setting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +163,12 @@
     </Compile>
     <Compile Include="Window\TagEditer.Designer.cs">
       <DependentUpon>TagEditer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Window\TranslatorSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\TranslatorSet.Designer.cs">
+      <DependentUpon>TranslatorSet.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -142,8 +183,23 @@
     <EmbeddedResource Include="Window\Account.resx">
       <DependentUpon>Account.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Window\Browser.resx">
+      <DependentUpon>Browser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Window\Captcha.resx">
       <DependentUpon>Captcha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window\ColorSelect.resx">
+      <DependentUpon>ColorSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window\CopyPasteView.resx">
+      <DependentUpon>CopyPasteView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window\CopyPasteWordEditer.resx">
+      <DependentUpon>CopyPasteWordEditer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window\Exception.resx">
+      <DependentUpon>Exception.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Window\HotKeyEdit.resx">
       <DependentUpon>HotKeyEdit.cs</DependentUpon>
@@ -154,15 +210,22 @@
     <EmbeddedResource Include="Window\Post.resx">
       <DependentUpon>Post.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Window\PostError.resx">
+      <DependentUpon>PostError.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Window\Setting.resx">
       <DependentUpon>Setting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Window\TagEditer.resx">
       <DependentUpon>TagEditer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Window\TranslatorSet.resx">
+      <DependentUpon>TranslatorSet.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Config\app.config" />
     <None Include="Config\packages.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
