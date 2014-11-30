@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace TweetField
 {
@@ -83,6 +84,10 @@ namespace TweetField
 		{
 			// Setting Load
 			SettingReload();
+			// Autorun Registry Check
+			AutoRun.Checked = Registry.CurrentUser.OpenSubKey(
+				@"Software\Microsoft\Windows\CurrentVersion\Run", true)
+				.GetValue(Application.ProductName) != null;
 			// Get own Assembly
 			System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
 			// Get Version
@@ -310,6 +315,21 @@ namespace TweetField
 		private void SplitInsertNext_CheckedChanged(object sender, EventArgs e)
 		{
 			ApSetting.SplitInsert_NEXT = SplitInsertNext.Checked;
+		}
+		
+		// Autorun setting changed
+		private void AutoRun_CheckedChanged(object sender, EventArgs e)
+		{
+			var key = Registry.CurrentUser.CreateSubKey(
+				@"Software\Microsoft\Windows\CurrentVersion\Run");
+			// if true, setting
+			if(AutoRun.Checked == true){
+				key.SetValue(Application.ProductName, Application.ExecutablePath);
+			}
+			// else, delete key
+			else{
+				key.DeleteValue(Application.ProductName);
+			}
 		}
 
 		// Setting Save

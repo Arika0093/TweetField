@@ -21,7 +21,7 @@
   <StringColor>White</StringColor>
   <DualPost>true</DualPost>
   <NoResetString>false</NoResetString>
-  <RegulationInfoShow>true</RegulationInfoShow>
+  <RegulationInfoShow>false</RegulationInfoShow>
   <ChangeAccOnRegulation>false</ChangeAccOnRegulation>
   <HideTweetWindow>true</HideTweetWindow>
   <HideInformation>false</HideInformation>

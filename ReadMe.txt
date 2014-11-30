@@ -4,11 +4,11 @@
 【　登録名】TweetField
 【　著作権】Copyright (C) 2013-2014 Arika.
 【　連絡先】Delete0093@Gmail.com
-【動作確認】Windows8 64Bit
+【動作確認】Windows8/8.1 64Bit
 【開発環境】Microsoft Visual Studio Professional
 【開発言語】C#
 【　種　類】Free Soft / Open Source
-【 Version】Ver. 1.8
+【 Version】Ver. 1.9
 【 Project】https://github.com/Arika0093/TweetField
 ----------------------------------------------------------------------------
 【各種機能】
