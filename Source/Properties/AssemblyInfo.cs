@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("TwiField")]
-[assembly: AssemblyCopyright("Copyright © 2013 Arika.")]
+[assembly: AssemblyCopyright("Copyright © 2013-2015 Arika.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.9.*")]
+[assembly: AssemblyVersion("1.10.*")]
 //[assembly: AssemblyFileVersion("1.2.0.2")]

@@ -54,6 +54,7 @@
 			this.SplitAtPoint = new System.Windows.Forms.CheckBox();
 			this.SplitInsertNext = new System.Windows.Forms.CheckBox();
 			this.IsIconShow = new System.Windows.Forms.CheckBox();
+			this.AtUserSuggest = new System.Windows.Forms.CheckBox();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -82,6 +83,10 @@
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
 			this.label6 = new System.Windows.Forms.Label();
 			this.label10 = new System.Windows.Forms.Label();
+			this.tabPage6 = new System.Windows.Forms.TabPage();
+			this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+			this.label18 = new System.Windows.Forms.Label();
+			this.AutoRun = new System.Windows.Forms.CheckBox();
 			this.tabPage5 = new System.Windows.Forms.TabPage();
 			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
 			this.ApplicationVersion = new System.Windows.Forms.Label();
@@ -95,10 +100,7 @@
 			this.label9 = new System.Windows.Forms.Label();
 			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-			this.tabPage6 = new System.Windows.Forms.TabPage();
-			this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-			this.label18 = new System.Windows.Forms.Label();
-			this.AutoRun = new System.Windows.Forms.CheckBox();
+			this.IsUsePicture = new System.Windows.Forms.CheckBox();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -108,11 +110,11 @@
 			this.tableLayoutPanel6.SuspendLayout();
 			this.tabPage4.SuspendLayout();
 			this.tableLayoutPanel4.SuspendLayout();
+			this.tabPage6.SuspendLayout();
+			this.tableLayoutPanel7.SuspendLayout();
 			this.tabPage5.SuspendLayout();
 			this.tableLayoutPanel5.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
-			this.tabPage6.SuspendLayout();
-			this.tableLayoutPanel7.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// AccountDelete
@@ -215,6 +217,7 @@
 			this.PostKey.Size = new System.Drawing.Size(421, 26);
 			this.PostKey.TabIndex = 40;
 			this.toolTip1.SetToolTip(this.PostKey, "ウインドウがアクティブな時に、ここで指定したキーを押すことで\r\nテキストボックス内の内容を呟きます。");
+			this.PostKey.SelectedIndexChanged += new System.EventHandler(this.PostKey_SelectedIndexChanged);
 			this.PostKey.Click += new System.EventHandler(this.PostKey_SelectedIndexChanged);
 			// 
 			// RentouKaihi
@@ -338,6 +341,7 @@
 			this.ShowPosition.Size = new System.Drawing.Size(389, 26);
 			this.ShowPosition.TabIndex = 57;
 			this.toolTip1.SetToolTip(this.ShowPosition, "起動時のウインドウの表示位置を指定します。");
+			this.ShowPosition.SelectedIndexChanged += new System.EventHandler(this.ShowPosition_SelectedIndexChanged);
 			this.ShowPosition.Click += new System.EventHandler(this.ShowPosition_SelectedIndexChanged);
 			// 
 			// HideFormAfterTweet
@@ -422,6 +426,20 @@
 			this.toolTip1.SetToolTip(this.IsIconShow, "投稿BOXの横にアイコンを表示するかどうかを指定します．");
 			this.IsIconShow.UseVisualStyleBackColor = true;
 			this.IsIconShow.CheckedChanged += new System.EventHandler(this.IsIconShow_CheckedChanged);
+			// 
+			// AtUserSuggest
+			// 
+			this.AtUserSuggest.AutoSize = true;
+			this.tableLayoutPanel7.SetColumnSpan(this.AtUserSuggest, 2);
+			this.AtUserSuggest.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.AtUserSuggest.Location = new System.Drawing.Point(6, 42);
+			this.AtUserSuggest.Name = "AtUserSuggest";
+			this.AtUserSuggest.Size = new System.Drawing.Size(505, 20);
+			this.AtUserSuggest.TabIndex = 2;
+			this.AtUserSuggest.Text = "@入力時のユーザー候補表示を有効にする";
+			this.toolTip1.SetToolTip(this.AtUserSuggest, "@を入力した時に、フォロワー一覧のIDを表示することで\r\nリプライ送信を簡単に行えるようにします。");
+			this.AtUserSuggest.UseVisualStyleBackColor = true;
+			this.AtUserSuggest.CheckedChanged += new System.EventHandler(this.AtUserSuggest_CheckedChanged);
 			// 
 			// tabControl1
 			// 
@@ -835,13 +853,75 @@
 			this.label10.Text = "投稿関連の設定";
 			this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// tabPage6
+			// 
+			this.tabPage6.Controls.Add(this.tableLayoutPanel7);
+			this.tabPage6.Location = new System.Drawing.Point(4, 27);
+			this.tabPage6.Name = "tabPage6";
+			this.tabPage6.Size = new System.Drawing.Size(517, 268);
+			this.tabPage6.TabIndex = 6;
+			this.tabPage6.Text = "その他";
+			this.tabPage6.UseVisualStyleBackColor = true;
+			// 
+			// tableLayoutPanel7
+			// 
+			this.tableLayoutPanel7.ColumnCount = 2;
+			this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 111F));
+			this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel7.Controls.Add(this.IsUsePicture, 0, 2);
+			this.tableLayoutPanel7.Controls.Add(this.AtUserSuggest, 0, 1);
+			this.tableLayoutPanel7.Controls.Add(this.label18, 0, 0);
+			this.tableLayoutPanel7.Controls.Add(this.AutoRun, 0, 3);
+			this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 0);
+			this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+			this.tableLayoutPanel7.Padding = new System.Windows.Forms.Padding(3);
+			this.tableLayoutPanel7.RowCount = 5;
+			this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
+			this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+			this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+			this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+			this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel7.Size = new System.Drawing.Size(517, 268);
+			this.tableLayoutPanel7.TabIndex = 2;
+			// 
+			// label18
+			// 
+			this.label18.AutoSize = true;
+			this.label18.BackColor = System.Drawing.SystemColors.MenuHighlight;
+			this.label18.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.tableLayoutPanel7.SetColumnSpan(this.label18, 2);
+			this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label18.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			this.label18.ForeColor = System.Drawing.SystemColors.Window;
+			this.label18.Location = new System.Drawing.Point(6, 6);
+			this.label18.Margin = new System.Windows.Forms.Padding(3);
+			this.label18.Name = "label18";
+			this.label18.Size = new System.Drawing.Size(505, 30);
+			this.label18.TabIndex = 0;
+			this.label18.Text = "その他の設定";
+			this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// AutoRun
+			// 
+			this.AutoRun.AutoSize = true;
+			this.tableLayoutPanel7.SetColumnSpan(this.AutoRun, 2);
+			this.AutoRun.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.AutoRun.Location = new System.Drawing.Point(6, 94);
+			this.AutoRun.Name = "AutoRun";
+			this.AutoRun.Size = new System.Drawing.Size(505, 20);
+			this.AutoRun.TabIndex = 1;
+			this.AutoRun.Text = "パソコン起動時に自動で起動するよう設定する";
+			this.AutoRun.UseVisualStyleBackColor = true;
+			this.AutoRun.CheckedChanged += new System.EventHandler(this.AutoRun_CheckedChanged);
+			// 
 			// tabPage5
 			// 
 			this.tabPage5.Controls.Add(this.tableLayoutPanel5);
 			this.tabPage5.Location = new System.Drawing.Point(4, 27);
 			this.tabPage5.Name = "tabPage5";
 			this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage5.Size = new System.Drawing.Size(476, 268);
+			this.tabPage5.Size = new System.Drawing.Size(517, 268);
 			this.tabPage5.TabIndex = 4;
 			this.tabPage5.Text = "情報";
 			this.tabPage5.UseVisualStyleBackColor = true;
@@ -872,7 +952,7 @@
 			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
 			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
 			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel5.Size = new System.Drawing.Size(470, 262);
+			this.tableLayoutPanel5.Size = new System.Drawing.Size(511, 262);
 			this.tableLayoutPanel5.TabIndex = 3;
 			// 
 			// ApplicationVersion
@@ -881,7 +961,7 @@
 			this.ApplicationVersion.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ApplicationVersion.Location = new System.Drawing.Point(93, 60);
 			this.ApplicationVersion.Name = "ApplicationVersion";
-			this.ApplicationVersion.Size = new System.Drawing.Size(374, 24);
+			this.ApplicationVersion.Size = new System.Drawing.Size(415, 24);
 			this.ApplicationVersion.TabIndex = 9;
 			this.ApplicationVersion.Text = "#APPLICATION_VERSION";
 			this.ApplicationVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -903,7 +983,7 @@
 			this.linkLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.linkLabel3.Location = new System.Drawing.Point(93, 132);
 			this.linkLabel3.Name = "linkLabel3";
-			this.linkLabel3.Size = new System.Drawing.Size(374, 24);
+			this.linkLabel3.Size = new System.Drawing.Size(415, 24);
 			this.linkLabel3.TabIndex = 7;
 			this.linkLabel3.TabStop = true;
 			this.linkLabel3.Text = "Github";
@@ -916,7 +996,7 @@
 			this.linkLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.linkLabel2.Location = new System.Drawing.Point(93, 108);
 			this.linkLabel2.Name = "linkLabel2";
-			this.linkLabel2.Size = new System.Drawing.Size(374, 24);
+			this.linkLabel2.Size = new System.Drawing.Size(415, 24);
 			this.linkLabel2.TabIndex = 6;
 			this.linkLabel2.TabStop = true;
 			this.linkLabel2.Text = "Official Site";
@@ -929,7 +1009,7 @@
 			this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.label14.Location = new System.Drawing.Point(93, 36);
 			this.label14.Name = "label14";
-			this.label14.Size = new System.Drawing.Size(374, 24);
+			this.label14.Size = new System.Drawing.Size(415, 24);
 			this.label14.TabIndex = 4;
 			this.label14.Text = "TwiField";
 			this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -968,7 +1048,7 @@
 			this.label11.Location = new System.Drawing.Point(3, 3);
 			this.label11.Margin = new System.Windows.Forms.Padding(3);
 			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(464, 30);
+			this.label11.Size = new System.Drawing.Size(505, 30);
 			this.label11.TabIndex = 0;
 			this.label11.Text = "Application Information";
 			this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -990,7 +1070,7 @@
 			this.linkLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.linkLabel1.Location = new System.Drawing.Point(93, 84);
 			this.linkLabel1.Name = "linkLabel1";
-			this.linkLabel1.Size = new System.Drawing.Size(374, 24);
+			this.linkLabel1.Size = new System.Drawing.Size(415, 24);
 			this.linkLabel1.TabIndex = 5;
 			this.linkLabel1.TabStop = true;
 			this.linkLabel1.Text = "Arika (Delete0093@Gmail.com)";
@@ -1017,64 +1097,19 @@
 			this.tableLayoutPanel3.Size = new System.Drawing.Size(531, 344);
 			this.tableLayoutPanel3.TabIndex = 1;
 			// 
-			// tabPage6
+			// IsUsePicture
 			// 
-			this.tabPage6.Controls.Add(this.tableLayoutPanel7);
-			this.tabPage6.Location = new System.Drawing.Point(4, 27);
-			this.tabPage6.Name = "tabPage6";
-			this.tabPage6.Size = new System.Drawing.Size(517, 268);
-			this.tabPage6.TabIndex = 6;
-			this.tabPage6.Text = "その他";
-			this.tabPage6.UseVisualStyleBackColor = true;
-			// 
-			// tableLayoutPanel7
-			// 
-			this.tableLayoutPanel7.ColumnCount = 2;
-			this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 111F));
-			this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel7.Controls.Add(this.label18, 0, 0);
-			this.tableLayoutPanel7.Controls.Add(this.AutoRun, 0, 1);
-			this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 0);
-			this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-			this.tableLayoutPanel7.Padding = new System.Windows.Forms.Padding(3);
-			this.tableLayoutPanel7.RowCount = 3;
-			this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
-			this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
-			this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel7.Size = new System.Drawing.Size(517, 268);
-			this.tableLayoutPanel7.TabIndex = 2;
-			// 
-			// label18
-			// 
-			this.label18.AutoSize = true;
-			this.label18.BackColor = System.Drawing.SystemColors.MenuHighlight;
-			this.label18.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.tableLayoutPanel7.SetColumnSpan(this.label18, 2);
-			this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label18.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.label18.ForeColor = System.Drawing.SystemColors.Window;
-			this.label18.Location = new System.Drawing.Point(6, 6);
-			this.label18.Margin = new System.Windows.Forms.Padding(3);
-			this.label18.Name = "label18";
-			this.label18.Size = new System.Drawing.Size(505, 30);
-			this.label18.TabIndex = 0;
-			this.label18.Text = "その他の設定";
-			this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// AutoRun
-			// 
-			this.AutoRun.AutoSize = true;
-			this.tableLayoutPanel7.SetColumnSpan(this.AutoRun, 2);
-			this.AutoRun.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.AutoRun.Location = new System.Drawing.Point(6, 42);
-			this.AutoRun.Name = "AutoRun";
-			this.AutoRun.Size = new System.Drawing.Size(505, 22);
-			this.AutoRun.TabIndex = 1;
-			this.AutoRun.Text = "パソコン起動時に自動で起動するよう設定する";
-			this.AutoRun.UseVisualStyleBackColor = true;
-			this.AutoRun.CheckedChanged += new System.EventHandler(this.AutoRun_CheckedChanged);
+			this.IsUsePicture.AutoSize = true;
+			this.tableLayoutPanel7.SetColumnSpan(this.IsUsePicture, 2);
+			this.IsUsePicture.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.IsUsePicture.Location = new System.Drawing.Point(6, 68);
+			this.IsUsePicture.Name = "IsUsePicture";
+			this.IsUsePicture.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+			this.IsUsePicture.Size = new System.Drawing.Size(505, 20);
+			this.IsUsePicture.TabIndex = 3;
+			this.IsUsePicture.Text = "ユーザー候補表示に画像を利用する(とても遅くなります)";
+			this.IsUsePicture.UseVisualStyleBackColor = true;
+			this.IsUsePicture.CheckedChanged += new System.EventHandler(this.IsUsePicture_CheckedChanged);
 			// 
 			// Setting
 			// 
@@ -1105,13 +1140,13 @@
 			this.tabPage4.ResumeLayout(false);
 			this.tableLayoutPanel4.ResumeLayout(false);
 			this.tableLayoutPanel4.PerformLayout();
+			this.tabPage6.ResumeLayout(false);
+			this.tableLayoutPanel7.ResumeLayout(false);
+			this.tableLayoutPanel7.PerformLayout();
 			this.tabPage5.ResumeLayout(false);
 			this.tableLayoutPanel5.ResumeLayout(false);
 			this.tableLayoutPanel5.PerformLayout();
 			this.tableLayoutPanel3.ResumeLayout(false);
-			this.tabPage6.ResumeLayout(false);
-			this.tableLayoutPanel7.ResumeLayout(false);
-			this.tableLayoutPanel7.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -1187,5 +1222,7 @@
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
 		private System.Windows.Forms.Label label18;
 		private System.Windows.Forms.CheckBox AutoRun;
+		private System.Windows.Forms.CheckBox AtUserSuggest;
+		private System.Windows.Forms.CheckBox IsUsePicture;
 	}
 }

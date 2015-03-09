@@ -285,6 +285,7 @@
 			this.ClientSize = new System.Drawing.Size(426, 54);
 			this.ContextMenuStrip = this.contextMenuStrip1;
 			this.Controls.Add(this.panel1);
+			this.Cursor = System.Windows.Forms.Cursors.IBeam;
 			this.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -296,8 +297,6 @@
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.TopMost = true;
-			this.Activated += new System.EventHandler(this.PostText_Enter);
-			this.Deactivate += new System.EventHandler(this.PostText_Leave);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Post_FormClosing);
 			this.Load += new System.EventHandler(this.Post_Load);
 			this.Resize += new System.EventHandler(this.Post_Resize);

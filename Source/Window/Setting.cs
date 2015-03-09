@@ -71,10 +71,13 @@ namespace TweetField
 			AutoTextSplit.Checked			= ApSetting.SplitText;
 			SplitAtPoint.Checked			= ApSetting.SplitAtSpace;
 			SplitInsertNext.Checked			= ApSetting.SplitInsert_NEXT;
+			AtUserSuggest.Checked			= ApSetting.UserSuggestUsed;
+			IsUsePicture.Checked			= ApSetting.LoadPictureAtSuggest;
 			// Enable Change
 			ChangeAcc.Enabled				= ApSetting.RegulationInfoShow;
 			SplitAtPoint.Enabled			= ApSetting.SplitText;
 			SplitInsertNext.Enabled			= ApSetting.SplitText;
+			IsUsePicture.Enabled			= ApSetting.UserSuggestUsed;
 			AccountDelete.Enabled			= ( ApSetting.UsingAccountVal != -1 );
 			OK.Enabled						= ( ApSetting.UsingAccountVal != -1 );
 		}
@@ -330,6 +333,20 @@ namespace TweetField
 			else{
 				key.DeleteValue(Application.ProductName);
 			}
+		}
+
+		// UserSuggest changed
+		private void AtUserSuggest_CheckedChanged(object sender, EventArgs e)
+		{
+			ApSetting.UserSuggestUsed = AtUserSuggest.Checked;
+			// Reload
+			SettingReload();
+		}
+
+		// Use Picture
+		private void IsUsePicture_CheckedChanged(object sender, EventArgs e)
+		{
+			ApSetting.LoadPictureAtSuggest = IsUsePicture.Checked;
 		}
 
 		// Setting Save

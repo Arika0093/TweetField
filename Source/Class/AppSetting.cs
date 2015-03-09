@@ -116,6 +116,8 @@ namespace TweetField
 		public bool			HideTweetWindow;			// Hide Window after Tweet
 		public bool			HideInformation;			// Hide Window out Focus
 		public bool			Gradation;					// Is Draw Gradation
+		public bool			UserSuggestUsed;			// User suggest
+		public bool			LoadPictureAtSuggest;		// Is Get Picture
 	}
 
 	public class TwAccount

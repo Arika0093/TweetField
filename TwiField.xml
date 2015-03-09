@@ -26,4 +26,6 @@
   <HideTweetWindow>true</HideTweetWindow>
   <HideInformation>false</HideInformation>
   <Gradation>false</Gradation>
+  <UserSuggestUsed>true</UserSuggestUsed>
+  <LoadPictureAtSuggest>false</LoadPictureAtSuggest>
 </ApplicationSetting>

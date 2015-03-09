@@ -103,26 +103,6 @@ namespace TweetField
 					Top = 0;
 					break;
 			}
-			// ShortCut Post Key String
-			String PostKey = "";
-			// ShortCut Post Key String Get
-			switch(AppStg.PostKeyType){
-				case 0:
-					PostKey = "Enter";
-					break;
-				case 1:
-					PostKey = "Ctrl + Enter";
-					break;
-				case 2:
-					PostKey = "Shift + Enter";
-					break;
-				case 3:
-					PostKey = "Alt + Enter";
-					break;
-			}
-			// Set Default String
-			DefTextString = "この欄に呟く内容を入力します。右クリックでメニューを表示します。\r\n"
-				+ PostKey + "キーを押すことで呟きを投稿します。";
 			// Image Set
 			PostText.ForeColor = (Color)ClConv.ConvertFromString(AppStg.FontColor);
 			// PictureBox Size Set
@@ -153,24 +133,19 @@ namespace TweetField
 			||	( AppStg.PostKeyType == 2 && e.Shift  )					// Push Shift Key(Setting: 2)
 			||	( AppStg.PostKeyType == 3 && e.Alt  )) )				// Push Alt Key(Setting: 3)
 			{
-				// If Edit Text
-				if(PostText.Text != DefTextString){
-					// Post Text Tweet
-					bool Result = TweetPost(PostText.Text);
-					// TextColor Reset
-					PostText.ForeColor = Color.Black;
-					// if Result is false
-					if(Result == false){
-						// Not Do Default Key Function
-						e.Handled = true;
-						// end
-						return;
-					}
-					// Regulation Check
-					GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal], true);
+				// Post Text Tweet
+				bool Result = TweetPost(PostText.Text);
+				// if Result is false
+				if(Result == false){
 					// Not Do Default Key Function
-					e.SuppressKeyPress = true;
+					e.Handled = true;
+					// end
+					return;
 				}
+				// Regulation Check
+				GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal], true);
+				// Not Do Default Key Function
+				e.SuppressKeyPress = true;
 			}
 			// If Push Ctrl + V
 			else if(e.KeyCode == Keys.V && e.Control){
@@ -201,27 +176,57 @@ namespace TweetField
 				// Not Do Default Key Function
 				e.SuppressKeyPress = true;
 			}
-		}
-
-		// On Focus
-		private void PostText_Enter(object sender, EventArgs e)
-		{
-			// text = default
-			if(PostText.Text == DefTextString)
-			{
-				PostText.ForeColor	= SystemColors.WindowText;
-				PostText.Text		= "";
-			}
-		}
-
-		// Out Focus
-		private void PostText_Leave(object sender, EventArgs e)
-		{
-			// text = empty
-			if (PostText.Text == "")
-			{
-				PostText.ForeColor	= SystemColors.ControlDark;
-				PostText.Text		= DefTextString;
+			// If push @
+			else if(e.KeyCode == Keys.Oemtilde && AppStg.UserSuggestUsed){
+				string NowSr = PostText.Text;
+				// Service Instance
+				TwitterService TwitServ = new TwitterService(
+					AppStg.TwitterAccs[AppStg.UsingAccountVal].ConsKey,
+					AppStg.TwitterAccs[AppStg.UsingAccountVal].ConsSecret
+				);
+				// OAuth
+				TwitServ.AuthenticateWith(
+					AppStg.TwitterAccs[AppStg.UsingAccountVal].AccessToken,
+					AppStg.TwitterAccs[AppStg.UsingAccountVal].AccessSecret
+				);
+				// If empty
+				if(FollowersWho != AppStg.TwitterAccs[AppStg.UsingAccountVal].ShowName || Followers.Count == 0){
+					// Clear
+					Followers.Clear();
+					// Get Follower
+					var Ops = new ListFollowersOptions();
+					var Lst = TwitServ.ListFollowers(Ops);
+					while(Lst != null && Lst.NextCursor != null){
+						foreach(var acc in Lst){
+							Followers.Add(acc);
+						}
+						if(Lst.NextCursor != null && Lst.NextCursor != 0){
+							Ops.Cursor = Lst.NextCursor;
+							Lst = TwitServ.ListFollowers(Ops);
+						} else {
+							break;
+						}
+					}
+					FollowersWho = AppStg.TwitterAccs[AppStg.UsingAccountVal].ShowName;
+				}
+				// Sort
+				Followers.Sort(delegate(TwitterUser a, TwitterUser b)
+					{return string.Compare(a.ScreenName, b.ScreenName);});
+				// Suggest Box Show
+				UserSuggest Us = new UserSuggest(Followers.ToArray(),
+					RectangleToScreen(new Rectangle( PostText.Location, PostText.Size)),
+					AppStg.LoadPictureAtSuggest);
+				Us.ShowDialog(this);
+				// Apply
+				PostText.Text = (NowSr=="" && Us.SelectedCount>=2 ? "." : "")
+					+ NowSr + (Us.SelectedCount<=0 ? "@" : "" );
+				for(int i=0; i<Us.SelectedCount; i++){
+					PostText.Text = PostText.Text + "@" + Us.Selected[i].ScreenName + " ";
+				}
+				PostText.Select(PostText.Text.Length, 0);
+				// Not Do Default Key Function
+				e.Handled = true;
+				e.SuppressKeyPress = true;
 			}
 		}
 
@@ -506,10 +511,6 @@ namespace TweetField
 		// Text Length
 		private int StringLengthBuf(String s){
 			int Result = s.Length;
-			if(s == DefTextString){
-				// default
-				return 0;
-			}
 			foreach(var Str in AppStg.HashTagList){
 				Result += Str.Length + 1;
 			}
@@ -991,12 +992,13 @@ namespace TweetField
 		private String _PictPath = "";
 		private int PictureType;
 
-		// TextBox Default String
-		private String DefTextString;
-
 		// Before Post(x10)
 		private String[] BeforeTweets = new String[10];
 		private int LastAddPlace = 0;
+
+		// All followers
+		private string FollowersWho;
+		private List<TwitterUser> Followers = new List<TwitterUser>();
 
 		// HotKey
 		private HotKey PostShow;
