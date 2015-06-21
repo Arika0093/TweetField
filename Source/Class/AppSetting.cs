@@ -118,6 +118,7 @@ namespace TweetField
 		public bool			Gradation;					// Is Draw Gradation
 		public bool			UserSuggestUsed;			// User suggest
 		public bool			LoadPictureAtSuggest;		// Is Get Picture
+		public bool			AutoRun;					// AutoRunCheck
 	}
 
 	public class TwAccount

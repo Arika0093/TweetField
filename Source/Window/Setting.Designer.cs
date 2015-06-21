@@ -85,6 +85,7 @@
 			this.label10 = new System.Windows.Forms.Label();
 			this.tabPage6 = new System.Windows.Forms.TabPage();
 			this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+			this.IsUsePicture = new System.Windows.Forms.CheckBox();
 			this.label18 = new System.Windows.Forms.Label();
 			this.AutoRun = new System.Windows.Forms.CheckBox();
 			this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -100,7 +101,6 @@
 			this.label9 = new System.Windows.Forms.Label();
 			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-			this.IsUsePicture = new System.Windows.Forms.CheckBox();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -885,6 +885,20 @@
 			this.tableLayoutPanel7.Size = new System.Drawing.Size(517, 268);
 			this.tableLayoutPanel7.TabIndex = 2;
 			// 
+			// IsUsePicture
+			// 
+			this.IsUsePicture.AutoSize = true;
+			this.tableLayoutPanel7.SetColumnSpan(this.IsUsePicture, 2);
+			this.IsUsePicture.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.IsUsePicture.Location = new System.Drawing.Point(6, 68);
+			this.IsUsePicture.Name = "IsUsePicture";
+			this.IsUsePicture.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+			this.IsUsePicture.Size = new System.Drawing.Size(505, 20);
+			this.IsUsePicture.TabIndex = 3;
+			this.IsUsePicture.Text = "ユーザー候補表示に画像を利用する(とても遅くなります)";
+			this.IsUsePicture.UseVisualStyleBackColor = true;
+			this.IsUsePicture.CheckedChanged += new System.EventHandler(this.IsUsePicture_CheckedChanged);
+			// 
 			// label18
 			// 
 			this.label18.AutoSize = true;
@@ -1096,20 +1110,6 @@
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
 			this.tableLayoutPanel3.Size = new System.Drawing.Size(531, 344);
 			this.tableLayoutPanel3.TabIndex = 1;
-			// 
-			// IsUsePicture
-			// 
-			this.IsUsePicture.AutoSize = true;
-			this.tableLayoutPanel7.SetColumnSpan(this.IsUsePicture, 2);
-			this.IsUsePicture.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.IsUsePicture.Location = new System.Drawing.Point(6, 68);
-			this.IsUsePicture.Name = "IsUsePicture";
-			this.IsUsePicture.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-			this.IsUsePicture.Size = new System.Drawing.Size(505, 20);
-			this.IsUsePicture.TabIndex = 3;
-			this.IsUsePicture.Text = "ユーザー候補表示に画像を利用する(とても遅くなります)";
-			this.IsUsePicture.UseVisualStyleBackColor = true;
-			this.IsUsePicture.CheckedChanged += new System.EventHandler(this.IsUsePicture_CheckedChanged);
 			// 
 			// Setting
 			// 

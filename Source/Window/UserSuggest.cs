@@ -100,7 +100,7 @@ namespace TweetField
 		private void SearchBox_TextChanged(object sender, EventArgs e)
 		{
 			// Select Item change
-			if(SearchBox.Text != ""){
+			if(SearchBox.Text != "" && UserList.Items.Count > 0) {
 				var It = UserList.FindItemWithText(SearchBox.Text, true, 0, true);
 				if(It != null){
 					UserList_AllItemUnselect();
@@ -127,6 +127,9 @@ namespace TweetField
 			}
 			// Esc / Backspace
 			else if(e.KeyCode == Keys.Escape){
+				Close();
+			}
+			else if(e.KeyCode == Keys.Back && SearchBox.Text.Length == 0){
 				Close();
 			}
 		}

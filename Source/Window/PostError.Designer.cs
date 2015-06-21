@@ -68,7 +68,7 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(486, 366);
-			this.tableLayoutPanel1.TabIndex = 1;
+			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// button3
 			// 
@@ -77,7 +77,7 @@
 			this.button3.Location = new System.Drawing.Point(360, 329);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(123, 34);
-			this.button3.TabIndex = 8;
+			this.button3.TabIndex = 6;
 			this.button3.Text = "消去";
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -89,7 +89,7 @@
 			this.button2.Location = new System.Drawing.Point(232, 329);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(122, 34);
-			this.button2.TabIndex = 7;
+			this.button2.TabIndex = 5;
 			this.button2.Text = "編集欄に戻す";
 			this.button2.UseVisualStyleBackColor = true;
 			this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -104,7 +104,7 @@
 			this.textBox2.ReadOnly = true;
 			this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
 			this.textBox2.Size = new System.Drawing.Size(379, 108);
-			this.textBox2.TabIndex = 5;
+			this.textBox2.TabIndex = 8;
 			// 
 			// label4
 			// 
@@ -167,7 +167,7 @@
 			this.textBox1.ReadOnly = true;
 			this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
 			this.textBox1.Size = new System.Drawing.Size(379, 134);
-			this.textBox1.TabIndex = 4;
+			this.textBox1.TabIndex = 7;
 			// 
 			// button1
 			// 
@@ -175,7 +175,7 @@
 			this.button1.Location = new System.Drawing.Point(104, 329);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(122, 34);
-			this.button1.TabIndex = 6;
+			this.button1.TabIndex = 4;
 			this.button1.Text = "再試行";
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);

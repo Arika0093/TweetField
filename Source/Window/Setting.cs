@@ -73,6 +73,7 @@ namespace TweetField
 			SplitInsertNext.Checked			= ApSetting.SplitInsert_NEXT;
 			AtUserSuggest.Checked			= ApSetting.UserSuggestUsed;
 			IsUsePicture.Checked			= ApSetting.LoadPictureAtSuggest;
+			AutoRun.Checked					= ApSetting.AutoRun;
 			// Enable Change
 			ChangeAcc.Enabled				= ApSetting.RegulationInfoShow;
 			SplitAtPoint.Enabled			= ApSetting.SplitText;
@@ -323,16 +324,7 @@ namespace TweetField
 		// Autorun setting changed
 		private void AutoRun_CheckedChanged(object sender, EventArgs e)
 		{
-			var key = Registry.CurrentUser.CreateSubKey(
-				@"Software\Microsoft\Windows\CurrentVersion\Run");
-			// if true, setting
-			if(AutoRun.Checked == true){
-				key.SetValue(Application.ProductName, Application.ExecutablePath);
-			}
-			// else, delete key
-			else{
-				key.DeleteValue(Application.ProductName);
-			}
+			ApSetting.AutoRun = AutoRun.Checked;
 		}
 
 		// UserSuggest changed
@@ -354,6 +346,17 @@ namespace TweetField
 		{
 			// Save
 			AppSettingAccess.SaveSetting(ApSetting);
+			// Autorun Setting
+			var key = Registry.CurrentUser.CreateSubKey(
+				@"Software\Microsoft\Windows\CurrentVersion\Run");
+			// if true, setting
+			if(AutoRun.Checked == true) {
+				key.SetValue(Application.ProductName, Application.ExecutablePath);
+			}
+			// else, delete key
+			else {
+				key.DeleteValue(Application.ProductName);
+			}
 			// Result OK
 			DialogResult = DialogResult.OK;
 			// Close

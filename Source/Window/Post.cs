@@ -121,11 +121,109 @@ namespace TweetField
 		private void PostText_KeyDown(object sender, KeyEventArgs e)
 		{
 			// Push Check
+			// Ctrl + Q
 			if(e.KeyCode == Keys.Q && e.Control){
 				UserIcon_Click(null, null);
 				// Not Do Default Key Function
 				e.SuppressKeyPress = true;
 			}
+			// Ctrl + S
+			else if(e.KeyCode == Keys.S && e.Control) {
+				スクリーンショットの投稿SToolStripMenuItem_Click(null, null);
+				// Not Do Default Key Function
+				e.SuppressKeyPress = true;
+			}
+			// Ctrl + V
+			else if(e.KeyCode == Keys.V && e.Control) {
+				// If Text Exist at Clipboard
+				if(Clipboard.ContainsText()) {
+					// File Exist Check
+					if(File.Exists(Clipboard.GetText())) {
+						// Set Image
+						PicturePath = Clipboard.GetText();
+					}
+					else {
+						// Paste Text
+						PostText.Paste(Clipboard.GetText());
+					}
+				}
+				// Else If Image Exist at Clipboard
+				else if(Clipboard.ContainsImage()) {
+					// Paste Image
+					クリップボードの画像を添付BToolStripMenuItem_Click(null, null);
+				}
+				// Not Do Default Key Function
+				e.SuppressKeyPress = true;
+			}
+			// Ctrl + A
+			else if(e.KeyCode == Keys.A && e.Control) {
+				// All Select
+				PostText.SelectAll();
+				// Not Do Default Key Function
+				e.SuppressKeyPress = true;
+			}
+			// Escape
+			else if(e.KeyCode == Keys.Escape) {
+				// Form Close
+				Hide();
+				// Not Do Default Key Function
+				e.SuppressKeyPress = true;
+			}
+			// @(Atsign)
+			else if(e.KeyCode == Keys.Oemtilde && AppStg.UserSuggestUsed) {
+				string NowSr = PostText.Text;
+				// Service Instance
+				TwitterService TwitServ = new TwitterService(
+					AppStg.TwitterAccs[AppStg.UsingAccountVal].ConsKey,
+					AppStg.TwitterAccs[AppStg.UsingAccountVal].ConsSecret
+				);
+				// OAuth
+				TwitServ.AuthenticateWith(
+					AppStg.TwitterAccs[AppStg.UsingAccountVal].AccessToken,
+					AppStg.TwitterAccs[AppStg.UsingAccountVal].AccessSecret
+				);
+				// If empty
+				if(FollowersWho != AppStg.TwitterAccs[AppStg.UsingAccountVal].ShowName || Followers.Count == 0) {
+					// Clear
+					Followers.Clear();
+					// Get Follower
+					var Ops = new ListFollowersOptions();
+					var Lst = TwitServ.ListFollowers(Ops);
+					while(Lst != null && Lst.NextCursor != null) {
+						foreach(var acc in Lst) {
+							Followers.Add(acc);
+						}
+						if(Lst.NextCursor != null && Lst.NextCursor != 0) {
+							Ops.Cursor = Lst.NextCursor;
+							Lst = TwitServ.ListFollowers(Ops);
+						}
+						else {
+							break;
+						}
+					}
+					FollowersWho = AppStg.TwitterAccs[AppStg.UsingAccountVal].ShowName;
+				}
+				// Sort
+				Followers.Sort(delegate(TwitterUser a, TwitterUser b) {
+						return string.Compare(a.ScreenName, b.ScreenName);
+					});
+				// Suggest Box Show
+				UserSuggest Us = new UserSuggest(Followers.ToArray(),
+					RectangleToScreen(new Rectangle(PostText.Location, PostText.Size)),
+					AppStg.LoadPictureAtSuggest);
+				Us.ShowDialog(this);
+				// Apply
+				PostText.Text = (NowSr == "" && Us.SelectedCount >= 2 ? "." : "")
+					+ NowSr + (Us.SelectedCount <= 0 ? "@" : "");
+				for(int i = 0; i < Us.SelectedCount; i++) {
+					PostText.Text = PostText.Text + "@" + Us.Selected[i].ScreenName + " ";
+				}
+				PostText.Select(PostText.Text.Length, 0);
+				// Not Do Default Key Function
+				e.Handled = true;
+				e.SuppressKeyPress = true;
+			}
+			// Enter
 			else if(
 				( e.KeyCode == Keys.Enter )								// Push Enter Key
 			&&(	( AppStg.PostKeyType == 0 && e.KeyData == Keys.Enter)	// Push Enter Only
@@ -145,87 +243,6 @@ namespace TweetField
 				// Regulation Check
 				GetRegulationNum(AppStg.TwitterAccs[AppStg.UsingAccountVal], true);
 				// Not Do Default Key Function
-				e.SuppressKeyPress = true;
-			}
-			// If Push Ctrl + V
-			else if(e.KeyCode == Keys.V && e.Control){
-				// If Text Exist at Clipboard
-				if(Clipboard.ContainsText()){
-					// Paste Text
-					PostText.Paste(Clipboard.GetText());
-				}
-				// Else If Image Exist at Clipboard
-				else if(Clipboard.ContainsImage()){
-					// Paste Image
-					クリップボードの画像を添付BToolStripMenuItem_Click(null, null);
-				}
-				// Not Do Default Key Function
-				e.SuppressKeyPress = true;
-			}
-			// If Push Ctrl + A
-			else if(e.KeyCode == Keys.A && e.Control){
-				// All Select
-				PostText.SelectAll();
-				// Not Do Default Key Function
-				e.SuppressKeyPress = true;
-			}
-			// If Push Escape Key
-			else if(e.KeyCode == Keys.Escape){
-				// Form Close
-				Hide();
-				// Not Do Default Key Function
-				e.SuppressKeyPress = true;
-			}
-			// If push @
-			else if(e.KeyCode == Keys.Oemtilde && AppStg.UserSuggestUsed){
-				string NowSr = PostText.Text;
-				// Service Instance
-				TwitterService TwitServ = new TwitterService(
-					AppStg.TwitterAccs[AppStg.UsingAccountVal].ConsKey,
-					AppStg.TwitterAccs[AppStg.UsingAccountVal].ConsSecret
-				);
-				// OAuth
-				TwitServ.AuthenticateWith(
-					AppStg.TwitterAccs[AppStg.UsingAccountVal].AccessToken,
-					AppStg.TwitterAccs[AppStg.UsingAccountVal].AccessSecret
-				);
-				// If empty
-				if(FollowersWho != AppStg.TwitterAccs[AppStg.UsingAccountVal].ShowName || Followers.Count == 0){
-					// Clear
-					Followers.Clear();
-					// Get Follower
-					var Ops = new ListFollowersOptions();
-					var Lst = TwitServ.ListFollowers(Ops);
-					while(Lst != null && Lst.NextCursor != null){
-						foreach(var acc in Lst){
-							Followers.Add(acc);
-						}
-						if(Lst.NextCursor != null && Lst.NextCursor != 0){
-							Ops.Cursor = Lst.NextCursor;
-							Lst = TwitServ.ListFollowers(Ops);
-						} else {
-							break;
-						}
-					}
-					FollowersWho = AppStg.TwitterAccs[AppStg.UsingAccountVal].ShowName;
-				}
-				// Sort
-				Followers.Sort(delegate(TwitterUser a, TwitterUser b)
-					{return string.Compare(a.ScreenName, b.ScreenName);});
-				// Suggest Box Show
-				UserSuggest Us = new UserSuggest(Followers.ToArray(),
-					RectangleToScreen(new Rectangle( PostText.Location, PostText.Size)),
-					AppStg.LoadPictureAtSuggest);
-				Us.ShowDialog(this);
-				// Apply
-				PostText.Text = (NowSr=="" && Us.SelectedCount>=2 ? "." : "")
-					+ NowSr + (Us.SelectedCount<=0 ? "@" : "" );
-				for(int i=0; i<Us.SelectedCount; i++){
-					PostText.Text = PostText.Text + "@" + Us.Selected[i].ScreenName + " ";
-				}
-				PostText.Select(PostText.Text.Length, 0);
-				// Not Do Default Key Function
-				e.Handled = true;
 				e.SuppressKeyPress = true;
 			}
 		}
