@@ -179,28 +179,29 @@
 			// 投稿PToolStripMenuItem
 			// 
 			this.投稿PToolStripMenuItem.Name = "投稿PToolStripMenuItem";
-			this.投稿PToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+			this.投稿PToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
 			this.投稿PToolStripMenuItem.Text = "画像を添付する(&P)...";
 			this.投稿PToolStripMenuItem.Click += new System.EventHandler(this.投稿PToolStripMenuItem_Click);
 			// 
 			// クリップボードの画像を添付BToolStripMenuItem
 			// 
 			this.クリップボードの画像を添付BToolStripMenuItem.Name = "クリップボードの画像を添付BToolStripMenuItem";
-			this.クリップボードの画像を添付BToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+			this.クリップボードの画像を添付BToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
 			this.クリップボードの画像を添付BToolStripMenuItem.Text = "クリップボードの画像を添付(&B)";
 			this.クリップボードの画像を添付BToolStripMenuItem.Click += new System.EventHandler(this.クリップボードの画像を添付BToolStripMenuItem_Click);
 			// 
 			// スクリーンショットの投稿SToolStripMenuItem
 			// 
 			this.スクリーンショットの投稿SToolStripMenuItem.Name = "スクリーンショットの投稿SToolStripMenuItem";
-			this.スクリーンショットの投稿SToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+			this.スクリーンショットの投稿SToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+			this.スクリーンショットの投稿SToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
 			this.スクリーンショットの投稿SToolStripMenuItem.Text = "スクリーンショットの投稿(&S)...";
 			this.スクリーンショットの投稿SToolStripMenuItem.Click += new System.EventHandler(this.スクリーンショットの投稿SToolStripMenuItem_Click);
 			// 
 			// 添付した画像を確認するCToolStripMenuItem
 			// 
 			this.添付した画像を確認するCToolStripMenuItem.Name = "添付した画像を確認するCToolStripMenuItem";
-			this.添付した画像を確認するCToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+			this.添付した画像を確認するCToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
 			this.添付した画像を確認するCToolStripMenuItem.Text = "添付した画像を確認する(&C)...";
 			this.添付した画像を確認するCToolStripMenuItem.Visible = false;
 			this.添付した画像を確認するCToolStripMenuItem.Click += new System.EventHandler(this.添付した画像を確認するCToolStripMenuItem_Click);
@@ -208,8 +209,8 @@
 			// 添付画像を破棄するDToolStripMenuItem
 			// 
 			this.添付画像を破棄するDToolStripMenuItem.Name = "添付画像を破棄するDToolStripMenuItem";
-			this.添付画像を破棄するDToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
-			this.添付画像を破棄するDToolStripMenuItem.Text = "添付画像を破棄する(&D)";
+			this.添付画像を破棄するDToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+			this.添付画像を破棄するDToolStripMenuItem.Text = "添付画像を全て破棄する(&D)";
 			this.添付画像を破棄するDToolStripMenuItem.Visible = false;
 			this.添付画像を破棄するDToolStripMenuItem.Click += new System.EventHandler(this.添付画像を破棄するDToolStripMenuItem_Click);
 			// 

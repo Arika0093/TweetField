@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<ApplicationSetting xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <UsingAccountVal>0</UsingAccountVal>
+  <TwitterAccs>
+    <TwAccount>
+      <UserName>arik_a_</UserName>
+      <ShowName>ありか</ShowName>
+      <ConsKey>iP9Fy2KPJCCdL0RdykFsg</ConsKey>
+      <ConsSecret>OAphTSn77RXQ1CgrJTs6JukmOeJYYIqNamjd9F09s</ConsSecret>
+      <AccessToken>545149812-2M95NMJBvqnYhFoN0W4RnTrB40CHwOMIxTZgj30j</AccessToken>
+      <AccessSecret>4mLFxA41O3EGf6kyehukTnLbKMxRAEAKovJ7K64scWmDI</AccessSecret>
+    </TwAccount>
+    <TwAccount>
+      <UserName>arika_friends</UserName>
+      <ShowName>身内用</ShowName>
+      <ConsKey>iP9Fy2KPJCCdL0RdykFsg</ConsKey>
+      <ConsSecret>OAphTSn77RXQ1CgrJTs6JukmOeJYYIqNamjd9F09s</ConsSecret>
+      <AccessToken>143856759-t7lopywBWATgoi4BZjm8RTeURVDhcKNShmyZasS3</AccessToken>
+      <AccessSecret>y599PzlhAlH0M5lEunza5dTGQt0IQs1xRjnglRG2UH2sD</AccessSecret>
+    </TwAccount>
+    <TwAccount>
+      <UserName>eclair_ptr</UserName>
+      <ShowName>ecl</ShowName>
+      <ConsKey>iP9Fy2KPJCCdL0RdykFsg</ConsKey>
+      <ConsSecret>OAphTSn77RXQ1CgrJTs6JukmOeJYYIqNamjd9F09s</ConsSecret>
+      <AccessToken>3190932186-wq2vvdTkqWh4k9g1W0S845Xf5KziBLFfOpqjADq</AccessToken>
+      <AccessSecret>2Yr6kWaPDnLYDIqqp68cUMO3QQznd6AoRe1HtUcv5P7A7</AccessSecret>
+    </TwAccount>
+  </TwitterAccs>
+  <CopyPasteWords>
+    <CopyWords>
+      <Text>%Select%人「%Select%」</Text>
+      <ShortText>○○人「○○」</ShortText>
+      <IsMenuShow>true</IsMenuShow>
+      <IsRandomize>false</IsRandomize>
+    </CopyWords>
+  </CopyPasteWords>
+  <HashTagList />
+  <HashTagHistory />
+  <SysFontName>メイリオ</SysFontName>
+  <SysFontSize>9.75</SysFontSize>
+  <ConsumerID />
+  <ClientSecret />
+  <InformationText>投稿: #ShowName [@#UserID] +Information</InformationText>
+  <InformationRegu>[残: #RegulationNum / Reset: #RegulationResetLongTime]</InformationRegu>
+  <InformationPict>[画像: #PicturePath]</InformationPict>
+  <WindowSize>
+    <Width>478</Width>
+    <Height>68</Height>
+  </WindowSize>
+  <ShowKeyChar>Space</ShowKeyChar>
+  <ShowModKey>2</ShowModKey>
+  <ShowWindowPosition>0</ShowWindowPosition>
+  <PostKeyType>0</PostKeyType>
+  <FontColor>Black</FontColor>
+  <FooterColor>DodgerBlue</FooterColor>
+  <StringColor>White</StringColor>
+  <DualPost>false</DualPost>
+  <NoResetString>false</NoResetString>
+  <RegulationInfoShow>true</RegulationInfoShow>
+  <ChangeAccOnRegulation>false</ChangeAccOnRegulation>
+  <IconShowed>true</IconShowed>
+  <SplitText>false</SplitText>
+  <SplitAtSpace>true</SplitAtSpace>
+  <SplitInsert_NEXT>false</SplitInsert_NEXT>
+  <HideTweetWindow>true</HideTweetWindow>
+  <HideInformation>false</HideInformation>
+  <Gradation>false</Gradation>
+  <UserSuggestUsed>true</UserSuggestUsed>
+  <LoadPictureAtSuggest>false</LoadPictureAtSuggest>
+  <AutoRun>false</AutoRun>
+</ApplicationSetting>

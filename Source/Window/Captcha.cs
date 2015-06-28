@@ -20,10 +20,12 @@ namespace TweetField
 			InitializeComponent();
 		}
 
-		public Rectangle GetCaptcha()
+		public Rectangle GetCaptcha(Form Fm)
 		{
+			// Hide Form
+			Fm.Hide();
 			// Call Dialog
-			ShowDialog();
+			ShowDialog(Fm);
 			// Set Rectangle
 			CapTriangle = new Rectangle(
 				Math.Min(CapStart.X-1,CapStart.X+CapLocal.X-1), 

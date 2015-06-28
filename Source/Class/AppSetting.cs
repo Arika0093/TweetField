@@ -42,6 +42,7 @@ namespace TweetField
 			InformationText		= "投稿: #ShowName [@#UserID] +Information";
 			InformationRegu		= "[残: #RegulationNum / Reset: #RegulationResetLongTime]";
 			InformationPict		= "[画像: #PicturePath]";
+			InformationSomePicts= "{0}枚添付中";
 			// Basic
 			ShowKeyChar			= Keys.None;				// Show/Hide Key
 			ShowModKey			= (int)MOD_KEY.CONTROL;		// Mod Key
@@ -97,6 +98,7 @@ namespace TweetField
 		public String		InformationText;			// Information Text Format @ PictureControl
 		public String		InformationRegu;			// Information Text(Regulation Ver)
 		public String		InformationPict;			// Information Text(Picture Ver)
+		public String		InformationSomePicts;		// Information Text(Some Picture Ver)
 		public Size			WindowSize;					// PostForm Window Size
 		public Keys			ShowKeyChar;				// Show/Hide Key
 		public int			ShowModKey;					// Key Option

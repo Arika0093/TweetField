@@ -127,12 +127,6 @@ namespace TweetField
 				// Not Do Default Key Function
 				e.SuppressKeyPress = true;
 			}
-			// Ctrl + S
-			else if(e.KeyCode == Keys.S && e.Control) {
-				スクリーンショットの投稿SToolStripMenuItem_Click(null, null);
-				// Not Do Default Key Function
-				e.SuppressKeyPress = true;
-			}
 			// Ctrl + V
 			else if(e.KeyCode == Keys.V && e.Control) {
 				// If Text Exist at Clipboard
@@ -140,7 +134,10 @@ namespace TweetField
 					// File Exist Check
 					if(File.Exists(Clipboard.GetText())) {
 						// Set Image
-						PicturePath = Clipboard.GetText();
+						Pictures += Clipboard.GetText();
+						添付画像を破棄するDToolStripMenuItem.Visible = (Pictures.Size != 0);
+						添付した画像を確認するCToolStripMenuItem.Visible = (Pictures.Size != 0);
+						pictureBox1.Refresh();
 					}
 					else {
 						// Paste Text
@@ -393,18 +390,24 @@ namespace TweetField
 			OpenFileDialog ofd = new OpenFileDialog();
 			// ---------------------------------------------
 			// Set Default File
-			ofd.FileName = _PictPath;
+			ofd.FileName = Pictures.GetPath(Pictures.Size - 1);
 			// Set Extensions
 			ofd.Filter = "画像ファイル|*.jpg;*.jpeg;*.png;*.bmp;*.gif|すべてのファイル(*.*)|*.*";
 			// Set Other Setting
 			ofd.Title = "投稿する画像を選択";
 			ofd.AutoUpgradeEnabled = true;
 			ofd.RestoreDirectory = true;
+			ofd.Multiselect = true;
 			// Open Dialog
 			if (ofd.ShowDialog() == DialogResult.OK)
 			{
-				// Set FilePath
-				PicturePath = ofd.FileName;
+				foreach(var path in ofd.FileNames) {
+					// Set FilePath
+					Pictures += path;
+				}
+				添付画像を破棄するDToolStripMenuItem.Visible = (Pictures.Size != 0);
+				添付した画像を確認するCToolStripMenuItem.Visible = (Pictures.Size != 0);
+				pictureBox1.Refresh();
 			}
 		}
 
@@ -416,29 +419,24 @@ namespace TweetField
 			// Hide TweetWindow
 			Hide();
 			// Get Rect
-			Rectangle ScRect = cpWindow.GetCaptcha();
+			Rectangle ScRect = cpWindow.GetCaptcha(this);
 			// if Minimam Size
-			if(ScRect.Width == 0){
-				// Show & Active
-				Show();
-				Activate();
-				// End
-				return;
+			if(ScRect.Width != 0){
+				// Create Bitmap
+				Bitmap Bmp = new Bitmap(ScRect.Width, ScRect.Height);
+				// Create Graphic
+				Graphics g = Graphics.FromImage(Bmp);
+				// Get ScreenShot
+				g.CopyFromScreen(ScRect.Location, new Point(0, 0), ScRect.Size);
+				// Free
+				g.Dispose();
+				// Set ClipBoard
+				Clipboard.SetImage(Bmp);
+				// ClipBoard Picture Post Function
+				クリップボードの画像を添付BToolStripMenuItem_Click(sender, e);
+				// Add FilePath
+				Pictures.SetImageType(Pictures.Size - 1, 1);
 			}
-			// Create Bitmap
-			Bitmap Bmp = new Bitmap(ScRect.Width, ScRect.Height);
-			// Create Graphic
-			Graphics g = Graphics.FromImage(Bmp);
-			// Get ScreenShot
-			g.CopyFromScreen(ScRect.Location, new Point(0, 0), ScRect.Size);
-			// Free
-			g.Dispose();
-			// Set ClipBoard
-			Clipboard.SetImage(Bmp);
-			// ClipBoard Picture Post Function
-			クリップボードの画像を添付BToolStripMenuItem_Click(sender, e);
-			// Add FilePath
-			PictureType = 1;
 			// Show & Active
 			Show();
 			Activate();
@@ -461,9 +459,12 @@ namespace TweetField
 			// Save
 			Clipboard.GetImage().Save(TempPath);
 			// Add FilePath
-			PicturePath = TempPath;
-			PictureType = 2;
+			Pictures += TempPath;
+			Pictures.SetImageType(Pictures.Size - 1, 1);
+			pictureBox1.Refresh();
 			// Refresh
+			添付画像を破棄するDToolStripMenuItem.Visible = (Pictures.Size != 0);
+			添付した画像を確認するCToolStripMenuItem.Visible = (Pictures.Size != 0);
 			Refresh();
 		}
 
@@ -471,7 +472,7 @@ namespace TweetField
 		private void 添付した画像を確認するCToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			// Create Instance
-			var CheckForm = new PictureCheck(_PictPath);
+			var CheckForm = new PictureCheck(Pictures);
 			// Show
 			CheckForm.ShowDialog();
 		}
@@ -479,7 +480,10 @@ namespace TweetField
 		// Delete SelectedPicture
 		private void 添付画像を破棄するDToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			PicturePath = String.Empty;
+			Pictures.Clear();
+			添付画像を破棄するDToolStripMenuItem.Visible = (Pictures.Size != 0);
+			添付した画像を確認するCToolStripMenuItem.Visible = (Pictures.Size != 0);
+			Refresh();
 		}
 
 		// Open the Config Dialog
@@ -527,7 +531,11 @@ namespace TweetField
 
 		// Text Length
 		private int StringLengthBuf(String s){
+			const int Url = 23;
 			int Result = s.Length;
+			// Image exist
+			Result += (Pictures.Size != 0 ? Url + 1 : 0);
+			// Hash Tag
 			foreach(var Str in AppStg.HashTagList){
 				Result += Str.Length + 1;
 			}
@@ -536,12 +544,12 @@ namespace TweetField
 		}
 
 		// Post Tweet
-		private bool TweetPost(String s)
+		private bool TweetPost(String Posts)
 		{
 			// Back Up
-			String BackUpStr = s;
+			String BackUpStr = Posts;
 			// is Empty
-			if ((PicturePath == "" && String.IsNullOrWhiteSpace(s))){
+			if (String.IsNullOrWhiteSpace(Posts)){
 				// Refresh
 				PostText.Refresh();
 				// false
@@ -554,10 +562,10 @@ namespace TweetField
 			// HashTag Add
 			foreach(var Tag in AppStg.HashTagList){
 				// Add
-				s += "‌" + Tag;
+				Posts += "‌" + Tag;
 			}
 			// String Add Error
-			if(PicturePath == "" && !StringAddSpace(ref s)){
+			if(Pictures.Size <= 0 && !StringAddSpace(ref Posts)) {
 				// Message
 				return PostErrorMessageShow(BackUpStr, "その文字列は既に投稿されています．\r\n"+
 					"このエラーを回避するためには，以下の対策をお取り下さい．\r\n" + 
@@ -566,13 +574,13 @@ namespace TweetField
 					"・10ツイート以内に同じツイートをしない");
 			}
 			// if Lenght is over 140
-			if(StringLengthBuf(s) > 140){
+			if(StringLengthBuf(Posts) > 140){
 				if(AppStg.SplitText){
-					return TweetLongPost(s);
+					return TweetLongPost(Posts);
 				} else {
 					// Message
 					return PostErrorMessageShow(BackUpStr, "文字数が超過しています[文字数: " +
-						StringLengthBuf(s).ToString() + "]．\r\n" +
+						StringLengthBuf(Posts).ToString() + "]．\r\n" +
 						"規制回避のためのスペース追加で超過した可能性があります．また，分割連投オプションで回避できる場合があります．");
 				}
 			}
@@ -589,27 +597,39 @@ namespace TweetField
 			// GetTweet
 			TwitterStatus TwiStatus;
 			// IF not Picture Tweet
-			if(PicturePath == ""){
+			if(Pictures.Size <= 0) {
 				// Send Tweet
-				TwiStatus = TwitServ.SendTweet(new SendTweetOptions { Status = s });
+				TwiStatus = TwitServ.SendTweet(new SendTweetOptions { Status = Posts });
 			}
 			// If Picture Tweet
 			else{
-				var stream = new FileStream(_PictPath, FileMode.Open);
-				SendTweetWithMediaOptions opt = new SendTweetWithMediaOptions();
-				opt.Status = s;
-				opt.Images = new Dictionary<string, Stream> { { "image", stream } };
+				var opt = new SendTweetOptions();
+				var dir = new List<String>();
+				for(int i = 0; i < Pictures.Size; i++) {
+					// open
+					var upopt = new UploadMediaOptions();
+					upopt.Media = new MediaFile();
+					upopt.Media.Content = new FileStream(Pictures.GetPath(i), FileMode.Open);
+					upopt.Media.FileName = Pictures.GetPath(i);
+					dir.Add(TwitServ.UploadMedia(upopt).Media_Id);
+				}
+				opt.Status = Posts;
+				opt.MediaIds = dir;
 				// Send Tweet
-				TwiStatus = TwitServ.SendTweetWithMedia(opt);
+				TwiStatus = TwitServ.SendTweet(opt);
 				// If no Reset Flag
 				if(AppStg.NoResetString == false){
-					// If Temp File
-					if(PictureType >= 1){
-						// File Delete
-						File.Delete(_PictPath);
+					// remove
+					for(int i = 0; i < Pictures.Size; i++) {
+						// If Temp File
+						if(Pictures.GetImageType(i) >= 1) {
+							// File Delete
+							File.Delete(Pictures.GetPath(i));
+						}
 					}
-					// Picture reset
-					PicturePath = "";
+					Pictures.Clear();
+					添付画像を破棄するDToolStripMenuItem.Visible = false;
+					添付した画像を確認するCToolStripMenuItem.Visible = false;
 				}
 			}
 			// if ResetTime over
@@ -632,12 +652,12 @@ namespace TweetField
 				&& Regu != null
 				&& Regu <= 0){
 				// Error Show and RePost
-				return !AccountChange(BackUpStr) && TweetPost(s);
+				return !AccountChange(BackUpStr) && TweetPost(Posts);
 			}
 			// else if Tweet is NULL
 			else{
 				// Error Show
-				return PostErrorMessageShow(s);
+				return PostErrorMessageShow(Posts);
 			}
 		}
 
@@ -827,7 +847,7 @@ namespace TweetField
 			// Return String
 			String Result = AppStg.InformationText;
 			// If add Picture
-			if(PicturePath.Length != 0){
+			if(Pictures.Size != 0) {
 				// Add Picture Name
 				Result = Result.Replace("+Information", AppStg.InformationPict);
 				Result = Result.Replace("+PictureInfo", AppStg.InformationPict);
@@ -855,8 +875,14 @@ namespace TweetField
 				(PostRstTime != null ? PostRstTime.Value.ToLocalTime().ToShortDateString(): "----"));
 			Result = Result.Replace("#RegulationResetDateAndTime",
 				(PostRstTime != null ? PostRstTime.Value.ToLocalTime().ToShortDateString() + PostRstTime.Value.ToLocalTime().ToShortTimeString(): "----"));
-			Result = Result.Replace("#PictureFullPath", PicturePath);
-			Result = Result.Replace("#PicturePath", Path.GetFileName(PicturePath));
+			Result = Result.Replace("#PictureFullPath",
+				(Pictures.Size > 0 ? (Pictures.Size >=2 ?
+					String.Format(AppStg.InformationSomePicts, Pictures.Size)
+					: Pictures.GetPathWithType(0)) : "(empty)"));
+			Result = Result.Replace("#PicturePath", 
+				(Pictures.Size > 0 ? (Pictures.Size >= 2 ?
+					String.Format(AppStg.InformationSomePicts, Pictures.Size)
+					: Path.GetFileName(Pictures.GetPathWithType(0))) : "(empty)"));
 			// return
 			return Result;
 		}
@@ -984,30 +1010,7 @@ namespace TweetField
 		private ApplicationSetting AppStg;
 
 		// Add Picture FilePath
-		private String PicturePath
-		{
-			get{
-				switch(PictureType){
-					case 1:
-						return "Screen Shot";
-					case 2:
-						return "Clip Board";
-					default:
-						return _PictPath;
-				}
-			}
-			set{
-				if(value == String.Empty){
-					PictureType = 0;
-				}
-				_PictPath = value;
-				添付画像を破棄するDToolStripMenuItem.Visible	 = (value != String.Empty);
-				添付した画像を確認するCToolStripMenuItem.Visible = (value != String.Empty);
-				pictureBox1.Refresh();
-			}
-		}
-		private String _PictPath = "";
-		private int PictureType;
+		private PictureImages Pictures = new PictureImages();
 
 		// Before Post(x10)
 		private String[] BeforeTweets = new String[10];
@@ -1027,5 +1030,92 @@ namespace TweetField
 		// PostResetTime
 		private DateTime? PostRstTime = null;
 		private DateTime? LatestPstTime = null;
+	}
+
+	public class PictureImages
+	{
+		private class _PictureImage
+		{
+			public String _PictPath;
+			public int PictureType;
+			public _PictureImage()
+			{
+
+			}
+			public _PictureImage(String Path)
+			{
+				PicturePath = Path;
+			}
+			public String PicturePath
+			{
+				get
+				{
+					switch(PictureType) {
+						case 1:
+							return "Screen Shot";
+						case 2:
+							return "Clip Board";
+						default:
+							return _PictPath;
+					}
+				}
+				set
+				{
+					if(value == String.Empty) {
+						PictureType = 0;
+					}
+					_PictPath = value;
+				}
+			}
+		}
+		private List<_PictureImage> _Pics;
+		private static int ImageMax = 4;
+		public PictureImages()
+		{
+			_Pics = new List<_PictureImage>(ImageMax);
+		}
+		public int Size
+		{
+			get
+			{
+				return _Pics.Count;
+			}
+		}
+		public void Clear()
+		{
+			_Pics.Clear();
+		}
+		public string GetPath(int Index)
+		{
+			if(Index < 0 || Index >= Size)
+				return "";
+			return _Pics[Index]._PictPath;
+		}
+		public string GetPathWithType(int Index)
+		{
+			if(Index < 0 || Index >= Size)
+				return "";
+			return _Pics[Index].PicturePath;
+		}
+		public int GetImageType(int Index)
+		{
+			return _Pics[Index].PictureType;
+		}
+		public void SetImageType(int Index, int Type)
+		{
+			_Pics[Index].PictureType = Type;
+		}
+		public static PictureImages operator+(PictureImages This, String Path)
+		{
+			if(This.Size < ImageMax) {
+				This._Pics.Add(new _PictureImage(Path));
+			}
+			return This;
+		}
+		public static PictureImages operator-(PictureImages This, int Index)
+		{
+			This._Pics.RemoveAt(Index);
+			return This;
+		}
 	}
 }
